@@ -41,7 +41,7 @@ $ redis-server
 $ pip install -r requirements.txt
 
 # Start uvicorn
-$ uvicorn main:app --port 8009
+$ uvicorn main:app --port 8009 or python main.py
 
 ```
 

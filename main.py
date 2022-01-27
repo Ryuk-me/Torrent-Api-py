@@ -129,3 +129,5 @@ async def startup():
     redis = aioredis.from_url(
         HOST, encoding="utf8", decode_responses=True)
     FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
+
+uvicorn.run(app,host="0.0.0.0",port="8080",log_level="info")
