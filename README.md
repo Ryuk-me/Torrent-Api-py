@@ -5,7 +5,7 @@
 
 <p align="center">
 <a href="https://github.com/Ryuk-me"><img title="Followers" src="https://img.shields.io/github/followers/Ryuk-me?color=teal&style=flat-square"></a>
-<a href="https://github.com/Ryuk-me/DogeTheBot/stargazers/"><img title="Stars" src="https://img.shields.io/github/stars/ryuk-me/Torrent-Api-py?color=brown&style=flat-square"></a>
+<a href="https://github.com/Ryuk-me/Torrent-Api-py/stargazers/"><img title="Stars" src="https://img.shields.io/github/stars/ryuk-me/Torrent-Api-py?color=brown&style=flat-square"></a>
 <a href="https://github.com/Ryuk-me/Torrent-Api-py/network/members"><img title="Forks" src="https://img.shields.io/github/forks/ryuk-me/Torrent-Api-py?color=lightgrey&style=flat-square"></a>
 <a href="https://github.com/Ryuk-me/Torrent-Api-py/issues"><img title="issues" src="https://img.shields.io/github/issues/Ryuk-me/Torrent-Api-py?style=flat-square">
 </a>
