@@ -236,7 +236,7 @@ PYTHON_ENV=dev (if running local)
 
 ## Want to Try api ?
 
-> https://torrents-api-py3.herokuapp.com/api/v1/search?site=1337x&query=eternals
+> https://torrent-api-py.ryukme.repl.co/api/v1/search?site=1337x&query=eternals
 
 ```json
 {
