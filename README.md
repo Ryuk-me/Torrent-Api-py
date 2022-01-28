@@ -37,9 +37,6 @@ $ sudo apt-get install redis
 # Start redis server
 $ redis-server
 
-# Install  Requirements
-$ pip install -r requirements.txt
-
 # Start
 $ uvicorn main:app
 
