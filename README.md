@@ -41,7 +41,7 @@ $ redis-server
 $ pip install -r requirements.txt
 
 # Start
-$ python main.py
+$ uvicorn main:app
 
 ```
 
