@@ -40,8 +40,8 @@ $ redis-server
 # Install  Requirements
 $ pip install -r requirements.txt
 
-# Start uvicorn
-$ uvicorn main:app --port 8009 or python main.py
+# Start
+$ python main.py
 
 ```
 
@@ -236,7 +236,7 @@ PYTHON_ENV=dev (if running local)
 
 ## Want to Try api ?
 
-> https://torrent-api-py.ryukme.repl.co/api/v1/search?site=1337x&query=eternals
+> https://torrents-api-py3.herokuapp.com/api/v1/search?site=1337x&query=eternals
 
 ```json
 {
