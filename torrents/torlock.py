@@ -54,20 +54,19 @@ class Torlock:
         await asyncio.gather(*tasks)
         return result
 
-    def _parser(self, htmls, is_trending=False):
+    def _parser(self, htmls, idx=0):
         try:
-            idx = 5
-            if is_trending:
-                idx = 1
             for html in htmls:
                 soup = BeautifulSoup(html, 'lxml')
                 list_of_urls = []
                 my_dict = {
                     'data': []
                 }
-                tr = soup.find_all('tr')
+
                 for tr in soup.find_all('tr')[idx:]:
                     td = tr.find_all("td")
+                    if len(td) == 0:
+                        continue
                     name = td[0].get_text(strip=True)
                     if name != '':
                         url = td[0].find('a')['href']
@@ -106,11 +105,11 @@ class Torlock:
             start_time = time.time()
             url = self.BASE_URL + \
                 "/all/torrents/{}.html?sort=seeds&page={}".format(query, page)
-            return await self.parser_result(start_time, url, session)
+            return await self.parser_result(start_time, url, session, idx=5)
 
-    async def parser_result(self, start_time, url, session, is_trending=False):
+    async def parser_result(self, start_time, url, session, idx=0):
         htmls = await Scraper().get_all_results(session, url)
-        result, urls = self._parser(htmls, is_trending)
+        result, urls = self._parser(htmls, idx)
         if result != None:
             results = await self._get_torrent(result, session, urls)
             results['time'] = time.time() - start_time
@@ -122,13 +121,13 @@ class Torlock:
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
             if not category:
-                url = self.BASE_URL + '/top100.html'
+                url = self.BASE_URL
             else:
                 if category == 'books':
                     category = 'ebooks'
                 url = self.BASE_URL + \
-                    "/{}.html".format(category.lower())
-            return await self.parser_result(start_time, url, session, is_trending=True)
+                    "/{}.html".format(category)
+            return await self.parser_result(start_time, url, session)
 
     async def recent(self, category, page):
         async with aiohttp.ClientSession() as session:
@@ -140,6 +139,6 @@ class Torlock:
                     category = 'ebooks'
                 url = self.BASE_URL + \
                     "/{}/{}/added/desc.html".format(category, page)
-            return await self.parser_result(start_time, url, session, is_trending=True)
+            return await self.parser_result(start_time, url, session)
 
     #! Maybe impelment Search By Category in Future

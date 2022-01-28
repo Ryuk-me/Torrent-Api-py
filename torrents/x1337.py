@@ -65,8 +65,8 @@ class x1337:
                 my_dict = {
                     'data': []
                 }
-                trs = soup.find_all('tr')
-                for tr in trs[1:]:
+                trs = soup.select('tbody tr')
+                for tr in trs:
                     td = tr.find_all('td')
                     name = td[0].find_all("a")[-1].text
                     if name:
@@ -122,10 +122,10 @@ class x1337:
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
             if not category:
-                url = self.BASE_URL + '/top-100'
+                url = self.BASE_URL + '/home/'
             else:
                 url = self.BASE_URL + \
-                    "/top-100-{}/".format(category.lower())
+                    "/popular-{}".format(category.lower())
             return await self.parser_result(start_time, url, session)
 
     async def recent(self, category, page):
