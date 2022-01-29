@@ -50,15 +50,6 @@ def check_if_site_available(site):
             # e-books
             "categories": ['apps', 'movies', 'music', 'games', 'tv', 'books']
         },
-        'eztv': {
-            "website": None,
-            "trending_available": False,
-            "trending_category": False,
-            "search_by_category": False,
-            "recent_available": False,
-            "recent_category_available": False,
-            "categories": []
-        },
         'tgx': {
             "website": TorrentGalaxy,
             "trending_available": True,
