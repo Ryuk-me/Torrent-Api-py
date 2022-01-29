@@ -235,13 +235,13 @@ PYTHON_ENV=dev (if running local)
 <summary style='font-size: 15px'><span style='font-size: 20px;font-weight:bold;'>Search from all sites</span></summary>
 <p>
 
-> `api/v1/all`
+> `api/v1/all/search`
 
 | Parameter | Required |  Type  | Default |           Example           |
 | :-------: | :------: | :----: | :-----: | :-------------------------: |
-|   query   |    ✅    | string |  None   | `api/v1/all?query=avengers` |
+|   query   |    ✅    | string |  None   | `api/v1/all/search?query=avengers` |
 
-> `https://torrents-api-py3.herokuapp.com/api/v1/all?query=avengers`
+> `https://torrents-api-py3.herokuapp.com/api/v1/all/search?query=avengers`
 
 </p>
 </details>
@@ -254,7 +254,7 @@ PYTHON_ENV=dev (if running local)
 
 > `api/v1/all/trending`
 
-> `https://torrents-api-py3.herokuapp.com/api/v1/all/trending`
+> https://torrents-api-py3.herokuapp.com/api/v1/all/trending
 
 </p>
 </details>
@@ -267,7 +267,7 @@ PYTHON_ENV=dev (if running local)
 
 > `api/v1/all/recent`
 
-> `https://torrents-api-py3.herokuapp.com/api/v1/all/recent`
+> https://torrents-api-py3.herokuapp.com/api/v1/all/recent
 </p>
 </details>
 

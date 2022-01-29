@@ -5,6 +5,7 @@ import uvicorn
 from helper.is_site_available import check_if_site_available
 import json
 import os
+import asyncio
 import time
 from dotenv import load_dotenv
 import aioredis
@@ -114,7 +115,7 @@ async def get_recent(site: str, category: Optional[str] = None, page: Optional[i
         return {"error": "invalid site"}
 
 
-@app.get("/api/v1/all")
+@app.get("/api/v1/all/search")
 @cache(expire=CACHE_EXPIRATION)
 async def get_search_combo(query: str):
     start_time = time.time()
