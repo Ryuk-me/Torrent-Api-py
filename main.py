@@ -27,6 +27,7 @@ CACHE_EXPIRATION = int(os.getenv('CACHE_EXPIRATION', 180)) if os.getenv(
 @cache(expire=CACHE_EXPIRATION)
 async def call_api(site: str, query: str, page: Optional[int] = 1):
     site = site.lower()
+    query = query.lower()
     all_sites = check_if_site_available(site)
     if all_sites:
         resp = await all_sites[site]['website']().search(query, page)
@@ -118,6 +119,7 @@ async def get_recent(site: str, category: Optional[str] = None, page: Optional[i
 @app.get("/api/v1/all/search")
 @cache(expire=CACHE_EXPIRATION)
 async def get_search_combo(query: str):
+    query = query.lower()
     start_time = time.time()
     # just getting all_sites dictionary
     all_sites = check_if_site_available('1337x')
