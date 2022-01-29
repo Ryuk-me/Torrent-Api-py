@@ -4,6 +4,7 @@ import asyncio
 import aiohttp
 import re
 import cloudscraper
+import requests
 
 
 class Magnetdl:
@@ -72,6 +73,7 @@ class Magnetdl:
     async def search(self, query, page):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            query = requests.utils.unquote(query)
             query = query.split(' ')
             query = '-'.join(query)
             url = self.BASE_URL + \
