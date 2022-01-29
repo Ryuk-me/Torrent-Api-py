@@ -229,11 +229,57 @@ PYTHON_ENV=dev (if running local)
 </p>
 </details>
 
+<br>
+
+<details open>
+<summary style='font-size: 15px'><span style='font-size: 20px;font-weight:bold;'>Search from all sites</span></summary>
+<p>
+
+> `api/v1/all`
+
+| Parameter | Required |  Type  | Default |           Example           |
+| :-------: | :------: | :----: | :-----: | :-------------------------: |
+|   query   |    ✅    | string |  None   | `api/v1/all?query=avengers` |
+
+> `https://torrents-api-py3.herokuapp.com/api/v1/all?query=avengers`
+
+</p>
+</details>
+
+<br>
+
+<details open>
+<summary style='font-size: 15px'><span style='font-size: 20px;font-weight:bold;'>Get trending from all sites</span></summary>
+<p>
+
+> `api/v1/all/trending`
+
+> `https://torrents-api-py3.herokuapp.com/api/v1/all/trending`
+
+</p>
+</details>
+
+<br>
+
+<details open>
+<summary style='font-size: 15px'><span style='font-size: 20px;font-weight:bold;'>Get recent from all sites</span></summary>
+<p>
+
+> `api/v1/all/recent`
+
+> `https://torrents-api-py3.herokuapp.com/api/v1/all/recent`
+</p>
+</details>
+
 ---
 
 ## Want to Try api ?
 
 > https://torrents-api-py3.herokuapp.com/api/v1/search?site=1337x&query=eternals
+
+<details open>
+<summary> See response</summary>
+<p>
 
 ```json
 {
@@ -263,6 +309,9 @@ PYTHON_ENV=dev (if running local)
   "total": 20
 }
 ```
+
+</p>
+</details>
 
 ---
 

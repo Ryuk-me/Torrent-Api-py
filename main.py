@@ -114,6 +114,86 @@ async def get_recent(site: str, category: Optional[str] = None, page: Optional[i
         return {"error": "invalid site"}
 
 
+@app.get("/api/v1/all")
+@cache(expire=CACHE_EXPIRATION)
+async def get_search_combo(query: str):
+    start_time = time.time()
+    # just getting all_sites dictionary
+    all_sites = check_if_site_available('1337x')
+    sites_list = list(all_sites.keys())
+    tasks = []
+    COMBO = {
+        'data': []
+    }
+    total_torrents_overall = 0
+    for site in sites_list:
+        tasks.append(asyncio.create_task(
+            all_sites[site]['website']().search(query, page=1)))
+    results = await asyncio.gather(*tasks)
+    for res in results:
+        if res and len(res['data']) > 0:
+            for torrent in res['data']:
+                COMBO['data'].append(torrent)
+            total_torrents_overall = total_torrents_overall + res['total']
+    COMBO['time'] = time.time() - start_time
+    COMBO['total'] = total_torrents_overall
+    return COMBO
+
+
+@app.get("/api/v1/all/trending")
+@cache(expire=CACHE_EXPIRATION)
+async def get_all_trending():
+    start_time = time.time()
+    # just getting all_sites dictionary
+    all_sites = check_if_site_available('1337x')
+    sites_list = [site for site in all_sites.keys(
+    ) if all_sites[site]['trending_available']]
+    tasks = []
+    COMBO = {
+        'data': []
+    }
+    total_torrents_overall = 0
+    for site in sites_list:
+        tasks.append(asyncio.create_task(
+            all_sites[site]['website']().trending(category=None, page=1)))
+    results = await asyncio.gather(*tasks)
+    for res in results:
+        if res and len(res['data']) > 0:
+            for torrent in res['data']:
+                COMBO['data'].append(torrent)
+            total_torrents_overall = total_torrents_overall + res['total']
+    COMBO['time'] = time.time() - start_time
+    COMBO['total'] = total_torrents_overall
+    return COMBO
+
+
+@app.get("/api/v1/all/recent")
+@cache(expire=CACHE_EXPIRATION)
+async def get_all_recent():
+    start_time = time.time()
+    # just getting all_sites dictionary
+    all_sites = check_if_site_available('1337x')
+    sites_list = [site for site in all_sites.keys(
+    ) if all_sites[site]['recent_available']]
+    tasks = []
+    COMBO = {
+        'data': []
+    }
+    total_torrents_overall = 0
+    for site in sites_list:
+        tasks.append(asyncio.create_task(
+            all_sites[site]['website']().recent(category=None, page=1)))
+    results = await asyncio.gather(*tasks)
+    for res in results:
+        if res and len(res['data']) > 0:
+            for torrent in res['data']:
+                COMBO['data'].append(torrent)
+            total_torrents_overall = total_torrents_overall + res['total']
+    COMBO['time'] = time.time() - start_time
+    COMBO['total'] = total_torrents_overall
+    return COMBO
+
+
 @app.get("/")
 async def home():
     return FileResponse('README.md')
