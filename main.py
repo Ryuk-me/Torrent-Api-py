@@ -128,8 +128,9 @@ async def get_search_combo(query: str):
     }
     total_torrents_overall = 0
     for site in sites_list:
-        tasks.append(asyncio.create_task(
-            all_sites[site]['website']().search(query, page=1)))
+        if all_sites[site]['website']:
+            tasks.append(asyncio.create_task(
+                all_sites[site]['website']().search(query, page=1)))
     results = await asyncio.gather(*tasks)
     for res in results:
         if res and len(res['data']) > 0:
@@ -148,7 +149,7 @@ async def get_all_trending():
     # just getting all_sites dictionary
     all_sites = check_if_site_available('1337x')
     sites_list = [site for site in all_sites.keys(
-    ) if all_sites[site]['trending_available']]
+    ) if all_sites[site]['trending_available'] and all_sites[site]['website']]
     tasks = []
     COMBO = {
         'data': []
@@ -175,7 +176,7 @@ async def get_all_recent():
     # just getting all_sites dictionary
     all_sites = check_if_site_available('1337x')
     sites_list = [site for site in all_sites.keys(
-    ) if all_sites[site]['recent_available']]
+    ) if all_sites[site]['recent_available'] and all_sites[site]['website']]
     tasks = []
     COMBO = {
         'data': []
