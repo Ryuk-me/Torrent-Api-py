@@ -95,7 +95,16 @@ def check_if_site_available(site):
             "recent_available": True,
             "recent_category_available": True,
             "categories": ['anime', 'music', 'games', "tv",
-                           "apps", "documentaries", "other", "xxx", "movies", 'books'] #television applications 
+                           "apps", "documentaries", "other", "xxx", "movies", 'books']  # television applications
+        },
+        'libgen': {
+            "website": Libgen,
+            "trending_available": False,
+            "trending_category": False,
+            "search_by_category": False,
+            "recent_available": False,
+            "recent_category_available": False,
+            "categories": []
         }
 
     }
