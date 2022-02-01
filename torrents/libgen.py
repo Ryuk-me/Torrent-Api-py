@@ -5,7 +5,7 @@ import time
 from helper.asyncioPoliciesFix import decorator_asyncio_fix
 import re
 from helper.html_scraper import Scraper
-
+from torrents.libgen import Libgen
 
 class Libgen:
 
