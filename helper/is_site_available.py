@@ -7,7 +7,7 @@ from torrents.nyaa_si import NyaaSi
 from torrents.pirate_bay import PirateBay
 from torrents.bitsearch import Bitsearch
 from torrents.kickass import Kickass
-
+from torrents.libgen import Libgen
 
 def check_if_site_available(site):
     all_sites = {
