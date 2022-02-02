@@ -20,7 +20,7 @@ class TorrentGalaxy:
                 my_dict = {
                     'data': []
                 }
-                for divs in soup.find_all('div', class_='tgxtablerow'):
+                for idx, divs in enumerate(soup.find_all('div', class_='tgxtablerow')):
                     div = divs.find_all("div")
                     try:
                         name = div[4].find('a').get_text(strip=True)
@@ -35,8 +35,8 @@ class TorrentGalaxy:
                             magnet = div[3].find_all('a')[1]['href']
                             torrent = div[3].find_all('a')[0]['href']
 
-                        size = soup.select_one(
-                            'span.badge.badge-secondary.txlight').text
+                        size = soup.select(
+                            'span.badge.badge-secondary.txlight')[idx].text
                         try:
                             url = div[4].find('a')['href']
                         except:
@@ -125,7 +125,7 @@ class TorrentGalaxy:
                     "/torrents.php?parent_cat={}&sort=id&order=desc&page={}".format(
                         str(category).capitalize(), page-1)
             return await self.parser_result(start_time, url, session)
-    
+
     #! Maybe Implemented in Future
     # async def search_by_category(self, query, category, page):
     #     async with aiohttp.ClientSession() as session:
