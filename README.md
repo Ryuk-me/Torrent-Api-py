@@ -14,7 +14,7 @@
 
 <p align="center">
 <span style='font-size: 19px'>
-An Unofficial API for <span style='font-weight:600;'>1337x</span>, <span style='font-weight:600;'>Piratebay</span>, <span style='font-weight:bold;'>Nyaasi</span>, <span style='font-weight:bold;'>Torlock</span>, <span style='font-weight:bold;'>Torrent Galaxy</span>, <span style='font-weight:600;'>Zooqle</span>, <span style='font-weight:600;'>Kickass</span>, <span style='font-weight:600;'>Bitsearch</span>, <span style='font-weight:600;'>MagnetDL</span> and Libgen
+An Unofficial API for <span style='font-weight:600;'>1337x</span>, <span style='font-weight:600;'>Piratebay</span>, <span style='font-weight:bold;'>Nyaasi</span>, <span style='font-weight:bold;'>Torlock</span>, <span style='font-weight:bold;'>Torrent Galaxy</span>, <span style='font-weight:600;'>Zooqle</span>, <span style='font-weight:600;'>Kickass</span>, <span style='font-weight:600;'>Bitsearch</span>, <span style='font-weight:600;'>MagnetDL</span>, Libgen and YTS
 </span>
 </p>
 
@@ -71,7 +71,8 @@ PYTHON_ENV=dev (if running local)
 |    KickAss     |  `kickass`  | https://kickasstorrents.to |    ❌     |
 |   Bitsearch    | `bitsearch` |    https://bitsearch.to    |    ❌     |
 |    MagnetDL    | `magnetdl`  |  https://www.magnetdl.com  |    ✅     |
-|    Libgen    | `libgen`  |  https://libgen.is  |    ❌    |
+|     Libgen     |  `libgen`   |     https://libgen.is      |    ❌     |
+|      YTS       |    `yts`    |       https://yts.mx       |    ❌     |
 
 ---
 
@@ -162,6 +163,14 @@ PYTHON_ENV=dev (if running local)
             "recent_available": False,
             "recent_category_available": False,
             "categories": []
+        },
+        "yts": {
+            "trending_available": True,
+            "trending_category": False,
+            "search_by_category": False,
+            "recent_available": True,
+            "recent_category_available": False,
+            "categories": []
         }
 
     }
@@ -246,11 +255,11 @@ PYTHON_ENV=dev (if running local)
 
 > `api/v1/all/search`
 
-| Parameter | Required |  Type  | Default |           Example           |
-| :-------: | :------: | :----: | :-----: | :-------------------------: |
+| Parameter | Required |  Type  | Default |              Example               |
+| :-------: | :------: | :----: | :-----: | :--------------------------------: |
 |   query   |    ✅    | string |  None   | `api/v1/all/search?query=avengers` |
 
-> `https://torrents-api-py3.herokuapp.com/api/v1/all/search?query=avengers`
+> https://torrents-api-py3.herokuapp.com/api/v1/all/search?query=avengers
 
 </p>
 </details>
@@ -277,6 +286,7 @@ PYTHON_ENV=dev (if running local)
 > `api/v1/all/recent`
 
 > https://torrents-api-py3.herokuapp.com/api/v1/all/recent
+
 </p>
 </details>
 

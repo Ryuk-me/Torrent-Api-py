@@ -8,6 +8,8 @@ from torrents.pirate_bay import PirateBay
 from torrents.bitsearch import Bitsearch
 from torrents.kickass import Kickass
 from torrents.libgen import Libgen
+from torrents.yts import Yts
+
 
 def check_if_site_available(site):
     all_sites = {
@@ -103,6 +105,15 @@ def check_if_site_available(site):
             "trending_category": False,
             "search_by_category": False,
             "recent_available": False,
+            "recent_category_available": False,
+            "categories": []
+        },
+        'yts': {
+            "website": Yts,
+            "trending_available": True,
+            "trending_category": False,
+            "search_by_category": False,
+            "recent_available": True,
             "recent_category_available": False,
             "categories": []
         }

@@ -1,6 +1,6 @@
 {
     "name": "Torrent-Api-py",
-    "description": "An Unofficial API for 1337x, Piratebay, Nyaasi, Torlock, Torrent Galaxy, Zooqle, Kickass, Bitsearch, and MagnetDL",
+    "description": "An Unofficial API for 1337x, Piratebay, Nyaasi, Torlock, Torrent Galaxy, Zooqle, Kickass, Bitsearch, MagnetDL, Libgen and YTS",
     "keywords": [
       "fast-api",
       "python",
