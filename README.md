@@ -14,7 +14,7 @@
 
 <p align="center">
 <span style='font-size: 19px'>
-An Unofficial API for <span style='font-weight:600;'>1337x</span>, <span style='font-weight:600;'>Piratebay</span>, <span style='font-weight:bold;'>Nyaasi</span>, <span style='font-weight:bold;'>Torlock</span>, <span style='font-weight:bold;'>Torrent Galaxy</span>, <span style='font-weight:600;'>Zooqle</span>, <span style='font-weight:600;'>Kickass</span>, <span style='font-weight:600;'>Bitsearch</span>, <span style='font-weight:600;'>MagnetDL</span>, Libgen and YTS
+An Unofficial API for <span style='font-weight:600;'>1337x</span>, <span style='font-weight:600;'>Piratebay</span>, <span style='font-weight:bold;'>Nyaasi</span>, <span style='font-weight:bold;'>Torlock</span>, <span style='font-weight:bold;'>Torrent Galaxy</span>, <span style='font-weight:600;'>Zooqle</span>, <span style='font-weight:600;'>Kickass</span>, <span style='font-weight:600;'>Bitsearch</span>, <span style='font-weight:600;'>MagnetDL</span>Libgen, YTS and Limetorrent
 </span>
 </p>
 
@@ -49,9 +49,9 @@ $ uvicorn main:app
 
 Go to .env file and add the following
 
-## Get it from https://redistogo.com/
+# Get it from https://redistogo.com/
 REDIS_URI=redis://redistogo:f99edf3de0cyryty324fe462@sole.redistogo.com:10393/
-CACHE_EXPIRATION=180 #set cache expire time in seconds default is 180
+CACHE_EXPIRATION=180 # set cache expire time in seconds default is 180
 PYTHON_ENV=prod (if you are hosting)
 PYTHON_ENV=dev (if running local)
 ```
@@ -60,19 +60,20 @@ PYTHON_ENV=dev (if running local)
 
 ## Supported Sites
 
-|    Website     |   Keyword   |            Url             | Cloudfare |
-| :------------: | :---------: | :------------------------: | :-------: |
-|     1337x      |   `1337x`   |     https://1337xx.to      |    ❌     |
-| Torrent Galaxy |    `tgx`    |  https://torrentgalaxy.to  |    ❌     |
-|    Torlock     |  `torlock`  |  https://www.torlock.com   |    ❌     |
-|   PirateBay    | `piratebay` | https://thepiratebay10.org |    ❌     |
-|     Nyaasi     |  `nyaasi`   |      https://nyaa.si       |    ❌     |
-|     Zooqle     |  `zooqle`   |     https://zooqle.com     |    ❌     |
-|    KickAss     |  `kickass`  | https://kickasstorrents.to |    ❌     |
-|   Bitsearch    | `bitsearch` |    https://bitsearch.to    |    ❌     |
-|    MagnetDL    | `magnetdl`  |  https://www.magnetdl.com  |    ✅     |
-|     Libgen     |  `libgen`   |     https://libgen.is      |    ❌     |
-|      YTS       |    `yts`    |       https://yts.mx       |    ❌     |
+|    Website     |    Keyword    |             Url              | Cloudfare |
+| :------------: | :-----------: | :--------------------------: | :-------: |
+|     1337x      |    `1337x`    |      https://1337xx.to       |    ❌     |
+| Torrent Galaxy |     `tgx`     |   https://torrentgalaxy.to   |    ❌     |
+|    Torlock     |   `torlock`   |   https://www.torlock.com    |    ❌     |
+|   PirateBay    |  `piratebay`  |  https://thepiratebay10.org  |    ❌     |
+|     Nyaasi     |   `nyaasi`    |       https://nyaa.si        |    ❌     |
+|     Zooqle     |   `zooqle`    |      https://zooqle.com      |    ❌     |
+|    KickAss     |   `kickass`   |  https://kickasstorrents.to  |    ❌     |
+|   Bitsearch    |  `bitsearch`  |     https://bitsearch.to     |    ❌     |
+|    MagnetDL    |  `magnetdl`   |   https://www.magnetdl.com   |    ✅     |
+|     Libgen     |   `libgen`    |      https://libgen.is       |    ❌     |
+|      YTS       |     `yts`     |        https://yts.mx        |    ❌     |
+|  Limetorrent   | `limetorrent` | https://www.limetorrents.pro |    ❌     |
 
 ---
 
@@ -171,6 +172,15 @@ PYTHON_ENV=dev (if running local)
             "recent_available": True,
             "recent_category_available": False,
             "categories": []
+        },
+        "limetorrent": {
+            "trending_available": True,
+            "trending_category": False,
+            "search_by_category": False,
+            "recent_available": True,
+            "recent_category_available": True,
+            "categories": ["anime", "music", "games", "tv",
+                           "apps", "other", "movies", "books"]  # applications and tv-shows
         }
 
     }
