@@ -10,6 +10,7 @@ from torrents.kickass import Kickass
 from torrents.libgen import Libgen
 from torrents.yts import Yts
 from torrents.limetorrent import Limetorrent
+from torrents.torrentfunk import TorrentFunk
 
 
 def check_if_site_available(site):
@@ -127,6 +128,16 @@ def check_if_site_available(site):
             "recent_category_available": True,
             "categories": ['anime', 'music', 'games', "tv",
                            'apps', "other", "movies", 'books']  # applications and tv-shows
+        },
+        'torrentfunk': {
+            "website": TorrentFunk,
+            "trending_available": True,
+            "trending_category": True,
+            "search_by_category": False,
+            "recent_available": True,
+            "recent_category_available": True,
+            "categories": ['anime', 'music', 'games', "tv",
+                           'apps', "xxx", "movies", 'books']  # television # software #adult # ebooks
         }
 
     }
