@@ -12,6 +12,7 @@ from torrents.yts import Yts
 from torrents.limetorrent import Limetorrent
 from torrents.torrentfunk import TorrentFunk
 from torrents.glodls import Glodls
+from torrents.torrentProject import TorrentProject
 
 
 def check_if_site_available(site):
@@ -146,6 +147,15 @@ def check_if_site_available(site):
             "trending_category": False,
             "search_by_category": False,
             "recent_available": True,
+            "recent_category_available": False,
+            "categories": []
+        },
+        'torrentproject': {
+            "website": TorrentProject,
+            "trending_available": False,
+            "trending_category": False,
+            "search_by_category": False,
+            "recent_available": False,
             "recent_category_available": False,
             "categories": []
         }

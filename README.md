@@ -14,7 +14,7 @@
 
 <p align="center">
 <span style='font-size: 19px'>
-An Unofficial API for <span style='font-weight:600;'>1337x</span>, <span style='font-weight:600;'>Piratebay</span>, <span style='font-weight:bold;'>Nyaasi</span>, <span style='font-weight:bold;'>Torlock</span>, <span style='font-weight:bold;'>Torrent Galaxy</span>, <span style='font-weight:600;'>Zooqle</span>, <span style='font-weight:600;'>Kickass</span>, <span style='font-weight:600;'>Bitsearch</span>, <span style='font-weight:600;'>MagnetDL</span>Libgen, YTS, Limetorrent, TorrentFunk and Glodls
+An Unofficial API for <span style='font-weight:600;'>1337x</span>, <span style='font-weight:600;'>Piratebay</span>, <span style='font-weight:bold;'>Nyaasi</span>, <span style='font-weight:bold;'>Torlock</span>, <span style='font-weight:bold;'>Torrent Galaxy</span>, <span style='font-weight:600;'>Zooqle</span>, <span style='font-weight:600;'>Kickass</span>, <span style='font-weight:600;'>Bitsearch</span>, <span style='font-weight:600;'>MagnetDL</span>Libgen, YTS, Limetorrent, TorrentFunk, Glodls and TorrentProject
 </span>
 </p>
 
@@ -60,22 +60,23 @@ PYTHON_ENV=dev (if running local)
 
 ## Supported Sites
 
-|    Website     |    Keyword    |             Url              | Cloudfare |
-| :------------: | :-----------: | :--------------------------: | :-------: |
-|     1337x      |    `1337x`    |      https://1337xx.to       |    ❌     |
-| Torrent Galaxy |     `tgx`     |   https://torrentgalaxy.to   |    ❌     |
-|    Torlock     |   `torlock`   |   https://www.torlock.com    |    ❌     |
-|   PirateBay    |  `piratebay`  |  https://thepiratebay10.org  |    ❌     |
-|     Nyaasi     |   `nyaasi`    |       https://nyaa.si        |    ❌     |
-|     Zooqle     |   `zooqle`    |      https://zooqle.com      |    ❌     |
-|    KickAss     |   `kickass`   |  https://kickasstorrents.to  |    ❌     |
-|   Bitsearch    |  `bitsearch`  |     https://bitsearch.to     |    ❌     |
-|    MagnetDL    |  `magnetdl`   |   https://www.magnetdl.com   |    ✅     |
-|     Libgen     |   `libgen`    |      https://libgen.is       |    ❌     |
-|      YTS       |     `yts`     |        https://yts.mx        |    ❌     |
-|  Limetorrent   | `limetorrent` | https://www.limetorrents.pro |    ❌     |
-|  TorrentFunk   | `torrentfunk` | https://www.torrentfunk.com  |    ❌     |
-|     Glodls     |   `glodls`    |      https://glodls.to       |    ❌     |
+|    Website     |     Keyword      |             Url              | Cloudfare |
+| :------------: | :--------------: | :--------------------------: | :-------: |
+|     1337x      |     `1337x`      |      https://1337xx.to       |    ❌     |
+| Torrent Galaxy |      `tgx`       |   https://torrentgalaxy.to   |    ❌     |
+|    Torlock     |    `torlock`     |   https://www.torlock.com    |    ❌     |
+|   PirateBay    |   `piratebay`    |  https://thepiratebay10.org  |    ❌     |
+|     Nyaasi     |     `nyaasi`     |       https://nyaa.si        |    ❌     |
+|     Zooqle     |     `zooqle`     |      https://zooqle.com      |    ❌     |
+|    KickAss     |    `kickass`     |  https://kickasstorrents.to  |    ❌     |
+|   Bitsearch    |   `bitsearch`    |     https://bitsearch.to     |    ❌     |
+|    MagnetDL    |    `magnetdl`    |   https://www.magnetdl.com   |    ✅     |
+|     Libgen     |     `libgen`     |      https://libgen.is       |    ❌     |
+|      YTS       |      `yts`       |        https://yts.mx        |    ❌     |
+|  Limetorrent   |  `limetorrent`   | https://www.limetorrents.pro |    ❌     |
+|  TorrentFunk   |  `torrentfunk`   | https://www.torrentfunk.com  |    ❌     |
+|     Glodls     |     `glodls`     |      https://glodls.to       |    ❌     |
+| TorrentProject | `torrentproject` | https://torrentproject2.com  |    ❌     |
 
 ---
 
@@ -198,6 +199,14 @@ PYTHON_ENV=dev (if running local)
             "trending_category": False,
             "search_by_category": False,
             "recent_available": True,
+            "recent_category_available": False,
+            "categories": []
+        },
+        "torrentproject": {
+            "trending_available": False,
+            "trending_category": False,
+            "search_by_category": False,
+            "recent_available": False,
             "recent_category_available": False,
             "categories": []
         }
