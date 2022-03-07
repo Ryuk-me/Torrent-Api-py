@@ -11,6 +11,7 @@ from torrents.libgen import Libgen
 from torrents.yts import Yts
 from torrents.limetorrent import Limetorrent
 from torrents.torrentfunk import TorrentFunk
+from torrents.glodls import Glodls
 
 
 def check_if_site_available(site):
@@ -138,6 +139,15 @@ def check_if_site_available(site):
             "recent_category_available": True,
             "categories": ['anime', 'music', 'games', "tv",
                            'apps', "xxx", "movies", 'books']  # television # software #adult # ebooks
+        },
+        'glodls': {
+            "website": Glodls,
+            "trending_available": True,
+            "trending_category": False,
+            "search_by_category": False,
+            "recent_available": True,
+            "recent_category_available": False,
+            "categories": []
         }
 
     }
