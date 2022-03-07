@@ -25,7 +25,7 @@ class x1337:
                     imgs = (soup.find("div", class_='torrent-tabs')
                             ).find_all('img')
                     if imgs and len(imgs) > 0:
-                        obj['screenshot'] = [img['src'] for img in imgs]
+                        obj['screenshot'] = [img['src'].replace('.th','') for img in imgs]
                     obj['category'] = lis.find('span').text
                     try:
                         poster = soup.select_one(
