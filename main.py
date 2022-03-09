@@ -125,7 +125,7 @@ async def home():
 
 @app.get("/api/v1/all/search")
 @cache(expire=CACHE_EXPIRATION)
-async def get_search_combo(query: str):
+async def get_search_combo(query: str, limit: Optional[int] = 0):
     start_time = time.time()
     query = query.lower()
     # just getting all_sites dictionary
@@ -138,8 +138,9 @@ async def get_search_combo(query: str):
     total_torrents_overall = 0
     for site in sites_list:
         if all_sites[site]['website']:
+            limit = all_sites[site]['limit'] if limit == 0 or limit > all_sites[site]['limit'] else limit
             tasks.append(asyncio.create_task(
-                all_sites[site]['website']().search(query, page=1, limit=all_sites[site]['limit'])))
+                all_sites[site]['website']().search(query, page=1, limit=limit)))
     results = await asyncio.gather(*tasks)
     for res in results:
         if res and len(res['data']) > 0:
@@ -153,7 +154,7 @@ async def get_search_combo(query: str):
 
 @app.get("/api/v1/all/trending")
 @cache(expire=CACHE_EXPIRATION)
-async def get_all_trending():
+async def get_all_trending(limit: Optional[int] = 0):
     start_time = time.time()
     # just getting all_sites dictionary
     all_sites = check_if_site_available('1337x')
@@ -165,8 +166,9 @@ async def get_all_trending():
     }
     total_torrents_overall = 0
     for site in sites_list:
+        limit = all_sites[site]['limit'] if limit == 0 or limit > all_sites[site]['limit'] else limit
         tasks.append(asyncio.create_task(
-            all_sites[site]['website']().trending(category=None, page=1, limit=all_sites[site]['limit'])))
+            all_sites[site]['website']().trending(category=None, page=1, limit=limit)))
     results = await asyncio.gather(*tasks)
     for res in results:
         if res and len(res['data']) > 0:
@@ -180,7 +182,7 @@ async def get_all_trending():
 
 @app.get("/api/v1/all/recent")
 @cache(expire=CACHE_EXPIRATION)
-async def get_all_recent():
+async def get_all_recent(limit: Optional[int] = 0):
     start_time = time.time()
     # just getting all_sites dictionary
     all_sites = check_if_site_available('1337x')
@@ -192,8 +194,9 @@ async def get_all_recent():
     }
     total_torrents_overall = 0
     for site in sites_list:
+        limit = all_sites[site]['limit'] if limit == 0 or limit > all_sites[site]['limit'] else limit
         tasks.append(asyncio.create_task(
-            all_sites[site]['website']().recent(category=None, page=1, limit=all_sites[site]['limit'])))
+            all_sites[site]['website']().recent(category=None, page=1, limit=limit)))
     results = await asyncio.gather(*tasks)
     for res in results:
         if res and len(res['data']) > 0:

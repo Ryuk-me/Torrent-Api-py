@@ -313,13 +313,18 @@ PYTHON_ENV=dev (if running local)
 
 > `api/v1/all/search`
 
-| Parameter | Required |  Type  | Default |              Example               |
-| :-------: | :------: | :----: | :-----: | :--------------------------------: |
-|   query   |    ✅    | string |  None   | `api/v1/all/search?query=avengers` |
+| Parameter | Required |  Type   | Default |                  Example                   |
+| :-------: | :------: | :-----: | :-----: | :----------------------------------------: |
+|   query   |    ✅    | string  |  None   |     `api/v1/all/search?query=avengers`     |
+|   limit   |    ❌    | integer | Default | `api/v1/all/search?query=avengers&limit=5` |
+
+<pre>Here <b>limit = 5</b> will get 5 results from each site.</pre>
 
 > https://torrents-api-py3.herokuapp.com/api/v1/all/search?query=avengers
 
-</p>
+> https://torrents-api-py3.herokuapp.com/api/v1/all/search?query=avengers&limit=5
+
+</pre>
 </details>
 
 <br>
@@ -330,7 +335,13 @@ PYTHON_ENV=dev (if running local)
 
 > `api/v1/all/trending`
 
+| Parameter | Required |  Type   | Default |            Example            |
+| :-------: | :------: | :-----: | :-----: | :---------------------------: |
+|   limit   |    ❌    | integer | Default | `api/v1/all/trending?limit=2` |
+
 > https://torrents-api-py3.herokuapp.com/api/v1/all/trending
+
+> https://torrents-api-py3.herokuapp.com/api/v1/all/trending?limit=2
 
 </p>
 </details>
@@ -343,7 +354,13 @@ PYTHON_ENV=dev (if running local)
 
 > `api/v1/all/recent`
 
+| Parameter | Required |  Type   | Default |           Example           |
+| :-------: | :------: | :-----: | :-----: | :-------------------------: |
+|   limit   |    ❌    | integer | Default | `api/v1/all/recent?limit=2` |
+
 > https://torrents-api-py3.herokuapp.com/api/v1/all/recent
+
+> https://torrents-api-py3.herokuapp.com/api/v1/all/recent?limit=2
 
 </p>
 </details>
@@ -370,9 +387,9 @@ PYTHON_ENV=dev (if running local)
       "url": "https://1337xx.to/torrent/5110260/Eternals-2021-1080p-WEBRip-DDP5-1-x264-NOGRP/",
       "uploader": "TheMorozko",
       "screenshot": [
-        "https://checkmy.pictures/images/2022/01/11/32162343474810151667.th.jpg",
-        "https://checkmy.pictures/images/2022/01/11/38515612831471833686.th.jpg",
-        "https://checkmy.pictures/images/2022/01/11/71518482909886223945.th.jpg"
+        "https://checkmy.pictures/images/2022/01/11/32162343474810151667.jpg",
+        "https://checkmy.pictures/images/2022/01/11/38515612831471833686.jpg",
+        "https://checkmy.pictures/images/2022/01/11/71518482909886223945.jpg"
       ],
       "category": "Movies",
       "poster": "https://1337xx.to/img/movie/Eternals-2021.jpg",
