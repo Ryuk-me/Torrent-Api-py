@@ -11,6 +11,7 @@ class Torlock:
 
     def __init__(self):
         self.BASE_URL = 'https://www.torlock.com'
+        self.LIMIT = None
 
     @decorator_asyncio_fix
     async def _individual_scrap(self, session, url, obj):
@@ -86,6 +87,8 @@ class Torlock:
                             'leechers': leechers,
                             'url': url,
                         })
+                    if len(my_dict['data']) == self.LIMIT:
+                        break
                 try:
                     ul = soup.find('ul', class_='pagination')
                     tpages = ul.find_all('a')[-2].text
@@ -100,9 +103,10 @@ class Torlock:
         except:
             return None, None
 
-    async def search(self, query, page):
+    async def search(self, query, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             url = self.BASE_URL + \
                 "/all/torrents/{}.html?sort=seeds&page={}".format(query, page)
             return await self.parser_result(start_time, url, session, idx=5)
@@ -117,9 +121,10 @@ class Torlock:
             return results
         return result
 
-    async def trending(self, category, page):
+    async def trending(self, category, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             if not category:
                 url = self.BASE_URL
             else:
@@ -129,9 +134,10 @@ class Torlock:
                     "/{}.html".format(category)
             return await self.parser_result(start_time, url, session)
 
-    async def recent(self, category, page):
+    async def recent(self, category, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             if not category:
                 url = self.BASE_URL + '/fresh.html'
             else:

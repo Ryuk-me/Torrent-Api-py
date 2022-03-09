@@ -9,7 +9,7 @@ from torrents.bitsearch import Bitsearch
 from torrents.kickass import Kickass
 from torrents.libgen import Libgen
 from torrents.yts import Yts
-from torrents.limetorrent import Limetorrent
+from torrents.limetorrents import Limetorrent
 from torrents.torrentfunk import TorrentFunk
 from torrents.glodls import Glodls
 from torrents.torrentProject import TorrentProject
@@ -25,7 +25,8 @@ def check_if_site_available(site):
             "recent_available": True,
             "recent_category_available": True,
             "categories": ['anime', 'music', 'games', "tv",
-                           "apps", "documentaries", "other", "xxx", "movies"]
+                           "apps", "documentaries", "other", "xxx", "movies"],
+            "limit": 50
         },
         "torlock": {
             "website": Torlock,
@@ -35,7 +36,8 @@ def check_if_site_available(site):
             "recent_available": True,
             "recent_category_available": True,
             "categories": ['anime', 'music', 'games', "tv",
-                           "apps", "documentaries", "other", "xxx", "movies", 'books', 'images']  # ebooks
+                           "apps", "documentaries", "other", "xxx", "movies", 'books', 'images'],  # ebooks
+            "limit": 50
         },
         "zooqle": {
             "website": Zooqle,
@@ -44,7 +46,8 @@ def check_if_site_available(site):
             "search_by_category": False,
             "recent_available": False,
             "recent_category_available": False,
-            "categories": []
+            "categories": [],
+            "limit": 30
         },
         "magnetdl": {
             "website": Magnetdl,
@@ -54,7 +57,8 @@ def check_if_site_available(site):
             "recent_available": True,
             "recent_category_available": True,
             # e-books
-            "categories": ['apps', 'movies', 'music', 'games', 'tv', 'books']
+            "categories": ['apps', 'movies', 'music', 'games', 'tv', 'books'],
+            "limit": 40
         },
         'tgx': {
             "website": TorrentGalaxy,
@@ -64,7 +68,8 @@ def check_if_site_available(site):
             "recent_available": True,
             "recent_category_available": True,
             "categories": ['anime', 'music', 'games', "tv",
-                           "apps", "documentaries", "other", "xxx", "movies", 'books']
+                           "apps", "documentaries", "other", "xxx", "movies", 'books'],
+            "limit": 50
         },
         'nyaasi': {
             "website": NyaaSi,
@@ -73,7 +78,8 @@ def check_if_site_available(site):
             "search_by_category": False,
             "recent_available": True,
             "recent_category_available": False,
-            "categories": []
+            "categories": [],
+            "limit": 50
         },
         'piratebay': {
             "website": PirateBay,
@@ -82,7 +88,8 @@ def check_if_site_available(site):
             "search_by_category": False,
             "recent_available": True,
             "recent_category_available": True,
-            "categories": ['tv']
+            "categories": ['tv'],
+            "limit": 50
         },
         'bitsearch': {
             "website": Bitsearch,
@@ -91,7 +98,8 @@ def check_if_site_available(site):
             "search_by_category": False,
             "recent_available": False,
             "recent_category_available": False,
-            "categories": []
+            "categories": [],
+            "limit": 50
         },
         'kickass': {
             "website": Kickass,
@@ -101,7 +109,8 @@ def check_if_site_available(site):
             "recent_available": True,
             "recent_category_available": True,
             "categories": ['anime', 'music', 'games', "tv",
-                           "apps", "documentaries", "other", "xxx", "movies", 'books']  # television applications
+                           "apps", "documentaries", "other", "xxx", "movies", 'books'],  # television applications
+            "limit": 50
         },
         'libgen': {
             "website": Libgen,
@@ -110,7 +119,8 @@ def check_if_site_available(site):
             "search_by_category": False,
             "recent_available": False,
             "recent_category_available": False,
-            "categories": []
+            "categories": [],
+            "limit": 25
         },
         'yts': {
             "website": Yts,
@@ -119,7 +129,8 @@ def check_if_site_available(site):
             "search_by_category": False,
             "recent_available": True,
             "recent_category_available": False,
-            "categories": []
+            "categories": [],
+            "limit": 20
         },
         'limetorrent': {
             "website": Limetorrent,
@@ -129,7 +140,8 @@ def check_if_site_available(site):
             "recent_available": True,
             "recent_category_available": True,
             "categories": ['anime', 'music', 'games', "tv",
-                           'apps', "other", "movies", 'books']  # applications and tv-shows
+                           'apps', "other", "movies", 'books'],  # applications and tv-shows
+            "limit": 50
         },
         'torrentfunk': {
             "website": TorrentFunk,
@@ -139,7 +151,8 @@ def check_if_site_available(site):
             "recent_available": True,
             "recent_category_available": True,
             "categories": ['anime', 'music', 'games', "tv",
-                           'apps', "xxx", "movies", 'books']  # television # software #adult # ebooks
+                           'apps', "xxx", "movies", 'books'],  # television # software #adult # ebooks
+            "limit": 50
         },
         'glodls': {
             "website": Glodls,
@@ -148,7 +161,8 @@ def check_if_site_available(site):
             "search_by_category": False,
             "recent_available": True,
             "recent_category_available": False,
-            "categories": []
+            "categories": [],
+            "limit": 45
         },
         'torrentproject': {
             "website": TorrentProject,
@@ -157,7 +171,8 @@ def check_if_site_available(site):
             "search_by_category": False,
             "recent_available": False,
             "recent_category_available": False,
-            "categories": []
+            "categories": [],
+            "limit": 20
         }
 
     }

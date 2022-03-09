@@ -11,6 +11,7 @@ class Zooqle:
 
     def __init__(self):
         self.BASE_URL = 'https://zooqle.com'
+        self.LIMIT = None
 
     def _parser(self, htmls):
         try:
@@ -49,6 +50,8 @@ class Zooqle:
                             'date': date,
 
                         })
+                    if len(my_dict['data']) == self.LIMIT:
+                        break
                 try:
                     ul = soup.find('ul', class_='pagination')
                     tpages = ul.find_all('a')[-3].text
@@ -63,9 +66,10 @@ class Zooqle:
         except:
             return None
 
-    async def search(self, query, page):
+    async def search(self, query, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             url = self.BASE_URL + \
                 '/search?pg={1}&q={0}&v=t'.format(query, page)
             return await self.parser_result(start_time, url, session)

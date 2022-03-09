@@ -6,10 +6,12 @@ from helper.asyncioPoliciesFix import decorator_asyncio_fix
 import re
 from helper.html_scraper import Scraper
 
+
 class Libgen:
 
     def __init__(self):
         self.BASE_URL = 'https://libgen.is'
+        self.LIMIT = None
 
     @decorator_asyncio_fix
     async def _individual_scrap(self, session, url, obj, sem):
@@ -89,13 +91,16 @@ class Libgen:
                         'extension': extension,
                         'url':  url,
                     })
+                    if len(my_dict['data']) == self.LIMIT:
+                        break
                 return my_dict, list_of_urls
         except:
             return None, None
 
-    async def search(self, query, page):
+    async def search(self, query, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             url = self.BASE_URL + \
                 '/search.php?req={}&lg_topic=libgen&open=0&view=simple&res=100&phrase=1&column=def'.format(
                     query)

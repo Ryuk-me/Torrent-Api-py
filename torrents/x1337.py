@@ -11,6 +11,7 @@ class x1337:
 
     def __init__(self):
         self.BASE_URL = 'https://1337xx.to'
+        self.LIMIT = None
 
     @decorator_asyncio_fix
     async def _individual_scrap(self, session, url, obj):
@@ -25,7 +26,8 @@ class x1337:
                     imgs = (soup.find("div", class_='torrent-tabs')
                             ).find_all('img')
                     if imgs and len(imgs) > 0:
-                        obj['screenshot'] = [img['src'].replace('.th','') for img in imgs]
+                        obj['screenshot'] = [
+                            img['src'].replace('.th', '') for img in imgs]
                     obj['category'] = lis.find('span').text
                     try:
                         poster = soup.select_one(
@@ -58,7 +60,6 @@ class x1337:
 
     def _parser(self, htmls):
         try:
-
             for html in htmls:
                 soup = BeautifulSoup(html, 'lxml')
                 list_of_urls = []
@@ -88,6 +89,8 @@ class x1337:
                             'url': url,
                             "uploader": uploader,
                         })
+                    if len(my_dict['data']) == self.LIMIT:
+                        break
                 try:
                     pages = soup.select('.pagination li a')
                     my_dict['current_page'] = int(pages[0].text)
@@ -102,8 +105,9 @@ class x1337:
         except:
             return None, None
 
-    async def search(self, query, page):
+    async def search(self, query, page, limit):
         async with aiohttp.ClientSession() as session:
+            self.LIMIT = limit
             start_time = time.time()
             url = self.BASE_URL + '/search/{}/{}/'.format(query, page)
             return await self.parser_result(start_time, url, session)
@@ -118,9 +122,10 @@ class x1337:
             return results
         return result
 
-    async def trending(self, category, page):
+    async def trending(self, category, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             if not category:
                 url = self.BASE_URL + '/home/'
             else:
@@ -128,9 +133,10 @@ class x1337:
                     "/popular-{}".format(category.lower())
             return await self.parser_result(start_time, url, session)
 
-    async def recent(self, category, page):
+    async def recent(self, category, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             if not category:
                 url = self.BASE_URL + '/trending'
             else:
@@ -138,9 +144,11 @@ class x1337:
                     "/cat/{}/{}/".format(str(category).capitalize(), page)
             return await self.parser_result(start_time, url, session)
 
-    async def search_by_category(self, query, category, page):
+    async def search_by_category(self, query, category, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             url = self.BASE_URL + \
-                '/category-search/{}/{}/{}/'.format(query, category.capitalize(), page)
+                '/category-search/{}/{}/{}/'.format(query,
+                                                    category.capitalize(), page)
             return await self.parser_result(start_time, url, session)

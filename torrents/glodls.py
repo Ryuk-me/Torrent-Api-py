@@ -11,6 +11,7 @@ class Glodls:
 
     def __init__(self):
         self.BASE_URL = 'https://glodls.to'
+        self.LIMIT = None
 
     def _parser(self, htmls):
         try:
@@ -43,6 +44,8 @@ class Glodls:
                         'torrent': torrent,
                         'url': self.BASE_URL + url,
                     })
+                    if len(my_dict['data']) == self.LIMIT:
+                        break
                 try:
                     pagination = soup.find('div', class_='pagination')
                     total_pages = pagination.find_all('a')[-2]['href']
@@ -54,9 +57,10 @@ class Glodls:
         except:
             return None
 
-    async def search(self, query, page):
+    async def search(self, query, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             print(query)
             url = self.BASE_URL + \
                 '/search_results.php?search={}&cat=0&incldead=0&inclexternal=0&lang=0&sort=seeders&order=desc&page={}'.format(
@@ -72,14 +76,16 @@ class Glodls:
             return results
         return results
 
-    async def trending(self, category, page):
+    async def trending(self, category, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             url = self.BASE_URL + '/today.php'
             return await self.parser_result(start_time, url, session)
 
-    async def recent(self, category, page):
+    async def recent(self, category, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             url = self.BASE_URL + '/search.php'
             return await self.parser_result(start_time, url, session)

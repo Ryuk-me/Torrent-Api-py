@@ -11,6 +11,7 @@ class NyaaSi:
 
     def __init__(self):
         self.BASE_URL = 'https://nyaa.si'
+        self.LIMIT = None
 
     def _parser(self, htmls):
         try:
@@ -47,6 +48,8 @@ class NyaaSi:
                         'downloads': downloads
 
                     })
+                if len(my_dict['data']) == self.LIMIT:
+                    break
 
                 try:
                     ul = soup.find('ul', class_='pagination')
@@ -62,9 +65,10 @@ class NyaaSi:
         except:
             return None
 
-    async def search(self, query, page):
+    async def search(self, query, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             url = self.BASE_URL + \
                 '/?f=0&c=0_0&q={}&p={}'.format(
                     query, page)
@@ -79,8 +83,9 @@ class NyaaSi:
             return results
         return results
 
-    async def recent(self, category, page):
+    async def recent(self, category, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             url = self.BASE_URL
             return await self.parser_result(start_time, url, session)

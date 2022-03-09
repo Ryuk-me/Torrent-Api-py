@@ -11,6 +11,7 @@ class Magnetdl:
 
     def __init__(self):
         self.BASE_URL = "https://www.magnetdl.com"
+        self.LIMIT = None
 
     def _parser(self, htmls):
         try:
@@ -48,6 +49,8 @@ class Magnetdl:
                                 'date': date,
 
                             })
+                        if len(my_dict['data']) == self.LIMIT:
+                            break
                 total_results = soup.find(
                     'div', id='footer').text.replace(',', '')
                 current_page = int(
@@ -70,9 +73,10 @@ class Magnetdl:
     async def _get_all_results(self, session, url):
         return await asyncio.gather(asyncio.create_task(self._get_html(session, url)))
 
-    async def search(self, query, page):
+    async def search(self, query, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             query = requests.utils.unquote(query)
             query = query.split(' ')
             query = '-'.join(query)
@@ -89,9 +93,10 @@ class Magnetdl:
             return results
         return results
 
-    async def recent(self, category, page):
+    async def recent(self, category, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             if not category:
                 url = self.BASE_URL + '/download/movies/{}'.format(page)
             else:

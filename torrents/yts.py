@@ -11,6 +11,7 @@ class Yts:
 
     def __init__(self):
         self.BASE_URL = 'https://yts.mx'
+        self.LIMIT = None
 
     @decorator_asyncio_fix
     async def _individual_scrap(self, session, url, obj):
@@ -18,7 +19,6 @@ class Yts:
             async with session.get(url) as res:
                 html = await res.text(encoding="ISO-8859-1")
                 soup = BeautifulSoup(html, 'lxml')
-                print(soup.title)
                 try:
                     name = soup.select_one('div.hidden-xs h1').text
                     div = soup.select('div.hidden-xs h2')
@@ -96,6 +96,8 @@ class Yts:
                     my_dict['data'].append({
                         'url': url
                     })
+                    if len(my_dict['data']) == self.LIMIT:
+                        break
                 try:
                     ul = soup.find(
                         'ul', class_='tsc_pagination')
@@ -116,9 +118,10 @@ class Yts:
         except:
             return None, None
 
-    async def search(self, query, page):
+    async def search(self, query, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             if page != 1:
                 url = self.BASE_URL + \
                     '/browse-movies/{}/all/all/0/latest/0/all?page={}'.format(
@@ -138,14 +141,16 @@ class Yts:
             return results
         return result
 
-    async def trending(self, category, page):
+    async def trending(self, category, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             url = self.BASE_URL + "/trending-movies"
             return await self.parser_result(start_time, url, session)
 
-    async def recent(self, category, page):
+    async def recent(self, category, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             url = self.BASE_URL + '/browse-movies/0/all/all/0/featured/0/all'
             return await self.parser_result(start_time, url, session)

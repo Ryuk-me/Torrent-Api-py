@@ -11,6 +11,7 @@ class TorrentGalaxy:
 
     def __init__(self):
         self.BASE_URL = 'https://torrentgalaxy.to'
+        self.LIMIT = None
 
     def _parser(self, htmls):
         try:
@@ -76,6 +77,8 @@ class TorrentGalaxy:
                             'date': date,
 
                         })
+                    if len(my_dict['data']) == self.LIMIT:
+                        break
                 try:
                     ul = soup.find_all('ul', class_='pagination')[-1]
                     tpages = ul.find_all('li')[-2]
@@ -90,9 +93,10 @@ class TorrentGalaxy:
         except:
             return None
 
-    async def search(self, query, page):
+    async def search(self, query, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             url = self.BASE_URL + \
                 '/torrents.php?search=+{}&sort=seeders&order=desc&page={}'.format(
                     query, page-1)
@@ -107,15 +111,17 @@ class TorrentGalaxy:
             return results
         return results
 
-    async def trending(self, category, page):
+    async def trending(self, category, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             url = self.BASE_URL
             return await self.parser_result(start_time, url, session)
 
-    async def recent(self, category, page):
+    async def recent(self, category, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             if not category:
                 url = self.BASE_URL + '/latest'
             else:
@@ -127,9 +133,3 @@ class TorrentGalaxy:
             return await self.parser_result(start_time, url, session)
 
     #! Maybe Implemented in Future
-    # async def search_by_category(self, query, category, page):
-    #     async with aiohttp.ClientSession() as session:
-    #         start_time = time.time()
-    #         url = self.BASE_URL + \
-    #             '/category-search/{}/{}/{}/'.format(query, category, page)
-    #         return await self.parser_result(start_time, url, session)

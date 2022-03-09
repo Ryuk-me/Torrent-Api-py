@@ -12,6 +12,7 @@ class PirateBay:
 
     def __init__(self):
         self.BASE_URL = 'https://thepiratebay10.org'
+        self.LIMIT = None
 
     def _parser(self, htmls):
         try:
@@ -48,6 +49,8 @@ class PirateBay:
                             'hash': re.search(r'([{a-f\d,A-F\d}]{32,40})\b', magnet).group(0),
                             'magnet': magnet,
                         })
+                    if len(my_dict['data']) == self.LIMIT:
+                        break
                 last_tr = soup.find_all('tr')[-1]
                 check_if_pagination_available = last_tr.find(
                     'td').find('center')
@@ -60,9 +63,10 @@ class PirateBay:
         except:
             return None
 
-    async def search(self, query, page):
+    async def search(self, query, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             url = self.BASE_URL + \
                 '/search/{}/{}/99/0'.format(
                     query, page)
@@ -77,19 +81,20 @@ class PirateBay:
             return results
         return results
 
-    async def trending(self, category, page):
+    async def trending(self, category, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             url = self.BASE_URL + '/top/all'
             return await self.parser_result(start_time, url, session)
-    
-    async def recent(self, category, page):
+
+    async def recent(self, category, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             if not category:
                 url = self.BASE_URL + '/recent'
             else:
                 url = self.BASE_URL + \
                     "/{}/latest/".format(category)
             return await self.parser_result(start_time, url, session)
-

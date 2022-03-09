@@ -11,6 +11,7 @@ class Kickass:
 
     def __init__(self):
         self.BASE_URL = 'https://kickasstorrents.to'
+        self.LIMIT = None
 
     @decorator_asyncio_fix
     async def _individual_scrap(self, session, url, obj):
@@ -80,6 +81,8 @@ class Kickass:
                             'url': url,
                             "uploader": uploader,
                         })
+                    if len(my_dict['data']) == self.LIMIT:
+                        break
                 try:
                     pages = soup.find('div', class_='pages')
                     current_page = int(pages.find('a', class_='active').text)
@@ -95,9 +98,10 @@ class Kickass:
         except:
             return None, None
 
-    async def search(self, query, page):
+    async def search(self, query, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             url = self.BASE_URL + '/usearch/{}/{}/'.format(query, page)
             return await self.parser_result(start_time, url, session)
 
@@ -111,9 +115,10 @@ class Kickass:
             return results
         return result
 
-    async def trending(self, category, page):
+    async def trending(self, category, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             if not category:
                 url = self.BASE_URL + '/top-100'
             else:
@@ -125,9 +130,10 @@ class Kickass:
                     "/top-100-{}/".format(category)
             return await self.parser_result(start_time, url, session)
 
-    async def recent(self, category, page):
+    async def recent(self, category, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             if not category:
                 url = self.BASE_URL + '/new/'
             else:

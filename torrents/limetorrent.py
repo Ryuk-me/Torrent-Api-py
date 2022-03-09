@@ -11,6 +11,7 @@ class Limetorrent:
 
     def __init__(self):
         self.BASE_URL = 'https://www.limetorrents.pro'
+        self.LIMIT = None
 
     @decorator_asyncio_fix
     async def _individual_scrap(self, session, url, obj):
@@ -71,6 +72,8 @@ class Limetorrent:
                         'leechers': leechers,
                         'url': url,
                     })
+                    if len(my_dict['data']) == self.LIMIT:
+                        break
                 try:
                     div = soup.find('div', class_='search_stat')
                     current_page = int(div.find('span', class_='active').text)
@@ -85,9 +88,10 @@ class Limetorrent:
         except:
             return None, None
 
-    async def search(self, query, page):
+    async def search(self, query, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             url = self.BASE_URL + \
                 "/search/all/{}//{}".format(query, page)
             return await self.parser_result(start_time, url, session, idx=5)
@@ -102,15 +106,17 @@ class Limetorrent:
             return results
         return result
 
-    async def trending(self, category, page):
+    async def trending(self, category, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             url = self.BASE_URL + '/top100'
             return await self.parser_result(start_time, url, session)
 
-    async def recent(self, category, page):
+    async def recent(self, category, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             if not category:
                 url = self.BASE_URL + '/latest100'
             else:

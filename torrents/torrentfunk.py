@@ -3,6 +3,7 @@ import aiohttp
 from bs4 import BeautifulSoup
 import time
 from helper.asyncioPoliciesFix import decorator_asyncio_fix
+import re
 from helper.html_scraper import Scraper
 
 
@@ -10,6 +11,7 @@ class TorrentFunk:
 
     def __init__(self):
         self.BASE_URL = 'https://www.torrentfunk.com'
+        self.LIMIT = None
 
     @decorator_asyncio_fix
     async def _individual_scrap(self, session, url, obj):
@@ -20,8 +22,10 @@ class TorrentFunk:
                 try:
                     obj['torrent'] = soup.select_one(
                         '#right > main > div.content > table:nth-child(3) > tr > td:nth-child(2) > a')['href']
-                    obj['category'] = soup.select_one('#right > main > div.content > table:nth-child(7) > tr> td:nth-child(2) > a').text
-                    obj['hash'] = soup.select_one('#right > main > div.content > table:nth-child(7) > tr:nth-child(3) > td:nth-child(2)').text
+                    obj['category'] = soup.select_one(
+                        '#right > main > div.content > table:nth-child(7) > tr> td:nth-child(2) > a').text
+                    obj['hash'] = soup.select_one(
+                        '#right > main > div.content > table:nth-child(7) > tr:nth-child(3) > td:nth-child(2)').text
                 except:
                     pass
         except:
@@ -68,13 +72,16 @@ class TorrentFunk:
                         'uploader': uploader if uploader else None,
                         'url': url,
                     })
+                    if len(my_dict['data']) == self.LIMIT:
+                        break
                 return my_dict, list_of_urls
         except:
             return None, None
 
-    async def search(self, query, page):
+    async def search(self, query, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             url = self.BASE_URL + \
                 "/all/torrents/{}/{}.html".format(query, page)
             return await self.parser_result(start_time, url, session, idx=6)
@@ -89,15 +96,17 @@ class TorrentFunk:
             return results
         return result
 
-    async def trending(self, category, page):
+    async def trending(self, category, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             url = self.BASE_URL
             return await self.parser_result(start_time, url, session)
 
-    async def recent(self, category, page):
+    async def recent(self, category, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             if not category:
                 url = self.BASE_URL + '/movies/recent.html'
             else:

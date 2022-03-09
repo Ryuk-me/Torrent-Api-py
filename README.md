@@ -93,7 +93,8 @@ PYTHON_ENV=dev (if running local)
             "search_by_category": True,
             "recent_available": True,
             "recent_category_available": True,
-            "categories": ["anime", "music", "games", "tv","apps","documentaries", "other", "xxx", "movies"]
+            "categories": ["anime", "music", "games", "tv","apps","documentaries", "other", "xxx", "movies"],
+            "limit" : 20
         },
         "torlock": {
             "trending_available": True,
@@ -101,7 +102,8 @@ PYTHON_ENV=dev (if running local)
             "search_by_category": False,
             "recent_available": True,
             "recent_category_available": True,
-            "categories": ["anime", "music", "games", "tv","apps", "documentaries", "other", "xxx", "movies", "books", "images"]
+            "categories": ["anime", "music", "games", "tv","apps", "documentaries", "other", "xxx", "movies", "books", "images"],
+            "limit" : 50
         },
         "zooqle": {
             "trending_available": False,
@@ -109,7 +111,8 @@ PYTHON_ENV=dev (if running local)
             "search_by_category": False,
             "recent_available": False,
             "recent_category_available": False,
-            "categories": []
+            "categories": [],
+            "limit": 30
         },
         "magnetdl": {
             "trending_available": False,
@@ -117,7 +120,8 @@ PYTHON_ENV=dev (if running local)
             "search_by_category": False,
             "recent_available": True,
             "recent_category_available": True,
-            "categories": ["apps", "movies", "music", "games", "tv", "books"]
+            "categories": ["apps", "movies", "music", "games", "tv", "books"],
+            "limit": 40
         },
         "tgx": {
             "trending_available": True,
@@ -126,7 +130,8 @@ PYTHON_ENV=dev (if running local)
             "recent_available": True,
             "recent_category_available": True,
             "categories": ["anime", "music", "games", "tv",
-                           "apps", "documentaries", "other", "xxx", "movies", "books"]
+                           "apps", "documentaries", "other", "xxx", "movies", "books"],
+            "limit": 50
         },
         "nyaasi": {
             "trending_available": False,
@@ -134,7 +139,9 @@ PYTHON_ENV=dev (if running local)
             "search_by_category": False,
             "recent_available": True,
             "recent_category_available": False,
-            "categories": []
+            "categories": [],
+            "limit": 50
+
         },
         "piratebay": {
             "trending_available": True,
@@ -142,7 +149,8 @@ PYTHON_ENV=dev (if running local)
             "search_by_category": False,
             "recent_available": True,
             "recent_category_available": True,
-            "categories": ["tv"]
+            "categories": ["tv"],
+            "limit": 50
         },
         "bitsearch": {
             "trending_available": True,
@@ -150,7 +158,8 @@ PYTHON_ENV=dev (if running local)
             "search_by_category": False,
             "recent_available": False,
             "recent_category_available": False,
-            "categories": []
+            "categories": [],
+            "limit": 50
         },
         "kickass": {
             "trending_available": True,
@@ -158,7 +167,8 @@ PYTHON_ENV=dev (if running local)
             "search_by_category": False,
             "recent_available": True,
             "recent_category_available": True,
-            "categories": ["anime", "music", "games", "tv","apps", "documentaries", "other", "xxx", "movies", "books"]
+            "categories": ["anime", "music", "games", "tv","apps", "documentaries", "other", "xxx", "movies", "books"],
+            "limit": 50
         },
         "libgen'": {
             "trending_available": False,
@@ -166,7 +176,8 @@ PYTHON_ENV=dev (if running local)
             "search_by_category": False,
             "recent_available": False,
             "recent_category_available": False,
-            "categories": []
+            "categories": [],
+            "limit": 25
         },
         "yts": {
             "trending_available": True,
@@ -174,7 +185,8 @@ PYTHON_ENV=dev (if running local)
             "search_by_category": False,
             "recent_available": True,
             "recent_category_available": False,
-            "categories": []
+            "categories": [],
+            "limit": 20
         },
         "limetorrent": {
             "trending_available": True,
@@ -183,7 +195,8 @@ PYTHON_ENV=dev (if running local)
             "recent_available": True,
             "recent_category_available": True,
             "categories": ["anime", "music", "games", "tv",
-                           "apps", "other", "movies", "books"]  # applications and tv-shows
+                           "apps", "other", "movies", "books"],  # applications and tv-shows
+            "limit": 50
         },
         "torrentfunk": {
             "trending_available": True,
@@ -192,7 +205,8 @@ PYTHON_ENV=dev (if running local)
             "recent_available": True,
             "recent_category_available": True,
             "categories": ["anime", "music", "games", "tv",
-                           "apps", "xxx", "movies", "books"]  # television # software #adult # ebooks
+                           "apps", "xxx", "movies", "books"],  # television # software #adult # ebooks
+            "limit": 50
         },
         "glodls": {
             "trending_available": True,
@@ -200,7 +214,8 @@ PYTHON_ENV=dev (if running local)
             "search_by_category": False,
             "recent_available": True,
             "recent_category_available": False,
-            "categories": []
+            "categories": [],
+            "limit": 45
         },
         "torrentproject": {
             "trending_available": False,
@@ -208,7 +223,8 @@ PYTHON_ENV=dev (if running local)
             "search_by_category": False,
             "recent_available": False,
             "recent_category_available": False,
-            "categories": []
+            "categories": [],
+            "limit": 20
         }
 
     }
@@ -227,11 +243,12 @@ PYTHON_ENV=dev (if running local)
 
 > `api/v1/search`
 
-| Parameter | Required |  Type   | Default |                     Example                      |
-| :-------: | :------: | :-----: | :-----: | :----------------------------------------------: |
-|   site    |    ✅    | string  |  None   |            `api/v1/search?site=1337x`            |
-|   query   |    ✅    | string  |  None   |    `api/v1/search?site=1337x&query=avengers`     |
-|   page    |    ❌    | integer |    1    | `api/v1/search?site=1337x&query=avengers&page=2` |
+| Parameter | Required |  Type   | Default |                         Example                          |
+| :-------: | :------: | :-----: | :-----: | :------------------------------------------------------: |
+|   site    |    ✅    | string  |  None   |                `api/v1/search?site=1337x`                |
+|   query   |    ✅    | string  |  None   |        `api/v1/search?site=1337x&query=avengers`         |
+|   limit   |    ❌    | integer | Default |    `api/v1/search?site=1337x&query=avengers&limit=20`    |
+|   page    |    ❌    | integer |    1    | `api/v1/search?site=1337x&query=avengers&limit=0&page=2` |
 
 </p>
 </details>
@@ -243,11 +260,12 @@ PYTHON_ENV=dev (if running local)
 
 > `api/v1/trending`
 
-| Parameter | Required |  Type   | Default |                     Example                     |
-| :-------: | :------: | :-----: | :-----: | :---------------------------------------------: |
-|   site    |    ✅    | string  |  None   |          `api/v1/trending?site=1337x`           |
-| category  |    ❌    | string  |  None   |    `api/v1/trending?site=1337x&category=tv`     |
-|   page    |    ❌    | integer |    1    | `api/v1/trending?site=1337x&category=tv&page=2` |
+| Parameter | Required |  Type   | Default |                         Example                         |
+| :-------: | :------: | :-----: | :-----: | :-----------------------------------------------------: |
+|   site    |    ✅    | string  |  None   |              `api/v1/trending?site=1337x`               |
+|   limit   |    ❌    | integer | Default |          `api/v1/trending?site=1337x&limit=10`          |
+| category  |    ❌    | string  |  None   |    `api/v1/trending?site=1337x&limit=0&category=tv`     |
+|   page    |    ❌    | integer |    1    | `api/v1/trending?site=1337x&limit=6&category=tv&page=2` |
 
 </p>
 </details>
@@ -259,11 +277,12 @@ PYTHON_ENV=dev (if running local)
 
 > `api/v1/recent`
 
-| Parameter | Required |  Type   | Default |                    Example                    |
-| :-------: | :------: | :-----: | :-----: | :-------------------------------------------: |
-|   site    |    ✅    | string  |  None   |          `api/v1/recent?site=1337x`           |
-| category  |    ❌    | string  |  None   |    `api/v1/recent?site=1337x&category=tv`     |
-|   page    |    ❌    | integer |    1    | `api/v1/recent?site=1337x&category=tv&page=2` |
+| Parameter | Required |  Type   | Default |                        Example                         |
+| :-------: | :------: | :-----: | :-----: | :----------------------------------------------------: |
+|   site    |    ✅    | string  |  None   |               `api/v1/recent?site=1337x`               |
+|   limit   |    ❌    | integer | Default |           `api/v1/recent?site=1337x&limit=7`           |
+| category  |    ❌    | string  |  None   |     `api/v1/recent?site=1337x&limit=0&category=tv`     |
+|   page    |    ❌    | integer |    1    | `api/v1/recent?site=1337x&limit=15&category=tv&page=2` |
 
 </p>
 </details>
@@ -275,12 +294,13 @@ PYTHON_ENV=dev (if running local)
 
 > `api/v1/category`
 
-| Parameter | Required |  Type   | Default |                            Example                             |
-| :-------: | :------: | :-----: | :-----: | :------------------------------------------------------------: |
-|   site    |    ✅    | string  |  None   |                  `api/v1/category?site=1337x`                  |
-|   query   |    ✅    | string  |  None   |          `api/v1/category?site=1337x&query=avengers`           |
-| category  |    ✅    | string  |  None   |  `api/v1/category?site=1337x&query=avengers&category=movies`   |
-|   page    |    ❌    | integer |    1    | `api/v1/category?site=1337x&query=avengers&category=tv&page=2` |
+| Parameter | Required |  Type   | Default |                                Example                                 |
+| :-------: | :------: | :-----: | :-----: | :--------------------------------------------------------------------: |
+|   site    |    ✅    | string  |  None   |                      `api/v1/category?site=1337x`                      |
+|   query   |    ✅    | string  |  None   |              `api/v1/category?site=1337x&query=avengers`               |
+| category  |    ✅    | string  |  None   |      `api/v1/category?site=1337x&query=avengers&category=movies`       |
+|   limit   |    ❌    | integer | Default |  `api/v1/category?site=1337x&query=avengers&category=movies&limit=10`  |
+|   page    |    ❌    | integer |    1    | `api/v1/category?site=1337x&query=avengers&category=tv&limit=0&page=2` |
 
 </p>
 </details>

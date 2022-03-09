@@ -11,6 +11,7 @@ class Bitsearch:
 
     def __init__(self):
         self.BASE_URL = 'https://bitsearch.to'
+        self.LIMIT = None
 
     def _parser(self, htmls):
         try:
@@ -50,6 +51,8 @@ class Bitsearch:
                             'downloads': downloads
 
                         })
+                    if len(my_dict['data']) == self.LIMIT:
+                        break
                 try:
                     total_pages = int(soup.select(
                         'body > main > div.container.mt-2 > div > div:nth-child(1) > div > span > b')[0].text) / 20  # !20 search result available on each page
@@ -67,9 +70,10 @@ class Bitsearch:
         except:
             return None
 
-    async def search(self, query, page):
+    async def search(self, query, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             url = self.BASE_URL + \
                 '/search?q={}&page={}'.format(
                     query, page)
@@ -84,8 +88,9 @@ class Bitsearch:
             return results
         return results
 
-    async def trending(self, category, page):
+    async def trending(self, category, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             url = self.BASE_URL + '/trending'
             return await self.parser_result(start_time, url, session)

@@ -11,9 +11,10 @@ class TorrentProject:
 
     def __init__(self):
         self.BASE_URL = 'https://torrentproject2.com'
+        self.LIMIT = None
 
     @decorator_asyncio_fix
-    async def _individual_scrap(self, session, url, obj,sem):
+    async def _individual_scrap(self, session, url, obj, sem):
         async with sem:
             try:
                 async with session.get(url, headers={
@@ -22,7 +23,8 @@ class TorrentProject:
                     html = await res.text(encoding="ISO-8859-1")
                     soup = BeautifulSoup(html, 'lxml')
                     try:
-                        magnet = soup.select_one('#download > div:nth-child(2) > div > a')['href']
+                        magnet = soup.select_one(
+                            '#download > div:nth-child(2) > div > a')['href']
                         index_of_magnet = magnet.index('magnet')
                         magnet = magnet[index_of_magnet:]
                         obj['magnet'] = magnet
@@ -38,7 +40,7 @@ class TorrentProject:
             for obj in result['data']:
                 if obj['url'] == url:
                     task = asyncio.create_task(self._individual_scrap(
-                        session, url, result['data'][idx],sem))
+                        session, url, result['data'][idx], sem))
                     tasks.append(task)
         await asyncio.gather(*tasks)
         return result
@@ -70,13 +72,16 @@ class TorrentProject:
                         'leechers': leechers,
                         'url': url,
                     })
+                    if len(my_dict['data']) == self.LIMIT:
+                        break
                 return my_dict, list_of_urls
         except:
             return None, None
 
-    async def search(self, query, page):
+    async def search(self, query, page, limit):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
+            self.LIMIT = limit
             url = self.BASE_URL + '/?t={}&p={}'.format(query, page - 1)
             return await self.parser_result(start_time, url, session)
 
