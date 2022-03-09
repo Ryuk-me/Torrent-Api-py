@@ -61,7 +61,6 @@ class Glodls:
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
             self.LIMIT = limit
-            print(query)
             url = self.BASE_URL + \
                 '/search_results.php?search={}&cat=0&incldead=0&inclexternal=0&lang=0&sort=seeders&order=desc&page={}'.format(
                     query, page-1)

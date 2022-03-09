@@ -20,7 +20,7 @@ app = FastAPI()
 
 
 CACHE_EXPIRATION = int(os.getenv('CACHE_EXPIRATION', 180)) if os.getenv(
-    'PYTHON_ENV', 'dev') == 'prod' else 1
+    'PYTHON_ENV', 'dev') == 'prod' else 30
 
 
 @app.get("/api/v1/search")
