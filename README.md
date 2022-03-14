@@ -409,6 +409,22 @@ PYTHON_ENV=dev (if running local)
 
 ---
 
+# How to Host On Repl.it
+
+```sh
+> Fork this repo
+> Import repo from github in repl
+> Command : python main.py
+> Install Requirements manually !very important
+> Add Environment variables from .env file in repl
+> And Run Your repl
+
+Note :  Due to CPU limitations Repl will take much more time than Heroku
+
+```
+
+---
+
 ## Donations
 
 <p> If you feel like showing your appreciation for this project, then how about buying me a coffee.</p>

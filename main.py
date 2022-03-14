@@ -18,6 +18,15 @@ from fastapi_cache.decorator import cache
 load_dotenv()
 app = FastAPI()
 
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 CACHE_EXPIRATION = int(os.getenv('CACHE_EXPIRATION', 180)) if os.getenv(
     'PYTHON_ENV', 'dev') == 'prod' else 30
@@ -221,4 +230,4 @@ async def startup():
 
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="127.0.0.1", port=5000, log_level="info")
+    uvicorn.run(app,host="0.0.0.0",port="8080")
