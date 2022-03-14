@@ -419,8 +419,9 @@ PYTHON_ENV=dev (if running local)
 > Add Environment variables from .env file in repl
 > And Run Your repl
 
-Note :  Due to CPU limitations Repl will take much more time than Heroku
+Note :  Due to CPU limitations Repl will take much more time than Heroku and everytime you pull new changes to repl you have to add REDIS_URI
 
+Test Here : https://Torrent-Api-py.ryukme.repl.co/api/v1/search?site=tgx&query=avengers&limit=5
 ```
 
 ---
