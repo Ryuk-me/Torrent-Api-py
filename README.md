@@ -38,7 +38,7 @@ $ sudo apt-get install redis
 $ redis-server
 
 # Start
-$ uvicorn main:app
+$ python main.py
 
 ```
 
@@ -47,7 +47,7 @@ $ uvicorn main:app
 ```sh
 # Change Environment variables
 
-Go to .env file and add the following
+Go to .env file / okteto-stack.yaml and add the following
 
 # Get it from https://redistogo.com/
 REDIS_URI=redis://redistogo:f99edf3de0cyryty324fe462@sole.redistogo.com:10393/
@@ -425,6 +425,17 @@ Test Here : https://Torrent-Api-py.ryukme.repl.co/api/v1/search?site=tgx&query=a
 ```
 
 ---
+
+# How to Host On Okteto
+
+```sh
+> Fork this repo
+> Go to  okteto-stack.yaml file and add REDIS_URI in environment
+> Now visit https://www.okteto.com/ and login via Github
+> Now select the repository u want to deploy and and just click on deploy don't add any environment variable there
+> Now wait for some time and your api will be live
+
+```
 
 ## Donations
 
