@@ -14,7 +14,7 @@
 
 <p align="center">
 <span style='font-size: 19px'>
-An Unofficial API for <span style='font-weight:600;'>1337x</span>, <span style='font-weight:600;'>Piratebay</span>, <span style='font-weight:bold;'>Nyaasi</span>, <span style='font-weight:bold;'>Torlock</span>, <span style='font-weight:bold;'>Torrent Galaxy</span>, <span style='font-weight:600;'>Zooqle</span>, <span style='font-weight:600;'>Kickass</span>, <span style='font-weight:600;'>Bitsearch</span>, <span style='font-weight:600;'>MagnetDL</span>Libgen, YTS, Limetorrent, TorrentFunk, Glodls and TorrentProject
+An Unofficial API for <span style='font-weight:600;'>1337x</span>, <span style='font-weight:600;'>Piratebay</span>, <span style='font-weight:bold;'>Nyaasi</span>, <span style='font-weight:bold;'>Torlock</span>, <span style='font-weight:bold;'>Torrent Galaxy</span>, <span style='font-weight:600;'>Zooqle</span>, <span style='font-weight:600;'>Kickass</span>, <span style='font-weight:600;'>Bitsearch</span>, <span style='font-weight:600;'>MagnetDL</span>Libgen, YTS, Limetorrent, TorrentFunk, Glodls, TorrentProject and YourBittorrent
 </span>
 </p>
 
@@ -77,6 +77,7 @@ PYTHON_ENV=dev (if running local)
 |  TorrentFunk   |  `torrentfunk`   | https://www.torrentfunk.com  |    ❌     |
 |     Glodls     |     `glodls`     |      https://glodls.to       |    ❌     |
 | TorrentProject | `torrentproject` | https://torrentproject2.com  |    ❌     |
+| YourBittorrent |      `ybt`       |  https://yourbittorrent.com  |    ❌     |
 
 ---
 
@@ -224,6 +225,16 @@ PYTHON_ENV=dev (if running local)
             "recent_available": False,
             "recent_category_available": False,
             "categories": [],
+            "limit": 20
+        },
+        "ybt": {
+            "trending_available": True,
+            "trending_category": True,
+            "search_by_category": False,
+            "recent_available": True,
+            "recent_category_available": True,
+            "categories": ["anime", "music", "games", "tv",
+                           "apps", "xxx", "movies", "books", "pictures", "other"],  # book -> ebooks
             "limit": 20
         }
 

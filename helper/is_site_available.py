@@ -13,6 +13,7 @@ from torrents.limetorrents import Limetorrent
 from torrents.torrentfunk import TorrentFunk
 from torrents.glodls import Glodls
 from torrents.torrentProject import TorrentProject
+from torrents.your_bittorrent import YourBittorrent
 
 
 def check_if_site_available(site):
@@ -172,6 +173,17 @@ def check_if_site_available(site):
             "recent_available": False,
             "recent_category_available": False,
             "categories": [],
+            "limit": 20
+        },
+        'ybt': {
+            "website": YourBittorrent,
+            "trending_available": True,
+            "trending_category": True,
+            "search_by_category": False,
+            "recent_available": True,
+            "recent_category_available": True,
+            "categories": ['anime', 'music', 'games', "tv",
+                           'apps', "xxx", "movies", 'books', 'pictures', 'other'],  # book -> ebooks
             "limit": 20
         }
 
