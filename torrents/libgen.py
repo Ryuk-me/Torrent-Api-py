@@ -82,7 +82,7 @@ class Libgen:
                     my_dict['data'].append({
                         'id': id,
                         'authors': authors,
-                        'title': name,
+                        'name': name,
                         'publisher': publisher,
                         'year': year,
                         'pages': pages,
