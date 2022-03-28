@@ -1,7 +1,6 @@
 services:
   fastapi:
     public: true
-    image: fastapi-crud:latest
     build: .
     replicas: 1
     environment:
@@ -13,7 +12,7 @@ services:
     resources:
       requests:
         cpu: 500m
-        memory: 500Mi
+        memory: 1500Mi
       limits:
         cpu: 1000m
-        memory: 1000Mi
+        memory: 3000Mi
