@@ -83,6 +83,9 @@ PYTHON_ENV=dev (if running local)
 
 <details open>
 <summary style='font-size: 20px'><span style='font-size: 25px;font-weight:bold;'>Supported Methods and categories</span></summary>
+
+> If you want to change the default limit site wise [Visit Here](https://github.com/Ryuk-me/Torrent-Api-py/blob/main/helper/is_site_available.py#L30)
+
 <p>
 
 ```json

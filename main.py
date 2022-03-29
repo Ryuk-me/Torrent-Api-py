@@ -147,10 +147,11 @@ async def get_search_combo(query: str, limit: Optional[int] = 0):
     }
     total_torrents_overall = 0
     for site in sites_list:
-        if all_sites[site]['website']:
-            limit = all_sites[site]['limit'] if limit == 0 or limit > all_sites[site]['limit'] else limit
-            tasks.append(asyncio.create_task(
-                all_sites[site]['website']().search(query, page=1, limit=limit)))
+        if site == 'libgen':
+            continue
+        limit = all_sites[site]['limit'] if limit == 0 or limit > all_sites[site]['limit'] else limit
+        tasks.append(asyncio.create_task(
+            all_sites[site]['website']().search(query, page=1, limit=limit)))
     results = await asyncio.gather(*tasks)
     for res in results:
         if res and len(res['data']) > 0:
@@ -176,6 +177,8 @@ async def get_all_trending(limit: Optional[int] = 0):
     }
     total_torrents_overall = 0
     for site in sites_list:
+        if site == 'libgen':
+            continue
         limit = all_sites[site]['limit'] if limit == 0 or limit > all_sites[site]['limit'] else limit
         tasks.append(asyncio.create_task(
             all_sites[site]['website']().trending(category=None, page=1, limit=limit)))
@@ -204,6 +207,8 @@ async def get_all_recent(limit: Optional[int] = 0):
     }
     total_torrents_overall = 0
     for site in sites_list:
+        if site == 'libgen':
+            continue
         limit = all_sites[site]['limit'] if limit == 0 or limit > all_sites[site]['limit'] else limit
         tasks.append(asyncio.create_task(
             all_sites[site]['website']().recent(category=None, page=1, limit=limit)))
@@ -231,4 +236,4 @@ async def startup():
 
 
 if __name__ == "__main__":
-    uvicorn.run(app,host="0.0.0.0",port="8080")
+    uvicorn.run(app, host="0.0.0.0", port="8080")
