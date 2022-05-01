@@ -3,9 +3,8 @@ import aiohttp
 from bs4 import BeautifulSoup
 import time
 from helper.asyncioPoliciesFix import decorator_asyncio_fix
-import re
 from helper.html_scraper import Scraper
-
+import requests
 
 class TorrentProject:
 
@@ -26,7 +25,7 @@ class TorrentProject:
                         magnet = soup.select_one(
                             '#download > div:nth-child(2) > div > a')['href']
                         index_of_magnet = magnet.index('magnet')
-                        magnet = magnet[index_of_magnet:]
+                        magnet = requests.utils.unquote(magnet[index_of_magnet:])
                         obj['magnet'] = magnet
                     except:
                         pass
