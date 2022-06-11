@@ -1,9 +1,7 @@
 import asyncio
-import json
 import os
 import time
 from typing import Optional
-
 import aioredis
 import uvicorn
 from dotenv import load_dotenv
@@ -13,9 +11,6 @@ from fastapi.responses import FileResponse
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
 from fastapi_cache.decorator import cache
-from starlette.requests import Request
-from starlette.responses import Response
-
 from helper.is_site_available import check_if_site_available
 
 load_dotenv()
@@ -39,7 +34,7 @@ CACHE_EXPIRATION = (
 
 
 @app.get("/api/v1/search")
-@cache(expire=CACHE_EXPIRATION)
+# @cache(expire=CACHE_EXPIRATION)
 async def call_api(
     site: str, query: str, limit: Optional[int] = 0, page: Optional[int] = 1
 ):
@@ -63,7 +58,7 @@ async def call_api(
 
 
 @app.get("/api/v1/trending")
-@cache(expire=CACHE_EXPIRATION)
+# @cache(expire=CACHE_EXPIRATION)
 async def get_trending(
     site: str,
     limit: Optional[int] = 0,
@@ -105,7 +100,7 @@ async def get_trending(
 
 
 @app.get("/api/v1/category")
-@cache(expire=CACHE_EXPIRATION)
+# @cache(expire=CACHE_EXPIRATION)
 async def get_category(
     site: str,
     query: str,
@@ -145,7 +140,7 @@ async def get_category(
 
 
 @app.get("/api/v1/recent")
-@cache(expire=CACHE_EXPIRATION)
+# @cache(expire=CACHE_EXPIRATION)
 async def get_recent(
     site: str,
     limit: Optional[int] = 0,
@@ -192,7 +187,7 @@ async def home():
 
 
 @app.get("/api/v1/all/search")
-@cache(expire=CACHE_EXPIRATION)
+# @cache(expire=CACHE_EXPIRATION)
 async def get_search_combo(query: str, limit: Optional[int] = 0):
     start_time = time.time()
     query = query.lower()
@@ -225,7 +220,7 @@ async def get_search_combo(query: str, limit: Optional[int] = 0):
 
 
 @app.get("/api/v1/all/trending")
-@cache(expire=CACHE_EXPIRATION)
+# @cache(expire=CACHE_EXPIRATION)
 async def get_all_trending(limit: Optional[int] = 0):
     start_time = time.time()
     # just getting all_sites dictionary
@@ -263,7 +258,7 @@ async def get_all_trending(limit: Optional[int] = 0):
 
 
 @app.get("/api/v1/all/recent")
-@cache(expire=CACHE_EXPIRATION)
+# @cache(expire=CACHE_EXPIRATION)
 async def get_all_recent(limit: Optional[int] = 0):
     start_time = time.time()
     # just getting all_sites dictionary
@@ -298,15 +293,15 @@ async def get_all_recent(limit: Optional[int] = 0):
     return COMBO
 
 
-@app.on_event("startup")
-async def startup():
-    PYTHON_ENV = os.getenv("PYTHON_ENV", "dev")
-    if PYTHON_ENV == "prod":
-        HOST = os.getenv("REDIS_URI", "redis://localhost")
-    else:
-        HOST = "redis://localhost"
-    redis = aioredis.from_url(HOST, encoding="utf8", decode_responses=True)
-    FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
+# @app.on_event("startup")
+# async def startup():
+#     PYTHON_ENV = os.getenv("PYTHON_ENV", "dev")
+#     if PYTHON_ENV == "prod":
+#         HOST = os.getenv("REDIS_URI", "redis://localhost")
+#     else:
+#         HOST = "redis://localhost"
+#     redis = aioredis.from_url(HOST, encoding="utf8", decode_responses=True)
+#     FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
 
 
 if __name__ == "__main__":

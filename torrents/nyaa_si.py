@@ -1,11 +1,7 @@
-import asyncio
 import re
 import time
-
 import aiohttp
 from bs4 import BeautifulSoup
-
-from helper.asyncioPoliciesFix import decorator_asyncio_fix
 from helper.html_scraper import Scraper
 
 
@@ -50,8 +46,8 @@ class NyaaSi:
                             "downloads": downloads,
                         }
                     )
-                if len(my_dict["data"]) == self.LIMIT:
-                    break
+                    if len(my_dict["data"]) == self.LIMIT:
+                        break
 
                 try:
                     ul = soup.find("ul", class_="pagination")
