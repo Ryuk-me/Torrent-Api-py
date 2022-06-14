@@ -279,7 +279,8 @@ async def get_all_recent(limit: Optional[int] = 0):
         )
         tasks.append(
             asyncio.create_task(
-                all_sites[site]["website"]().recent(category=None, page=1, limit=limit)
+                all_sites[site]["website"]().recent(
+                    category=None, page=1, limit=limit)
             )
         )
     results = await asyncio.gather(*tasks)
@@ -292,6 +293,16 @@ async def get_all_recent(limit: Optional[int] = 0):
     COMBO["total"] = total_torrents_overall
     return COMBO
 
+
+@app.get("/api/v1/sites")
+async def get_all_supported_sites():
+    all_sites = check_if_site_available("1337x")
+    sites_list = [
+        site
+        for site in all_sites.keys()
+        if all_sites[site]["website"]
+    ]
+    return {"supported_sites": sites_list}
 
 # @app.on_event("startup")
 # async def startup():

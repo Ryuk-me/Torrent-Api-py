@@ -252,6 +252,16 @@ PYTHON_ENV=dev (if running local)
 ## API Endpoints
 
 <details open>
+<summary style='font-size: 15px'><span style='font-size: 20px;font-weight:bold;'>Supported sites list</span></summary>
+<p>
+
+> `api/v1/sites`
+
+</p>
+</details>
+<br>
+
+<details open>
 <summary style='font-size: 15px'><span style='font-size: 20px;font-weight:bold;'>Search</span></summary>
 <p>
 
