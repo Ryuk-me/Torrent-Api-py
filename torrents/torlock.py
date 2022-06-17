@@ -11,7 +11,7 @@ from helper.html_scraper import Scraper
 
 class Torlock:
     def __init__(self):
-        self.BASE_URL = "https://www.torlock.com"
+        self.BASE_URL = "https://www.torlock2.com"
         self.LIMIT = None
 
     @decorator_asyncio_fix
