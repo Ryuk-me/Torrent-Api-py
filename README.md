@@ -30,13 +30,6 @@ $ git clone https://github.com/Ryuk-me/Torrent-Api-py
 # Install Depedencies
 $ pip install -r requirements.txt
 
-# Install Redis
-> Windows user (use ubuntu terminal)
-$ sudo apt-get install redis
-
-# Start redis server
-$ redis-server
-
 # Start
 $ python main.py
 
@@ -49,9 +42,6 @@ $ python main.py
 
 Go to .env file / okteto-stack.yaml and add the following
 
-# Get it from https://redistogo.com/
-REDIS_URI=redis://redistogo:f99edf3de0cyryty324fe462@sole.redistogo.com:10393/
-CACHE_EXPIRATION=180 # set cache expire time in seconds default is 180
 PYTHON_ENV=prod (if you are hosting)
 PYTHON_ENV=dev (if running local)
 ```
