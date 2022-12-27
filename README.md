@@ -334,9 +334,9 @@ PYTHON_ENV=dev (if running local)
 
 <pre>Here <b>limit = 5</b> will get 5 results from each site.</pre>
 
-> https://torrents-api-py3.herokuapp.com/api/v1/all/search?query=avengers
+> https://torrent-api-py.ryukme.repl.co/api/v1/all/search?query=avengers
 
-> https://torrents-api-py3.herokuapp.com/api/v1/all/search?query=avengers&limit=5
+> https://torrent-api-py.ryukme.repl.co/api/v1/all/search?query=avengers&limit=5
 
 </pre>
 </details>
@@ -353,9 +353,9 @@ PYTHON_ENV=dev (if running local)
 | :-------: | :------: | :-----: | :-----: | :---------------------------: |
 |   limit   |    ❌    | integer | Default | `api/v1/all/trending?limit=2` |
 
-> https://torrents-api-py3.herokuapp.com/api/v1/all/trending
+> https://torrent-api-py.ryukme.repl.co/api/v1/all/trending
 
-> https://torrents-api-py3.herokuapp.com/api/v1/all/trending?limit=2
+> https://torrent-api-py.ryukme.repl.co/api/v1/all/trending?limit=2
 
 </p>
 </details>
@@ -372,9 +372,9 @@ PYTHON_ENV=dev (if running local)
 | :-------: | :------: | :-----: | :-----: | :-------------------------: |
 |   limit   |    ❌    | integer | Default | `api/v1/all/recent?limit=2` |
 
-> https://torrents-api-py3.herokuapp.com/api/v1/all/recent
+> https://torrent-api-py.ryukme.repl.co/api/v1/all/recent
 
-> https://torrents-api-py3.herokuapp.com/api/v1/all/recent?limit=2
+> https://torrent-api-py.ryukme.repl.co/api/v1/all/recent?limit=2
 
 </p>
 </details>
@@ -383,7 +383,7 @@ PYTHON_ENV=dev (if running local)
 
 ## Want to Try api ?
 
-> https://torrents-api-py3.herokuapp.com/api/v1/search?site=1337x&query=eternals
+> https://torrent-api-py.ryukme.repl.co/api/v1/search?site=1337x&query=eternals
 
 <details open>
 <summary> See response</summary>
