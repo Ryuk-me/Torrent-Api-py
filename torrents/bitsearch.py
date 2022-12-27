@@ -25,6 +25,8 @@ class Bitsearch:
                     name = info.find("h5", class_="title").find("a").text
                     url = info.find("h5", class_="title").find("a")["href"]
                     category = info.find("div").find("a", class_="category").text
+                    if not category:
+                        continue
                     stats = info.find("div", class_="stats").find_all("div")
                     if stats:
                         downloads = stats[0].text

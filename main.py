@@ -2,15 +2,15 @@ import asyncio
 import os
 import time
 from typing import Optional
-import aioredis
+# import aioredis
 import uvicorn
 from dotenv import load_dotenv
-from fastapi import FastAPI, Query
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
-from fastapi_cache import FastAPICache
-from fastapi_cache.backends.redis import RedisBackend
-from fastapi_cache.decorator import cache
+# from fastapi_cache import FastAPICache
+# from fastapi_cache.backends.redis import RedisBackend
+# from fastapi_cache.decorator import cache
 from helper.is_site_available import check_if_site_available
 
 load_dotenv()
@@ -26,11 +26,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-CACHE_EXPIRATION = (
-    int(os.getenv("CACHE_EXPIRATION", 180))
-    if os.getenv("PYTHON_ENV", "dev") == "prod"
-    else 30
-)
+# CACHE_EXPIRATION = (
+#     int(os.getenv("CACHE_EXPIRATION", 180))
+#     if os.getenv("PYTHON_ENV", "dev") == "prod"
+#     else 30
+# )
 
 
 @app.get("/api/v1/search")
