@@ -24,14 +24,16 @@ class x1337:
                     magnet = soup.select_one(".clearfix ul li a")["href"]
                     uls = soup.find_all("ul", class_="list")[1]
                     lis = uls.find_all("li")[0]
-                    imgs = (soup.find("div", class_="torrent-tabs")).find_all("img")
+                    imgs = (soup.find("div", class_="torrent-tabs")
+                            ).find_all("img")
                     if imgs and len(imgs) > 0:
                         obj["screenshot"] = [
                             img["src"].replace(".th", "") for img in imgs
                         ]
                     obj["category"] = lis.find("span").text
                     try:
-                        poster = soup.select_one("div.torrent-image img")["src"]
+                        poster = soup.select_one(
+                            "div.torrent-image img")["src"]
                         if str(poster).startswith("//"):
                             obj["poster"] = "https:" + poster
                         elif str(poster).startswith("/"):
@@ -54,7 +56,8 @@ class x1337:
             for obj in result["data"]:
                 if obj["url"] == url:
                     task = asyncio.create_task(
-                        self._individual_scrap(session, url, result["data"][idx])
+                        self._individual_scrap(
+                            session, url, result["data"][idx])
                     )
                     tasks.append(task)
         await asyncio.gather(*tasks)
@@ -111,15 +114,38 @@ class x1337:
             self.LIMIT = limit
             start_time = time.time()
             url = self.BASE_URL + "/search/{}/{}/".format(query, page)
-            return await self.parser_result(start_time, url, session)
+            return await self.parser_result(start_time, url, session, query=query, page=page)
 
-    async def parser_result(self, start_time, url, session):
+    async def parser_result(self, start_time, url, session, page, query=None):
         htmls = await Scraper().get_all_results(session, url)
         result, urls = self._parser(htmls)
         if result != None:
             results = await self._get_torrent(result, session, urls)
             results["time"] = time.time() - start_time
             results["total"] = len(results["data"])
+            if query is None:
+                return results
+            while (True):
+                if len(results["data"]) >= self.LIMIT:
+                    results["data"] = results["data"][0:self.LIMIT]
+                    results["total"] = len(results["data"])
+                    return results
+                page = page + 1
+                url = self.BASE_URL + "/search/{}/{}/".format(query, page)
+                htmls = await Scraper().get_all_results(session, url)
+                result, urls = self._parser(htmls)
+                if result != None:
+                    res = await self._get_torrent(result, session, urls)
+                    for obj in res["data"]:
+                        results['data'].append(obj)
+                    try:
+                        results["current_page"] = res["current_page"]
+                    except:
+                        pass
+                    results["time"] = time.time() - start_time
+                    results["total"] = len(results["data"])
+                else:
+                    break
             return results
         return result
 
@@ -131,7 +157,7 @@ class x1337:
                 url = self.BASE_URL + "/home/"
             else:
                 url = self.BASE_URL + "/popular-{}".format(category.lower())
-            return await self.parser_result(start_time, url, session)
+            return await self.parser_result(start_time, url, session, page)
 
     async def recent(self, category, page, limit):
         async with aiohttp.ClientSession() as session:
@@ -143,7 +169,7 @@ class x1337:
                 url = self.BASE_URL + "/cat/{}/{}/".format(
                     str(category).capitalize(), page
                 )
-            return await self.parser_result(start_time, url, session)
+            return await self.parser_result(start_time, url, session, page)
 
     async def search_by_category(self, query, category, page, limit):
         async with aiohttp.ClientSession() as session:
@@ -152,4 +178,4 @@ class x1337:
             url = self.BASE_URL + "/category-search/{}/{}/{}/".format(
                 query, category.capitalize(), page
             )
-            return await self.parser_result(start_time, url, session)
+            return await self.parser_result(start_time, url, session, page, query)

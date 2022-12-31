@@ -20,6 +20,10 @@ An Unofficial API for <span style='font-weight:600;'>1337x</span>, <span style='
 
 ---
 
+<h2 align="center">Test Links are broken.</h2>
+
+---
+
 ## Installation
 
 ```sh
@@ -35,7 +39,7 @@ $ python main.py
 
 ```
 
-## Setup Env File
+## ~~Setup Env File~~
 
 ```sh
 # Change Environment variables
@@ -74,7 +78,7 @@ PYTHON_ENV=dev (if running local)
 <details open>
 <summary style='font-size: 20px'><span style='font-size: 25px;font-weight:bold;'>Supported Methods and categories</span></summary>
 
-> If you want to change the default limit site wise [Visit Here](https://github.com/Ryuk-me/Torrent-Api-py/blob/main/helper/is_site_available.py#L30)
+> If you want to change the default limit site wise [Visit Here](https://github.com/Ryuk-me/Torrent-Api-py/blob/main/helper/is_site_available.py#L39)
 
 <p>
 
@@ -88,7 +92,7 @@ PYTHON_ENV=dev (if running local)
             "recent_available": True,
             "recent_category_available": True,
             "categories": ["anime", "music", "games", "tv","apps","documentaries", "other", "xxx", "movies"],
-            "limit" : 20
+            "limit" : 100
         },
         "torlock": {
             "trending_available": True,
@@ -381,7 +385,7 @@ PYTHON_ENV=dev (if running local)
 
 ---
 
-## Want to Try api ?
+## ~~~Want to Try api ?~~
 
 > https://torrent-api-py.ryukme.repl.co/api/v1/search?site=1337x&query=eternals
 
@@ -440,7 +444,7 @@ Test Here : https://Torrent-Api-py.ryukme.repl.co/api/v1/search?site=tgx&query=a
 
 ---
 
-# How to Host On Okteto
+# ~~~How to Host On Okteto~~~
 
 ```sh
 > Fork this repo
