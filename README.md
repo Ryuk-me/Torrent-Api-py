@@ -31,6 +31,9 @@ An Unofficial API for <span style='font-weight:600;'>1337x</span>, <span style='
 # Clone the repo
 $ git clone https://github.com/Ryuk-me/Torrent-Api-py
 
+# Go to the repository
+$ cd Torrent-Api-py
+
 # Install Depedencies
 $ pip install -r requirements.txt
 
