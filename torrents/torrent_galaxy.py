@@ -24,8 +24,12 @@ class TorrentGalaxy:
                     div = divs.find_all("div")
                     try:
                         name = div[4].find("a").get_text(strip=True)
+                        imdb_url = (div[4].find_all("a"))[-1]["href"]
                     except:
-                        name = (div[1].find("a", class_="txlight")).find("b").text
+                        name = (div[1].find("a", class_="txlight")).find(
+                            "b").text
+                        imdb_url = (div[1].find_all("a"))[-1]['href']
+
                     if name != "":
                         try:
                             magnet = div[5].find_all("a")[1]["href"]
@@ -33,7 +37,6 @@ class TorrentGalaxy:
                         except:
                             magnet = div[3].find_all("a")[1]["href"]
                             torrent = div[3].find_all("a")[0]["href"]
-
                         size = soup.select("span.badge.badge-secondary.txlight")[
                             idx
                         ].text
@@ -71,6 +74,7 @@ class TorrentGalaxy:
                                 "leechers": leechers,
                                 "category": category,
                                 "uploader": uploader,
+                                "imdb_id": imdb_url.split("=")[-1],
                                 "hash": re.search(
                                     r"([{a-f\d,A-F\d}]{32,40})\b", magnet
                                 ).group(0),
