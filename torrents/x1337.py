@@ -11,7 +11,7 @@ from helper.html_scraper import Scraper
 
 class x1337:
     def __init__(self):
-        self.BASE_URL = "https://1337xx.to"
+        self.BASE_URL = "https://1337x.to"
         self.LIMIT = None
 
     @decorator_asyncio_fix
@@ -21,16 +21,19 @@ class x1337:
                 html = await res.text(encoding="ISO-8859-1")
                 soup = BeautifulSoup(html, "lxml")
                 try:
-                    magnet = soup.select_one(".clearfix ul li a")["href"]
+                    magnet = soup.select_one(
+                        ".no-top-radius > div > ul > li > a")['href']
                     uls = soup.find_all("ul", class_="list")[1]
                     lis = uls.find_all("li")[0]
-                    imgs = (soup.find("div", class_="torrent-tabs")
-                            ).find_all("img")
-                    if imgs and len(imgs) > 0:
-                        obj["screenshot"] = [
-                            img["src"].replace(".th", "") for img in imgs
-                        ]
+                    imgs = [img['href'] for img in (soup.find("div", id="description")
+                                                    ).find_all("a") if img['href'].endswith(
+                        (".png", ".jpg", ".jpeg"))]
+                    files = [f.text for f in soup.find(
+                        "div", id="files").find_all("li")]
+                    if len(imgs) > 0:
+                        obj["screenshot"] = imgs
                     obj["category"] = lis.find("span").text
+                    obj["files"] = files
                     try:
                         poster = soup.select_one(
                             "div.torrent-image img")["src"]
