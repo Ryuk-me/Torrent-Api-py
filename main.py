@@ -57,6 +57,22 @@ async def call_api(
     return {"error": "invalid site"}
 
 
+@app.get("/api/v1/search_url")
+async def get_torrent_from_url(
+        site: str, url: str):
+    site = site.lower()
+    all_sites = check_if_site_available(site)
+    if all_sites:
+        resp = await all_sites[site]["website"]().get_torrent_by_url(url)
+        if resp == None:
+            return {"error": "website blocked change ip or domain"}
+        elif len(resp["data"]) > 0:
+            return resp
+        else:
+            return {"error": "no results found"}
+    return {"error": "invalid site"}
+
+
 @app.get("/api/v1/trending")
 # @cache(expire=CACHE_EXPIRATION)
 async def get_trending(

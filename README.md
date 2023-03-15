@@ -31,6 +31,9 @@ An Unofficial API for <span style='font-weight:600;'>1337x</span>, <span style='
 # Clone the repo
 $ git clone https://github.com/Ryuk-me/Torrent-Api-py
 
+# Go to the repository
+$ cd Torrent-Api-py
+
 # Install Depedencies
 $ pip install -r requirements.txt
 
@@ -56,22 +59,22 @@ PYTHON_ENV=dev (if running local)
 
 |    Website     |     Keyword      |             Url              | Cloudfare |
 | :------------: | :--------------: | :--------------------------: | :-------: |
-|     1337x      |     `1337x`      |      https://1337xx.to       |    ❌     |
-| Torrent Galaxy |      `tgx`       |   https://torrentgalaxy.to   |    ❌     |
-|    Torlock     |    `torlock`     |   https://www.torlock.com    |    ❌     |
-|   PirateBay    |   `piratebay`    |  https://thepiratebay10.org  |    ❌     |
-|     Nyaasi     |     `nyaasi`     |       https://nyaa.si        |    ❌     |
-|     Zooqle     |     `zooqle`     |      https://zooqle.com      |    ❌     |
-|    KickAss     |    `kickass`     |  https://kickasstorrents.to  |    ❌     |
-|   Bitsearch    |   `bitsearch`    |     https://bitsearch.to     |    ❌     |
-|    MagnetDL    |    `magnetdl`    |   https://www.magnetdl.com   |    ✅     |
-|     Libgen     |     `libgen`     |      https://libgen.is       |    ❌     |
-|      YTS       |      `yts`       |        https://yts.mx        |    ❌     |
-|  Limetorrent   |  `limetorrent`   | https://www.limetorrents.pro |    ❌     |
-|  TorrentFunk   |  `torrentfunk`   | https://www.torrentfunk.com  |    ❌     |
-|     Glodls     |     `glodls`     |      https://glodls.to       |    ❌     |
-| TorrentProject | `torrentproject` | https://torrentproject2.com  |    ❌     |
-| YourBittorrent |      `ybt`       |  https://yourbittorrent.com  |    ❌     |
+|     1337x      |     `1337x`      |       https://1337x.to       |     ❌     |
+| Torrent Galaxy |      `tgx`       |   https://torrentgalaxy.to   |     ❌     |
+|    Torlock     |    `torlock`     |   https://www.torlock.com    |     ❌     |
+|   PirateBay    |   `piratebay`    |  https://thepiratebay10.org  |     ❌     |
+|     Nyaasi     |     `nyaasi`     |       https://nyaa.si        |     ❌     |
+|     Zooqle     |     `zooqle`     |      https://zooqle.com      |     ❌     |
+|    KickAss     |    `kickass`     |  https://kickasstorrents.to  |     ❌     |
+|   Bitsearch    |   `bitsearch`    |     https://bitsearch.to     |     ❌     |
+|    MagnetDL    |    `magnetdl`    |   https://www.magnetdl.com   |     ✅     |
+|     Libgen     |     `libgen`     |      https://libgen.is       |     ❌     |
+|      YTS       |      `yts`       |        https://yts.mx        |     ❌     |
+|  Limetorrent   |  `limetorrent`   | https://www.limetorrents.pro |     ❌     |
+|  TorrentFunk   |  `torrentfunk`   | https://www.torrentfunk.com  |     ❌     |
+|     Glodls     |     `glodls`     |      https://glodls.to       |     ❌     |
+| TorrentProject | `torrentproject` | https://torrentproject2.com  |     ❌     |
+| YourBittorrent |      `ybt`       |  https://yourbittorrent.com  |     ❌     |
 
 ---
 
@@ -263,10 +266,10 @@ PYTHON_ENV=dev (if running local)
 
 | Parameter | Required |  Type   | Default |                         Example                          |
 | :-------: | :------: | :-----: | :-----: | :------------------------------------------------------: |
-|   site    |    ✅    | string  |  None   |                `api/v1/search?site=1337x`                |
-|   query   |    ✅    | string  |  None   |        `api/v1/search?site=1337x&query=avengers`         |
-|   limit   |    ❌    | integer | Default |    `api/v1/search?site=1337x&query=avengers&limit=20`    |
-|   page    |    ❌    | integer |    1    | `api/v1/search?site=1337x&query=avengers&limit=0&page=2` |
+|   site    |    ✅     | string  |  None   |                `api/v1/search?site=1337x`                |
+|   query   |    ✅     | string  |  None   |        `api/v1/search?site=1337x&query=avengers`         |
+|   limit   |    ❌     | integer | Default |    `api/v1/search?site=1337x&query=avengers&limit=20`    |
+|   page    |    ❌     | integer |    1    | `api/v1/search?site=1337x&query=avengers&limit=0&page=2` |
 
 </p>
 </details>
@@ -280,10 +283,10 @@ PYTHON_ENV=dev (if running local)
 
 | Parameter | Required |  Type   | Default |                         Example                         |
 | :-------: | :------: | :-----: | :-----: | :-----------------------------------------------------: |
-|   site    |    ✅    | string  |  None   |              `api/v1/trending?site=1337x`               |
-|   limit   |    ❌    | integer | Default |          `api/v1/trending?site=1337x&limit=10`          |
-| category  |    ❌    | string  |  None   |    `api/v1/trending?site=1337x&limit=0&category=tv`     |
-|   page    |    ❌    | integer |    1    | `api/v1/trending?site=1337x&limit=6&category=tv&page=2` |
+|   site    |    ✅     | string  |  None   |              `api/v1/trending?site=1337x`               |
+|   limit   |    ❌     | integer | Default |          `api/v1/trending?site=1337x&limit=10`          |
+| category  |    ❌     | string  |  None   |    `api/v1/trending?site=1337x&limit=0&category=tv`     |
+|   page    |    ❌     | integer |    1    | `api/v1/trending?site=1337x&limit=6&category=tv&page=2` |
 
 </p>
 </details>
@@ -297,10 +300,10 @@ PYTHON_ENV=dev (if running local)
 
 | Parameter | Required |  Type   | Default |                        Example                         |
 | :-------: | :------: | :-----: | :-----: | :----------------------------------------------------: |
-|   site    |    ✅    | string  |  None   |               `api/v1/recent?site=1337x`               |
-|   limit   |    ❌    | integer | Default |           `api/v1/recent?site=1337x&limit=7`           |
-| category  |    ❌    | string  |  None   |     `api/v1/recent?site=1337x&limit=0&category=tv`     |
-|   page    |    ❌    | integer |    1    | `api/v1/recent?site=1337x&limit=15&category=tv&page=2` |
+|   site    |    ✅     | string  |  None   |               `api/v1/recent?site=1337x`               |
+|   limit   |    ❌     | integer | Default |           `api/v1/recent?site=1337x&limit=7`           |
+| category  |    ❌     | string  |  None   |     `api/v1/recent?site=1337x&limit=0&category=tv`     |
+|   page    |    ❌     | integer |    1    | `api/v1/recent?site=1337x&limit=15&category=tv&page=2` |
 
 </p>
 </details>
@@ -314,11 +317,11 @@ PYTHON_ENV=dev (if running local)
 
 | Parameter | Required |  Type   | Default |                                Example                                 |
 | :-------: | :------: | :-----: | :-----: | :--------------------------------------------------------------------: |
-|   site    |    ✅    | string  |  None   |                      `api/v1/category?site=1337x`                      |
-|   query   |    ✅    | string  |  None   |              `api/v1/category?site=1337x&query=avengers`               |
-| category  |    ✅    | string  |  None   |      `api/v1/category?site=1337x&query=avengers&category=movies`       |
-|   limit   |    ❌    | integer | Default |  `api/v1/category?site=1337x&query=avengers&category=movies&limit=10`  |
-|   page    |    ❌    | integer |    1    | `api/v1/category?site=1337x&query=avengers&category=tv&limit=0&page=2` |
+|   site    |    ✅     | string  |  None   |                      `api/v1/category?site=1337x`                      |
+|   query   |    ✅     | string  |  None   |              `api/v1/category?site=1337x&query=avengers`               |
+| category  |    ✅     | string  |  None   |      `api/v1/category?site=1337x&query=avengers&category=movies`       |
+|   limit   |    ❌     | integer | Default |  `api/v1/category?site=1337x&query=avengers&category=movies&limit=10`  |
+|   page    |    ❌     | integer |    1    | `api/v1/category?site=1337x&query=avengers&category=tv&limit=0&page=2` |
 
 </p>
 </details>
@@ -333,8 +336,8 @@ PYTHON_ENV=dev (if running local)
 
 | Parameter | Required |  Type   | Default |                  Example                   |
 | :-------: | :------: | :-----: | :-----: | :----------------------------------------: |
-|   query   |    ✅    | string  |  None   |     `api/v1/all/search?query=avengers`     |
-|   limit   |    ❌    | integer | Default | `api/v1/all/search?query=avengers&limit=5` |
+|   query   |    ✅     | string  |  None   |     `api/v1/all/search?query=avengers`     |
+|   limit   |    ❌     | integer | Default | `api/v1/all/search?query=avengers&limit=5` |
 
 <pre>Here <b>limit = 5</b> will get 5 results from each site.</pre>
 
@@ -355,7 +358,7 @@ PYTHON_ENV=dev (if running local)
 
 | Parameter | Required |  Type   | Default |            Example            |
 | :-------: | :------: | :-----: | :-----: | :---------------------------: |
-|   limit   |    ❌    | integer | Default | `api/v1/all/trending?limit=2` |
+|   limit   |    ❌     | integer | Default | `api/v1/all/trending?limit=2` |
 
 > https://torrent-api-py.ryukme.repl.co/api/v1/all/trending
 
@@ -374,7 +377,7 @@ PYTHON_ENV=dev (if running local)
 
 | Parameter | Required |  Type   | Default |           Example           |
 | :-------: | :------: | :-----: | :-----: | :-------------------------: |
-|   limit   |    ❌    | integer | Default | `api/v1/all/recent?limit=2` |
+|   limit   |    ❌     | integer | Default | `api/v1/all/recent?limit=2` |
 
 > https://torrent-api-py.ryukme.repl.co/api/v1/all/recent
 
