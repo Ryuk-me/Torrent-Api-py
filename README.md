@@ -18,12 +18,6 @@ An Unofficial API for <span style='font-weight:600;'>1337x</span>, <span style='
 </span>
 </p>
 
----
-
-<h2 align="center">Test Links are broken.</h2>
-
----
-
 ## Installation
 
 ```sh
@@ -252,7 +246,7 @@ PYTHON_ENV=dev (if running local)
 <summary style='font-size: 15px'><span style='font-size: 20px;font-weight:bold;'>Supported sites list</span></summary>
 <p>
 
-> `api/v1/sites`
+> [`api/v1/sites`](https://6howpgdphtrt752l4oksuieqyu0qcqfu.lambda-url.ap-southeast-2.on.aws/api/v1/sites)
 
 </p>
 </details>
@@ -262,7 +256,7 @@ PYTHON_ENV=dev (if running local)
 <summary style='font-size: 15px'><span style='font-size: 20px;font-weight:bold;'>Search</span></summary>
 <p>
 
-> `api/v1/search`
+> [`api/v1/search`](https://6howpgdphtrt752l4oksuieqyu0qcqfu.lambda-url.ap-southeast-2.on.aws/api/v1/search)
 
 | Parameter | Required |  Type   | Default |                         Example                          |
 | :-------: | :------: | :-----: | :-----: | :------------------------------------------------------: |
@@ -341,9 +335,9 @@ PYTHON_ENV=dev (if running local)
 
 <pre>Here <b>limit = 5</b> will get 5 results from each site.</pre>
 
-> https://torrent-api-py.ryukme.repl.co/api/v1/all/search?query=avengers
+> [api/v1/all/search?query=avengers](https://6howpgdphtrt752l4oksuieqyu0qcqfu.lambda-url.ap-southeast-2.on.aws/api/v1/all/search?query=avengers)
 
-> https://torrent-api-py.ryukme.repl.co/api/v1/all/search?query=avengers&limit=5
+> [api/v1/all/search?query=avengers&limit=5](https://6howpgdphtrt752l4oksuieqyu0qcqfu.lambda-url.ap-southeast-2.on.aws/api/v1/all/search?query=avengers&limit=5)
 
 </pre>
 </details>
@@ -360,9 +354,9 @@ PYTHON_ENV=dev (if running local)
 | :-------: | :------: | :-----: | :-----: | :---------------------------: |
 |   limit   |    ❌     | integer | Default | `api/v1/all/trending?limit=2` |
 
-> https://torrent-api-py.ryukme.repl.co/api/v1/all/trending
+> [api/v1/all/trending](https://6howpgdphtrt752l4oksuieqyu0qcqfu.lambda-url.ap-southeast-2.on.aws/api/v1/all/trending)
 
-> https://torrent-api-py.ryukme.repl.co/api/v1/all/trending?limit=2
+> [api/v1/all/trending?limit=2](https://6howpgdphtrt752l4oksuieqyu0qcqfu.lambda-url.ap-southeast-2.on.aws/api/v1/all/trending?limit=2)
 
 </p>
 </details>
@@ -379,18 +373,18 @@ PYTHON_ENV=dev (if running local)
 | :-------: | :------: | :-----: | :-----: | :-------------------------: |
 |   limit   |    ❌     | integer | Default | `api/v1/all/recent?limit=2` |
 
-> https://torrent-api-py.ryukme.repl.co/api/v1/all/recent
+> [api/v1/all/recent](https://6howpgdphtrt752l4oksuieqyu0qcqfu.lambda-url.ap-southeast-2.on.aws/api/v1/all/recent)
 
-> https://torrent-api-py.ryukme.repl.co/api/v1/all/recent?limit=2
+> [api/v1/all/recent?limit=2](https://6howpgdphtrt752l4oksuieqyu0qcqfu.lambda-url.ap-southeast-2.on.aws/api/v1/all/recent)
 
 </p>
 </details>
 
 ---
 
-## ~~~Want to Try api ?~~
+## Want to Try api ?
 
-> https://torrent-api-py.ryukme.repl.co/api/v1/search?site=1337x&query=eternals
+> [api/v1/search?site=1337x&query=eternals](https://6howpgdphtrt752l4oksuieqyu0qcqfu.lambda-url.ap-southeast-2.on.aws/api/v1/search?site=1337x&query=eternals)
 
 <details open>
 <summary> See response</summary>
