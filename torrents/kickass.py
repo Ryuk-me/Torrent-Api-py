@@ -1,10 +1,8 @@
 import asyncio
 import re
 import time
-
 import aiohttp
 from bs4 import BeautifulSoup
-
 from helper.asyncioPoliciesFix import decorator_asyncio_fix
 from helper.html_scraper import Scraper
 
@@ -19,7 +17,7 @@ class Kickass:
         try:
             async with session.get(url) as res:
                 html = await res.text(encoding="ISO-8859-1")
-                soup = BeautifulSoup(html, "lxml")
+                soup = BeautifulSoup(html, "html.parser")
                 try:
                     poster = soup.find("a", class_="movieCover")
                     if poster:
@@ -28,7 +26,8 @@ class Kickass:
                     imgs = (soup.find("div", class_="data")).find_all("img")
                     if imgs and len(imgs) > 0:
                         obj["screenshot"] = [img["src"] for img in imgs]
-                    magnet_and_torrent = soup.find_all("a", class_="kaGiantButton")
+                    magnet_and_torrent = soup.find_all(
+                        "a", class_="kaGiantButton")
                     magnet = magnet_and_torrent[0]["href"]
                     obj["hash"] = re.search(
                         r"([{a-f\d,A-F\d}]{32,40})\b", magnet
@@ -45,7 +44,8 @@ class Kickass:
             for obj in result["data"]:
                 if obj["url"] == url:
                     task = asyncio.create_task(
-                        self._individual_scrap(session, url, result["data"][idx])
+                        self._individual_scrap(
+                            session, url, result["data"][idx])
                     )
                     tasks.append(task)
         await asyncio.gather(*tasks)
@@ -55,13 +55,14 @@ class Kickass:
         try:
 
             for html in htmls:
-                soup = BeautifulSoup(html, "lxml")
+                soup = BeautifulSoup(html, "html.parser")
                 list_of_urls = []
                 my_dict = {"data": []}
                 for tr in soup.select("tr.odd,tr.even"):
                     td = tr.find_all("td")
                     name = tr.find("a", class_="cellMainLink").text.strip()
-                    url = self.BASE_URL + tr.find("a", class_="cellMainLink")["href"]
+                    url = self.BASE_URL + \
+                        tr.find("a", class_="cellMainLink")["href"]
                     list_of_urls.append(url)
                     if name:
                         size = td[1].text.strip()

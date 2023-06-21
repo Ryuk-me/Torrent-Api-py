@@ -1,7 +1,4 @@
 # created by virtualenv automatically
-Lib
-Scripts
 __pycache__
-/pyvenv.cfg
-info.txt
 api-py
+.env

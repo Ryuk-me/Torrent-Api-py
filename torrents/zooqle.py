@@ -1,11 +1,7 @@
-import asyncio
 import re
 import time
-
 import aiohttp
 from bs4 import BeautifulSoup
-
-from helper.asyncioPoliciesFix import decorator_asyncio_fix
 from helper.html_scraper import Scraper
 
 
@@ -17,7 +13,7 @@ class Zooqle:
     def _parser(self, htmls):
         try:
             for html in htmls:
-                soup = BeautifulSoup(html, "lxml")
+                soup = BeautifulSoup(html, "html.parser")
 
                 my_dict = {"data": []}
 
@@ -32,9 +28,12 @@ class Zooqle:
                             size = None
                         url = td[1].find_all("a")[0]["href"]
                         date = td[4].get_text(strip=True)
-                        seeders_leechers = td[5].find("div")["title"].split("|")
-                        seeders = seeders_leechers[0].replace("Seeders: ", "").strip()
-                        leechers = seeders_leechers[1].replace("Leechers: ", "").strip()
+                        seeders_leechers = td[5].find(
+                            "div")["title"].split("|")
+                        seeders = seeders_leechers[0].replace(
+                            "Seeders: ", "").strip()
+                        leechers = seeders_leechers[1].replace(
+                            "Leechers: ", "").strip()
                         my_dict["data"].append(
                             {
                                 "name": name,
@@ -54,7 +53,8 @@ class Zooqle:
                 try:
                     ul = soup.find("ul", class_="pagination")
                     tpages = ul.find_all("a")[-3].text
-                    current_page = (ul.find("li", class_="active")).find("a").text
+                    current_page = (
+                        ul.find("li", class_="active")).find("a").text
                     my_dict["current_page"] = int(current_page)
                     my_dict["total_pages"] = int(tpages)
                 except:
@@ -68,7 +68,8 @@ class Zooqle:
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
             self.LIMIT = limit
-            url = self.BASE_URL + "/search?pg={1}&q={0}&v=t".format(query, page)
+            url = self.BASE_URL + \
+                "/search?pg={1}&q={0}&v=t".format(query, page)
             return await self.parser_result(start_time, url, session)
 
     async def parser_result(self, start_time, url, session):

@@ -1,10 +1,8 @@
 import asyncio
 import re
 import time
-
 import aiohttp
 from bs4 import BeautifulSoup
-
 from helper.asyncioPoliciesFix import decorator_asyncio_fix
 from helper.html_scraper import Scraper
 
@@ -19,7 +17,7 @@ class Torlock:
         try:
             async with session.get(url) as res:
                 html = await res.text(encoding="ISO-8859-1")
-                soup = BeautifulSoup(html, "lxml")
+                soup = BeautifulSoup(html, "html.parser")
                 try:
                     tm = soup.find_all("a")
                     magnet = tm[20]["href"]
@@ -55,7 +53,8 @@ class Torlock:
             for obj in result["data"]:
                 if obj["url"] == url:
                     task = asyncio.create_task(
-                        self._individual_scrap(session, url, result["data"][idx])
+                        self._individual_scrap(
+                            session, url, result["data"][idx])
                     )
                     tasks.append(task)
         await asyncio.gather(*tasks)
@@ -64,7 +63,7 @@ class Torlock:
     def _parser(self, htmls, idx=0):
         try:
             for html in htmls:
-                soup = BeautifulSoup(html, "lxml")
+                soup = BeautifulSoup(html, "html.parser")
                 list_of_urls = []
                 my_dict = {"data": []}
 
@@ -99,7 +98,8 @@ class Torlock:
                     ul = soup.find("ul", class_="pagination")
                     tpages = ul.find_all("a")[-2].text
                     current_page = (
-                        (ul.find("li", class_="active")).find("span").text.split(" ")[0]
+                        (ul.find("li", class_="active")).find(
+                            "span").text.split(" ")[0]
                     )
                     my_dict["current_page"] = int(current_page)
                     my_dict["total_pages"] = int(tpages)
@@ -150,7 +150,8 @@ class Torlock:
             else:
                 if category == "books":
                     category = "ebooks"
-                url = self.BASE_URL + "/{}/{}/added/desc.html".format(category, page)
+                url = self.BASE_URL + \
+                    "/{}/{}/added/desc.html".format(category, page)
             return await self.parser_result(start_time, url, session)
 
     #! Maybe impelment Search By Category in Future

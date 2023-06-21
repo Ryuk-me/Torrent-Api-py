@@ -8,6 +8,7 @@ router = APIRouter(
     tags=["Search"]
 )
 
+
 @router.get("/")
 async def search_for_torrents(
     site: str, query: str, limit: Optional[int] = 0, page: Optional[int] = 1
@@ -30,7 +31,7 @@ async def search_for_torrents(
             return resp
         else:
             return error_handler(status_code=status.HTTP_404_NOT_FOUND,
-                                 json_message={"error" : "Result not found."})
+                                 json_message={"error": "Result not found."})
 
     return error_handler(status_code=status.HTTP_404_NOT_FOUND,
-                                 json_message={"error" : "Selected Site Not Available"})
+                         json_message={"error": "Selected Site Not Available"})

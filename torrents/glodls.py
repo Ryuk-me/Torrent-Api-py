@@ -1,11 +1,6 @@
-import asyncio
-import re
 import time
-
 import aiohttp
 from bs4 import BeautifulSoup
-
-from helper.asyncioPoliciesFix import decorator_asyncio_fix
 from helper.html_scraper import Scraper
 
 
@@ -17,7 +12,7 @@ class Glodls:
     def _parser(self, htmls):
         try:
             for html in htmls:
-                soup = BeautifulSoup(html, "lxml")
+                soup = BeautifulSoup(html, "html.parser")
 
                 my_dict = {"data": []}
                 for tr in soup.find_all("tr", class_="t-row")[0:-1:2]:

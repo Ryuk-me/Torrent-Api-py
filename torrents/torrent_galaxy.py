@@ -12,7 +12,7 @@ class TorrentGalaxy:
 
     def _parser_individual(self, html):
         try:
-            soup = BeautifulSoup(html[0], "lxml")
+            soup = BeautifulSoup(html[0], "html.parser")
             my_dict = {"data": []}
             root_div = soup.find("div", class_="gluewrapper")
             post_nd_torrents = root_div.find_next("div").find_all("div")
@@ -75,7 +75,7 @@ class TorrentGalaxy:
     def _parser(self, htmls):
         try:
             for html in htmls:
-                soup = BeautifulSoup(html, "lxml")
+                soup = BeautifulSoup(html, "html.parser")
 
                 my_dict = {"data": []}
                 for idx, divs in enumerate(soup.find_all("div", class_="tgxtablerow")):

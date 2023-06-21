@@ -25,14 +25,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(search_router,prefix="/api/v1/search")
-app.include_router(trending_router,prefix="/api/v1/trending")
-app.include_router(category_router,prefix="/api/v1/category")
-app.include_router(recent_router,prefix="/api/v1/recent")
-app.include_router(combo_router,prefix="/api/v1/all")
-app.include_router(site_list_router,prefix="/api/v1/sites")
-app.include_router(search_url_router,prefix="/api/v1/search_url")
-app.include_router(home_router,prefix="")
+app.include_router(search_router, prefix="/api/v1/search")
+app.include_router(trending_router, prefix="/api/v1/trending")
+app.include_router(category_router, prefix="/api/v1/category")
+app.include_router(recent_router, prefix="/api/v1/recent")
+app.include_router(combo_router, prefix="/api/v1/all")
+app.include_router(site_list_router, prefix="/api/v1/sites")
+app.include_router(search_url_router, prefix="/api/v1/search_url")
+app.include_router(home_router, prefix="")
 
 
 if __name__ == "__main__":

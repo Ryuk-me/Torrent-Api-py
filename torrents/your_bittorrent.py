@@ -1,10 +1,7 @@
 import asyncio
-import re
 import time
-
 import aiohttp
 from bs4 import BeautifulSoup
-
 from helper.asyncioPoliciesFix import decorator_asyncio_fix
 from helper.html_scraper import Scraper
 
@@ -19,7 +16,7 @@ class YourBittorrent:
         try:
             async with session.get(url) as res:
                 html = await res.text(encoding="ISO-8859-1")
-                soup = BeautifulSoup(html, "lxml")
+                soup = BeautifulSoup(html, "html.parser")
                 try:
                     container = soup.select_one("div.card-body.container")
                     poster = (
@@ -29,7 +26,8 @@ class YourBittorrent:
                         .find("img")["src"]
                     )
                     clearfix = soup.find("div", class_="clearfix")
-                    torrent = clearfix.find("div").find_all("div")[1].find("a")["href"]
+                    torrent = clearfix.find("div").find_all("div")[
+                        1].find("a")["href"]
                     obj["torrent"] = torrent
                     obj["poster"] = poster
                 except:
@@ -43,7 +41,8 @@ class YourBittorrent:
             for obj in result["data"]:
                 if obj["url"] == url:
                     task = asyncio.create_task(
-                        self._individual_scrap(session, url, result["data"][idx])
+                        self._individual_scrap(
+                            session, url, result["data"][idx])
                     )
                     tasks.append(task)
         await asyncio.gather(*tasks)
@@ -52,7 +51,7 @@ class YourBittorrent:
     def _parser(self, htmls, idx=1):
         try:
             for html in htmls:
-                soup = BeautifulSoup(html, "lxml")
+                soup = BeautifulSoup(html, "html.parser")
                 list_of_urls = []
                 my_dict = {"data": []}
 

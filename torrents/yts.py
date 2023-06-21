@@ -1,10 +1,8 @@
 import asyncio
 import re
 import time
-
 import aiohttp
 from bs4 import BeautifulSoup
-
 from helper.asyncioPoliciesFix import decorator_asyncio_fix
 from helper.html_scraper import Scraper
 
@@ -19,7 +17,7 @@ class Yts:
         try:
             async with session.get(url) as res:
                 html = await res.text(encoding="ISO-8859-1")
-                soup = BeautifulSoup(html, "lxml")
+                soup = BeautifulSoup(html, "html.parser")
                 try:
                     name = soup.select_one("div.hidden-xs h1").text
                     div = soup.select("div.hidden-xs h2")
@@ -33,7 +31,8 @@ class Yts:
                     )
                     poster[-1] = poster[-1].replace("medium", "large")
                     poster = "/".join(poster)
-                    description = soup.select("div#synopsis .hidden-xs")[0].text.strip()
+                    description = soup.select(
+                        "div#synopsis .hidden-xs")[0].text.strip()
                     runtime = (
                         soup.select_one(".tech-spec-info")
                         .find_all("div", class_="row")[-1]
@@ -45,14 +44,18 @@ class Yts:
                     torrents = []
                     for div in soup.find_all("div", class_="modal-torrent"):
                         quality = (
-                            div.find("div", class_="modal-quality").find("span").text
+                            div.find(
+                                "div", class_="modal-quality").find("span").text
                         )
                         all_p = div.find_all("p", class_="quality-size")
                         quality_type = all_p[0].text
                         size = all_p[1].text
-                        torrent_link = div.find("a", class_="download-torrent")["href"]
-                        magnet = div.find("a", class_="magnet-download")["href"]
-                        hash = re.search(r"([{a-f\d,A-F\d}]{32,40})\b", magnet).group(0)
+                        torrent_link = div.find(
+                            "a", class_="download-torrent")["href"]
+                        magnet = div.find(
+                            "a", class_="magnet-download")["href"]
+                        hash = re.search(
+                            r"([{a-f\d,A-F\d}]{32,40})\b", magnet).group(0)
                         torrents.append(
                             {
                                 "quality": quality,
@@ -83,7 +86,8 @@ class Yts:
             for obj in result["data"]:
                 if obj["url"] == url:
                     task = asyncio.create_task(
-                        self._individual_scrap(session, url, result["data"][idx])
+                        self._individual_scrap(
+                            session, url, result["data"][idx])
                     )
                     tasks.append(task)
         await asyncio.gather(*tasks)
@@ -93,7 +97,7 @@ class Yts:
         try:
 
             for html in htmls:
-                soup = BeautifulSoup(html, "lxml")
+                soup = BeautifulSoup(html, "html.parser")
                 list_of_urls = []
                 my_dict = {"data": []}
                 for div in soup.find_all("div", class_="browse-movie-wrap"):

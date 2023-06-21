@@ -1,14 +1,13 @@
 from fastapi import APIRouter
-from fastapi import status
 from typing import Optional
 from helper.is_site_available import check_if_site_available
-from helper.error_messages import error_handler
 from time import time
 import asyncio
 
 router = APIRouter(
     tags=["Combo Routes"]
 )
+
 
 @router.get("/search")
 async def get_search_combo(query: str, limit: Optional[int] = 0):
@@ -44,7 +43,7 @@ async def get_search_combo(query: str, limit: Optional[int] = 0):
 @router.get("/trending")
 async def get_all_trending(limit: Optional[int] = 0):
     start_time = time.time()
-    #* just getting all_sites dictionary
+    # * just getting all_sites dictionary
     all_sites = check_if_site_available("1337x")
     sites_list = [
         site
@@ -76,7 +75,6 @@ async def get_all_trending(limit: Optional[int] = 0):
     COMBO["time"] = time.time() - start_time
     COMBO["total"] = total_torrents_overall
     return COMBO
-
 
 
 @router.get("/recent")

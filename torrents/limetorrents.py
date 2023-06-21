@@ -1,10 +1,8 @@
 import asyncio
 import re
 import time
-
 import aiohttp
 from bs4 import BeautifulSoup
-
 from helper.asyncioPoliciesFix import decorator_asyncio_fix
 from helper.html_scraper import Scraper
 
@@ -19,7 +17,7 @@ class Limetorrent:
         try:
             async with session.get(url) as res:
                 html = await res.text(encoding="ISO-8859-1")
-                soup = BeautifulSoup(html, "lxml")
+                soup = BeautifulSoup(html, "html.parser")
                 try:
                     a_tag = soup.find_all("a", class_="csprite_dltorrent")
                     obj["torrent"] = a_tag[0]["href"]
@@ -38,7 +36,8 @@ class Limetorrent:
             for obj in result["data"]:
                 if obj["url"] == url:
                     task = asyncio.create_task(
-                        self._individual_scrap(session, url, result["data"][idx])
+                        self._individual_scrap(
+                            session, url, result["data"][idx])
                     )
                     tasks.append(task)
         await asyncio.gather(*tasks)
@@ -47,7 +46,7 @@ class Limetorrent:
     def _parser(self, htmls, idx=0):
         try:
             for html in htmls:
-                soup = BeautifulSoup(html, "lxml")
+                soup = BeautifulSoup(html, "html.parser")
                 list_of_urls = []
                 my_dict = {"data": []}
 

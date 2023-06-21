@@ -1,7 +1,6 @@
 import asyncio
 import re
 import time
-
 import aiohttp
 import cloudscraper
 import requests
@@ -16,7 +15,7 @@ class Magnetdl:
     def _parser(self, htmls):
         try:
             for html in htmls:
-                soup = BeautifulSoup(html, "lxml")
+                soup = BeautifulSoup(html, "html.parser")
 
                 my_dict = {"data": []}
                 table = soup.find("table", class_="download")
@@ -52,7 +51,8 @@ class Magnetdl:
                             )
                         if len(my_dict["data"]) == self.LIMIT:
                             break
-                total_results = soup.find("div", id="footer").text.replace(",", "")
+                total_results = soup.find(
+                    "div", id="footer").text.replace(",", "")
                 current_page = int(
                     (re.search(r"Page\s\d*", total_results).group(0)).replace(
                         "Page ", ""
@@ -97,7 +97,8 @@ class Magnetdl:
             query = requests.utils.unquote(query)
             query = query.split(" ")
             query = "-".join(query)
-            url = self.BASE_URL + "/{}/{}/se/desc/{}/".format(query[0], query, page)
+            url = self.BASE_URL + \
+                "/{}/{}/se/desc/{}/".format(query[0], query, page)
             return await self.parser_result(start_time, url, session)
 
     async def parser_result(self, start_time, url, session):
