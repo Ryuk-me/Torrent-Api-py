@@ -36,16 +36,6 @@ $ python main.py
 
 ```
 
-## ~~Setup Env File~~
-
-```sh
-# Change Environment variables
-
-Go to .env file / okteto-stack.yaml and add the following
-
-PYTHON_ENV=prod (if you are hosting)
-PYTHON_ENV=dev (if running local)
-```
 
 ---
 
@@ -431,27 +421,12 @@ PYTHON_ENV=dev (if running local)
 > Import repo from github in repl
 > Command : python main.py
 > Install Requirements manually !very important
-> Add Environment variables from .env file in repl
 > And Run Your repl
 
-Note :  Due to CPU limitations Repl will take much more time than Heroku and everytime you pull new changes to repl you have to add REDIS_URI
-
-Test Here : https://Torrent-Api-py.ryukme.repl.co/api/v1/search?site=tgx&query=avengers&limit=5
+Note :  Due to CPU limitations Repl will take much more time than Heroku.
 ```
 
 ---
-
-# ~~~How to Host On Okteto~~~
-
-```sh
-> Fork this repo
-> Go to  okteto-stack.yaml file and add REDIS_URI in environment
-> Now visit https://www.okteto.com/ and login via Github
-> Now select the repository u want to deploy and and just click on deploy don't add any environment variable there
-> Now wait for some time and your api will be live
-
-```
-
 ## Donations
 
 <p> If you feel like showing your appreciation for this project, then how about buying me a coffee.</p>
