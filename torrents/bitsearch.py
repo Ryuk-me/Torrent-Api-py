@@ -1,11 +1,7 @@
-import asyncio
 import re
 import time
-
 import aiohttp
 from bs4 import BeautifulSoup
-
-from helper.asyncioPoliciesFix import decorator_asyncio_fix
 from helper.html_scraper import Scraper
 
 
@@ -17,14 +13,15 @@ class Bitsearch:
     def _parser(self, htmls):
         try:
             for html in htmls:
-                soup = BeautifulSoup(html, "lxml")
+                soup = BeautifulSoup(html, "html.parser")
 
                 my_dict = {"data": []}
                 for divs in soup.find_all("li", class_="search-result"):
                     info = divs.find("div", class_="info")
                     name = info.find("h5", class_="title").find("a").text
                     url = info.find("h5", class_="title").find("a")["href"]
-                    category = info.find("div").find("a", class_="category").text
+                    category = info.find("div").find(
+                        "a", class_="category").text
                     if not category:
                         continue
                     stats = info.find("div", class_="stats").find_all("div")

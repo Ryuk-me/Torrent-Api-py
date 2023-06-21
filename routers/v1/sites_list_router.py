@@ -1,4 +1,4 @@
-from fastapi import APIRouter,status
+from fastapi import APIRouter, status
 from helper.is_site_available import check_if_site_available
 from helper.error_messages import error_handler
 
@@ -16,6 +16,6 @@ async def get_all_supported_sites():
         if all_sites[site]["website"]
     ]
     return error_handler(status_code=status.HTTP_404_NOT_FOUND,
-                                     json_message={
-                    "supported_sites": sites_list,
-                })
+                         json_message={
+                             "supported_sites": sites_list,
+                         })

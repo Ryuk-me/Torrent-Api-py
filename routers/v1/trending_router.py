@@ -29,27 +29,26 @@ async def get_trending(
             if not category is None and not all_sites[site]["trending_category"]:
                 return error_handler(status_code=status.HTTP_404_NOT_FOUND,
                                      json_message={
-                    "error": "Search by trending category not available for {}.".format(
-                        site
-                    )
-                })
+                                         "error": "Search by trending category not available for {}.".format(
+                                             site
+                                         )
+                                     })
             if not category is None and category not in all_sites[site]["categories"]:
-                return error_handler(status_code=status.HTTP_404_NOT_FOUND,json_message=
-                    {
+                return error_handler(status_code=status.HTTP_404_NOT_FOUND, json_message={
                     "error": "Selected category not available.",
                     "available_categories": all_sites[site]["categories"],
                 })
             resp = await all_sites[site]["website"]().trending(category, page, limit)
             if resp is None:
                 return error_handler(status_code=status.HTTP_403_FORBIDDEN,
-                        json_message={"error" : "Website Blocked Change IP or Website Domain."})
+                                     json_message={"error": "Website Blocked Change IP or Website Domain."})
             elif len(resp["data"]) > 0:
                 return resp
             else:
                 return error_handler(status_code=status.HTTP_404_NOT_FOUND,
-                                 json_message={"error" : "Result not found."})
+                                     json_message={"error": "Result not found."})
         else:
             return error_handler(status_code=status.HTTP_404_NOT_FOUND,
-                            json_message={"error" : "Trending search not availabe for {}.".format(site)})
+                                 json_message={"error": "Trending search not availabe for {}.".format(site)})
     return error_handler(status_code=status.HTTP_404_NOT_FOUND,
-                                 json_message={"error" : "Selected Site Not Available"})
+                         json_message={"error": "Selected Site Not Available"})

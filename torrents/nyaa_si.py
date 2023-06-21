@@ -13,7 +13,7 @@ class NyaaSi:
     def _parser(self, htmls):
         try:
             for html in htmls:
-                soup = BeautifulSoup(html, "lxml")
+                soup = BeautifulSoup(html, "html.parser")
 
                 my_dict = {"data": []}
                 for tr in (soup.find("table")).find_all("tr")[1:]:
@@ -52,7 +52,8 @@ class NyaaSi:
                 try:
                     ul = soup.find("ul", class_="pagination")
                     tpages = ul.find_all("a")[-2].text
-                    current_page = (ul.find("li", class_="active")).find("a").text
+                    current_page = (
+                        ul.find("li", class_="active")).find("a").text
                     my_dict["current_page"] = int(current_page)
                     my_dict["total_pages"] = int(tpages)
                 except:
