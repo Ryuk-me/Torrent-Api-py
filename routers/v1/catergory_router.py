@@ -10,6 +10,7 @@ router = APIRouter(
 
 
 @router.get("/")
+@router.get("")
 async def get_category(
     site: str,
     query: str,

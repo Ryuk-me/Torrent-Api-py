@@ -9,6 +9,7 @@ router = APIRouter(
 
 # * Only supports 1337x AS OF NOW
 @router.get("/")
+@router.get("")
 async def get_torrent_from_url(
         site: str, url: str):
     site = site.lower()

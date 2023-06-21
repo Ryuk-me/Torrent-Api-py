@@ -1,5 +1,4 @@
 import uvicorn
-from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers.v1.search_router import router as search_router
@@ -10,8 +9,8 @@ from routers.v1.combo_routers import router as combo_router
 from routers.v1.sites_list_router import router as site_list_router
 from routers.home_router import router as home_router
 from routers.v1.search_url_router import router as search_url_router
+from mangum import Mangum
 
-load_dotenv()
 
 app = FastAPI()
 
@@ -34,6 +33,7 @@ app.include_router(site_list_router, prefix="/api/v1/sites")
 app.include_router(search_url_router, prefix="/api/v1/search_url")
 app.include_router(home_router, prefix="")
 
+handler = Mangum(app)
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8080)
