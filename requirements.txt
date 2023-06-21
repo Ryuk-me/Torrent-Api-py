@@ -3,6 +3,6 @@ fastapi
 uvicorn[standard]
 beautifulsoup4
 cloudscraper
-lxml
 requests
 gunicorn
+mangum

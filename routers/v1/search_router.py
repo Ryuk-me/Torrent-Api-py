@@ -10,6 +10,7 @@ router = APIRouter(
 
 
 @router.get("/")
+@router.get("")
 async def search_for_torrents(
     site: str, query: str, limit: Optional[int] = 0, page: Optional[int] = 1
 ):
