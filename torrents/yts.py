@@ -32,13 +32,14 @@ class Yts:
                     poster[-1] = poster[-1].replace("medium", "large")
                     poster = "/".join(poster)
                     description = soup.select(
-                        "div#synopsis .hidden-xs")[0].text.strip()
+                        "div#synopsis > p")[0].text.strip()
                     runtime = (
                         soup.select_one(".tech-spec-info")
                         .find_all("div", class_="row")[-1]
                         .find_all("div")[-3]
                         .text.strip()
                     )
+
                     screenshots = soup.find_all("a", class_="screenshot-group")
                     screenshots = [a["href"] for a in screenshots]
                     torrents = []
