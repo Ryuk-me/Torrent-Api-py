@@ -28,11 +28,26 @@ $ git clone https://github.com/Ryuk-me/Torrent-Api-py
 # Go to the repository
 $ cd Torrent-Api-py
 
-# Install Depedencies
+# Install virtualenv
+$ pip install virtualenv
+
+# Create Virtual Env
+$ py -3 -m venv api-py
+
+# Activate Virtual Env [Windows]
+$ .\api-py\Scripts\activate
+
+# Activate Virtual Env [Linux]
+$ source api-py/bin/activate
+
+# Install Dependencies
 $ pip install -r requirements.txt
 
 # Start
 $ python main.py
+
+# To access API Open any browser/API Testing tool & move to the given URL
+$ localhost:8080 
 
 ```
 
@@ -383,23 +398,31 @@ $ python main.py
 ```json
 {
   "data": [
-    {
-      "name": "Eternals.2021.1080p.WEBRip.DDP5.1.x264-NOGRP",
-      "size": "5.6 GB",
+    { 
+      "name": "Eternals.2021.1080p.WEBRip.1600MB.DD5.1.x264-GalaxyRG",
+      "size": "1.6 GB",
       "date": "Jan. 11th '22",
-      "seeders": "10872",
-      "leechers": "6820",
-      "url": "https://1337xx.to/torrent/5110260/Eternals-2021-1080p-WEBRip-DDP5-1-x264-NOGRP/",
-      "uploader": "TheMorozko",
+      "seeders": "3674",
+      "leechers": "983",
+      "url": "https://1337x.to/torrent/5110228/Eternals-2021-1080p-WEBRip-1600MB-DD5-1-x264-GalaxyRG/",
+      "uploader": "TGxGoodies",
       "screenshot": [
-        "https://checkmy.pictures/images/2022/01/11/32162343474810151667.jpg",
-        "https://checkmy.pictures/images/2022/01/11/38515612831471833686.jpg",
-        "https://checkmy.pictures/images/2022/01/11/71518482909886223945.jpg"
+        "https://everest.picturedent.org/images/2022/01/11/tmpposter23827.jpg",
+        "https://everest.picturedent.org/images/2022/01/11/Harone8014.th.jpg",
+        "https://everest.picturedent.org/images/2022/01/11/Harone31320.th.jpg",
+        "https://everest.picturedent.org/images/2022/01/11/Harone8129XqiKn.th.jpg",
+        "https://everest.picturedent.org/images/2022/01/11/Harone27162.th.jpg",
+        "https://everest.picturedent.org/images/2022/01/11/Harone1352.th.jpg",
+        "https://everest.picturedent.org/images/2022/01/11/Harone14355.th.jpg"
       ],
       "category": "Movies",
-      "poster": "https://1337xx.to/img/movie/Eternals-2021.jpg",
-      "magnet": "magnet:?xt=urn:btih:A2AD2A669250A014BED19919E6C386DD4F82A883&dn=Eternals.2021.1080p.WEBRip.DDP5.1.x264-NOGRP&tr=http%3A%2F%2Ftracker.trackerfix.com%3A80%2Fannounce&tr=udp%3A%2F%2F9.rarbg.me%3A2950%2Fannounce&tr=udp%3A%2F%2F9.rarbg.to%3A2870%2Fannounce&tr=udp%3A%2F%2Ftracker.tallpenguin.org%3A15720%2Fannounce&tr=udp%3A%2F%2Ftracker.thinelephant.org%3A12780%2Fannounce&tr=udp%3A%2F%2Ftracker.zer0day.to%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fcoppersurfer.tk%3A6969%2Fannounce",
-      "hash": "A2AD2A669250A014BED19919E6C386DD4F82A883"
+      "files": [
+        "Eternals.2021.1080p.WEBRip.1600MB.DD5.1.x264-GalaxyRG.mkv (1.6 GB)",
+        "[TGx]Downloaded from torrentgalaxy.to .txt (0.7 KB)"
+      ],
+      "poster": "https://lx1.dyncdn.cc/cdn/02/0251ab7772c031c1130bc92810758cd4.jpg",
+      "magnet": "magnet:?xt=urn:btih:20F8D7C2942B143E6E2A0FB5562CDE7EE1B17822&dn=Eternals.2021.1080p.WEBRip.1600MB.DD5.1.x264-GalaxyRG&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.tiny-vps.com%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Fexplodie.org%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.cyberia.is%3A6969%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.birkenwald.de%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.moeking.me%3A6969%2Fannounce&tr=udp%3A%2F%2Fopentor.org%3A2710%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2F9.rarbg.me%3A2970%2Fannounce&tr=https%3A%2F%2Ftracker.foreverpirates.co%3A443%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=http%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Fopentracker.i2p.rocks%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fcoppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.zer0day.to%3A1337%2Fannounce",
+      "hash": "20F8D7C2942B143E6E2A0FB5562CDE7EE1B17822"
     }
   ],
   "current_page": 1,
@@ -429,7 +452,7 @@ Note :  Due to CPU limitations Repl will take much more time than Heroku.
 ---
 ## Donations
 
-<p> If you feel like showing your appreciation for this project, then how about buying me a coffee.</p>
+<p> If you feel like showing your appreciation for this project, then how about buying me a coffee?</p>
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/ryukmee)
 

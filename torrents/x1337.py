@@ -23,8 +23,8 @@ class x1337:
                         ".no-top-radius > div > ul > li > a")['href']
                     uls = soup.find_all("ul", class_="list")[1]
                     lis = uls.find_all("li")[0]
-                    imgs = [img['href'] for img in (soup.find("div", id="description")
-                                                    ).find_all("a") if img['href'].endswith(
+                    imgs = [img['data-original'] for img in (soup.find("div", id="description")
+                                                    ).find_all("img") if img['data-original'].endswith(
                         (".png", ".jpg", ".jpeg"))]
                     files = [f.text for f in soup.find(
                         "div", id="files").find_all("li")]
