@@ -168,5 +168,15 @@ class Yts:
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
             self.LIMIT = limit
-            url = self.BASE_URL + "/browse-movies/0/all/all/0/featured/0/all"
+            if page != 1:
+                url = (
+                    self.BASE_URL +
+                    "/browse-movies/0/all/all/0/featured/0/all?page={}".format(
+                        page)
+                )
+            else:
+                url = (
+                    self.BASE_URL +
+                    "/browse-movies/0/all/all/0/featured/0/all"
+                )
             return await self.parser_result(start_time, url, session)
