@@ -2,11 +2,11 @@ import time
 import aiohttp
 from bs4 import BeautifulSoup
 from helper.html_scraper import Scraper
-
+from constants.base_url import GLODLS
 
 class Glodls:
     def __init__(self):
-        self.BASE_URL = "https://glodls.to"
+        self.BASE_URL = GLODLS
         self.LIMIT = None
 
     def _parser(self, htmls):

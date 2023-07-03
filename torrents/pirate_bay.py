@@ -3,11 +3,11 @@ import time
 import aiohttp
 from bs4 import BeautifulSoup
 from helper.html_scraper import Scraper
-
+from constants.base_url import PIRATEBAY
 
 class PirateBay:
     def __init__(self):
-        self.BASE_URL = "https://thepiratebay10.org"
+        self.BASE_URL = PIRATEBAY
         self.LIMIT = None
 
     def _parser(self, htmls):

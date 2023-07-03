@@ -1,0 +1,6 @@
+version: '3.9'
+services:
+  api-py:
+    build: .
+    ports:
+      - "8009:8009"

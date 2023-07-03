@@ -1,0 +1,7 @@
+# created by virtualenv automatically
+__pycache__
+api-py
+.env
+function.*
+.vscode
+.github

@@ -5,17 +5,20 @@ import aiohttp
 from bs4 import BeautifulSoup
 from helper.asyncioPoliciesFix import decorator_asyncio_fix
 from helper.html_scraper import Scraper
+from constants.base_url import X1337
+from constants.headers import HEADER_AIO
+
 
 
 class x1337:
     def __init__(self):
-        self.BASE_URL = "https://1337x.to"
+        self.BASE_URL = X1337
         self.LIMIT = None
 
     @decorator_asyncio_fix
     async def _individual_scrap(self, session, url, obj):
         try:
-            async with session.get(url) as res:
+            async with session.get(url,headers=HEADER_AIO) as res:
                 html = await res.text(encoding="ISO-8859-1")
                 soup = BeautifulSoup(html, "html.parser")
                 try:

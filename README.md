@@ -47,7 +47,7 @@ $ pip install -r requirements.txt
 $ python main.py
 
 # To access API Open any browser/API Testing tool & move to the given URL
-$ localhost:8080 
+$ localhost:8009 
 
 ```
 
@@ -251,7 +251,7 @@ $ localhost:8080
 <summary style='font-size: 15px'><span style='font-size: 20px;font-weight:bold;'>Supported sites list</span></summary>
 <p>
 
-> [`api/v1/sites`](https://6howpgdphtrt752l4oksuieqyu0qcqfu.lambda-url.ap-southeast-2.on.aws/api/v1/sites)
+> [`api/v1/sites`](https://torrent-api-py-nx0x.onrender.com/api/v1/sites)
 
 </p>
 </details>
@@ -261,7 +261,7 @@ $ localhost:8080
 <summary style='font-size: 15px'><span style='font-size: 20px;font-weight:bold;'>Search</span></summary>
 <p>
 
-> [`api/v1/search`](https://6howpgdphtrt752l4oksuieqyu0qcqfu.lambda-url.ap-southeast-2.on.aws/api/v1/search)
+> [`api/v1/search`](https://torrent-api-py-nx0x.onrender.com/api/v1/search)
 
 | Parameter | Required |  Type   | Default |                         Example                          |
 | :-------: | :------: | :-----: | :-----: | :------------------------------------------------------: |
@@ -340,9 +340,9 @@ $ localhost:8080
 
 <pre>Here <b>limit = 5</b> will get 5 results from each site.</pre>
 
-> [api/v1/all/search?query=avengers](https://6howpgdphtrt752l4oksuieqyu0qcqfu.lambda-url.ap-southeast-2.on.aws/api/v1/all/search?query=avengers)
+> [api/v1/all/search?query=avengers](https://torrent-api-py-nx0x.onrender.com/api/v1/all/search?query=avengers)
 
-> [api/v1/all/search?query=avengers&limit=5](https://6howpgdphtrt752l4oksuieqyu0qcqfu.lambda-url.ap-southeast-2.on.aws/api/v1/all/search?query=avengers&limit=5)
+> [api/v1/all/search?query=avengers&limit=5](https://torrent-api-py-nx0x.onrender.com/api/v1/all/search?query=avengers&limit=5)
 
 </pre>
 </details>
@@ -359,9 +359,9 @@ $ localhost:8080
 | :-------: | :------: | :-----: | :-----: | :---------------------------: |
 |   limit   |    ❌     | integer | Default | `api/v1/all/trending?limit=2` |
 
-> [api/v1/all/trending](https://6howpgdphtrt752l4oksuieqyu0qcqfu.lambda-url.ap-southeast-2.on.aws/api/v1/all/trending)
+> [api/v1/all/trending](https://torrent-api-py-nx0x.onrender.com/api/v1/all/trending)
 
-> [api/v1/all/trending?limit=2](https://6howpgdphtrt752l4oksuieqyu0qcqfu.lambda-url.ap-southeast-2.on.aws/api/v1/all/trending?limit=2)
+> [api/v1/all/trending?limit=2](https://torrent-api-py-nx0x.onrender.com/api/v1/all/trending?limit=2)
 
 </p>
 </details>
@@ -378,9 +378,9 @@ $ localhost:8080
 | :-------: | :------: | :-----: | :-----: | :-------------------------: |
 |   limit   |    ❌     | integer | Default | `api/v1/all/recent?limit=2` |
 
-> [api/v1/all/recent](https://6howpgdphtrt752l4oksuieqyu0qcqfu.lambda-url.ap-southeast-2.on.aws/api/v1/all/recent)
+> [api/v1/all/recent](https://torrent-api-py-nx0x.onrender.com/api/v1/all/recent)
 
-> [api/v1/all/recent?limit=2](https://6howpgdphtrt752l4oksuieqyu0qcqfu.lambda-url.ap-southeast-2.on.aws/api/v1/all/recent)
+> [api/v1/all/recent?limit=2](https://torrent-api-py-nx0x.onrender.com/api/v1/all/recent)
 
 </p>
 </details>
@@ -389,7 +389,7 @@ $ localhost:8080
 
 ## Want to Try api ?
 
-> [api/v1/search?site=1337x&query=eternals](https://6howpgdphtrt752l4oksuieqyu0qcqfu.lambda-url.ap-southeast-2.on.aws/api/v1/search?site=1337x&query=eternals)
+> [api/v1/search?site=1337x&query=eternals](https://torrent-api-py-nx0x.onrender.com/api/v1/search?site=1337x&query=eternals)
 
 <details open>
 <summary> See response</summary>
@@ -421,7 +421,7 @@ $ localhost:8080
         "[TGx]Downloaded from torrentgalaxy.to .txt (0.7 KB)"
       ],
       "poster": "https://lx1.dyncdn.cc/cdn/02/0251ab7772c031c1130bc92810758cd4.jpg",
-      "magnet": "magnet:?xt=urn:btih:20F8D7C2942B143E6E2A0FB5562CDE7EE1B17822&dn=Eternals.2021.1080p.WEBRip.1600MB.DD5.1.x264-GalaxyRG&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.tiny-vps.com%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Fexplodie.org%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.cyberia.is%3A6969%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.birkenwald.de%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.moeking.me%3A6969%2Fannounce&tr=udp%3A%2F%2Fopentor.org%3A2710%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2F9.rarbg.me%3A2970%2Fannounce&tr=https%3A%2F%2Ftracker.foreverpirates.co%3A443%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=http%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Fopentracker.i2p.rocks%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fcoppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.zer0day.to%3A1337%2Fannounce",
+      "magnet": "magnet:?xt=urn:btih:20F8D7C2942B143E6E2A0FB5562CDE7EE1B17822&dn=Eternals.2021.1080p.WEBRip.1600MB.DD5.1.x264-GalaxyRG&tr=udp://open.stealth.si:80/announce&tr=udp://tracker.tiny-vps.com:6969/announce&tr=udp://tracker.opentrackr.org:1337/announce&tr=udp://tracker.torrent.eu.org:451/announce&tr=udp://explodie.org:6969/announce&tr=udp://tracker.cyberia.is:6969/announce&tr=udp://ipv4.tracker.harry.lu:80/announce&tr=udp://p4p.arenabg.com:1337/announce&tr=udp://tracker.birkenwald.de:6969/announce&tr=udp://tracker.moeking.me:6969/announce&tr=udp://opentor.org:2710/announce&tr=udp://tracker.dler.org:6969/announce&tr=udp://9.rarbg.me:2970/announce&tr=https://tracker.foreverpirates.co:443/announce&tr=udp://tracker.opentrackr.org:1337/announce&tr=http://tracker.openbittorrent.com:80/announce&tr=udp://opentracker.i2p.rocks:6969/announce&tr=udp://tracker.internetwarriors.net:1337/announce&tr=udp://tracker.leechers-paradise.org:6969/announce&tr=udp://coppersurfer.tk:6969/announce&tr=udp://tracker.zer0day.to:1337/announce",
       "hash": "20F8D7C2942B143E6E2A0FB5562CDE7EE1B17822"
     }
   ],
@@ -437,19 +437,6 @@ $ localhost:8080
 
 ---
 
-# How to Host On Repl.it
-
-```sh
-> Fork this repo
-> Import repo from github in repl
-> Command : python main.py
-> Install Requirements manually !very important
-> And Run Your repl
-
-Note :  Due to CPU limitations Repl will take much more time than Heroku.
-```
-
----
 ## Donations
 
 <p> If you feel like showing your appreciation for this project, then how about buying me a coffee?</p>
@@ -458,6 +445,12 @@ Note :  Due to CPU limitations Repl will take much more time than Heroku.
 
 ---
 
-#### You can fork the repo and deploy on VPS or deploy it on Heroku :)
+## DEPLOY
+
+<a href="https://render.com/deploy?repo=https://github.com/Ryuk-me/Torrent-Api-py">
+<img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy to Render" />
+</a>
+
+</br>
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)

@@ -5,11 +5,11 @@ import aiohttp
 import cloudscraper
 import requests
 from bs4 import BeautifulSoup
-
+from constants.base_url import MAGNETDL
 
 class Magnetdl:
     def __init__(self):
-        self.BASE_URL = "https://www.magnetdl.com"
+        self.BASE_URL = MAGNETDL
         self.LIMIT = None
 
     def _parser(self, htmls):
