@@ -1,8 +1,10 @@
-from fastapi import APIRouter
+from fastapi import APIRouter,status
 from typing import Optional
 from helper.is_site_available import check_if_site_available
-from time import time
+import time
 import asyncio
+from helper.error_messages import error_handler
+
 
 router = APIRouter(
     tags=["Combo Routes"]
@@ -31,12 +33,15 @@ async def get_search_combo(query: str, limit: Optional[int] = 0):
         )
     results = await asyncio.gather(*tasks)
     for res in results:
-        if res and len(res["data"]) > 0:
+        if res is not None and len(res["data"]) > 0:
             for torrent in res["data"]:
                 COMBO["data"].append(torrent)
             total_torrents_overall = total_torrents_overall + res["total"]
     COMBO["time"] = time.time() - start_time
     COMBO["total"] = total_torrents_overall
+    if total_torrents_overall == 0:
+        return error_handler(status_code=status.HTTP_404_NOT_FOUND,
+                                     json_message={"error": "Result not found."})
     return COMBO
 
 
@@ -68,12 +73,15 @@ async def get_all_trending(limit: Optional[int] = 0):
         )
     results = await asyncio.gather(*tasks)
     for res in results:
-        if res and len(res["data"]) > 0:
+        if res is not None and len(res["data"]) > 0:
             for torrent in res["data"]:
                 COMBO["data"].append(torrent)
             total_torrents_overall = total_torrents_overall + res["total"]
     COMBO["time"] = time.time() - start_time
     COMBO["total"] = total_torrents_overall
+    if total_torrents_overall == 0:
+        return error_handler(status_code=status.HTTP_404_NOT_FOUND,
+                                     json_message={"error": "Result not found."})
     return COMBO
 
 
@@ -104,10 +112,13 @@ async def get_all_recent(limit: Optional[int] = 0):
         )
     results = await asyncio.gather(*tasks)
     for res in results:
-        if res and len(res["data"]) > 0:
+        if res is not None and len(res["data"]) > 0:
             for torrent in res["data"]:
                 COMBO["data"].append(torrent)
             total_torrents_overall = total_torrents_overall + res["total"]
     COMBO["time"] = time.time() - start_time
     COMBO["total"] = total_torrents_overall
+    if total_torrents_overall == 0:
+        return error_handler(status_code=status.HTTP_404_NOT_FOUND,
+                                     json_message={"error": "Result not found."})
     return COMBO
