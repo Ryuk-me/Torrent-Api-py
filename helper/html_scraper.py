@@ -1,6 +1,6 @@
 import asyncio
 from .asyncioPoliciesFix import decorator_asyncio_fix
-
+from constants.headers import HEADER_AIO
 
 class Scraper:
     @decorator_asyncio_fix
@@ -8,9 +8,7 @@ class Scraper:
         try:
             async with session.get(
                 url,
-                headers={
-                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.106 Safari/537.36"
-                },
+                headers=HEADER_AIO,
             ) as r:
                 return await r.text(encoding="ISO-8859-1")
         except:

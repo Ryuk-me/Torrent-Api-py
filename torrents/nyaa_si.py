@@ -3,11 +3,11 @@ import time
 import aiohttp
 from bs4 import BeautifulSoup
 from helper.html_scraper import Scraper
-
+from constants.base_url import NYAASI
 
 class NyaaSi:
     def __init__(self):
-        self.BASE_URL = "https://nyaa.si"
+        self.BASE_URL = NYAASI
         self.LIMIT = None
 
     def _parser(self, htmls):

@@ -3,11 +3,12 @@ import time
 import aiohttp
 from bs4 import BeautifulSoup
 from helper.html_scraper import Scraper
+from constants.base_url import TGX
 
 
 class TorrentGalaxy:
     def __init__(self):
-        self.BASE_URL = "https://torrentgalaxy.to"
+        self.BASE_URL = TGX
         self.LIMIT = None
 
     def _parser_individual(self, html):
@@ -20,7 +21,7 @@ class TorrentGalaxy:
             torrentsand_all = post_nd_torrents[4].find_all("a")
             torrent_link = torrentsand_all[0]['href']
             magnet_link = torrentsand_all[1]['href']
-            direct_link = "https://torrentgalaxy.to" + \
+            direct_link = self.BASE_URL + \
                 torrentsand_all[2]['href']
 
             details_root = soup.find("div", class_="gluewrapper").select(
