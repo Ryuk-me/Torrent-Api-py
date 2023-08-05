@@ -1,6 +1,9 @@
+import os
 import asyncio
 from .asyncioPoliciesFix import decorator_asyncio_fix
 from constants.headers import HEADER_AIO
+
+HTTP_PROXY = os.environ.get("HTTP_PROXY", None)
 
 class Scraper:
     @decorator_asyncio_fix
@@ -9,6 +12,7 @@ class Scraper:
             async with session.get(
                 url,
                 headers=HEADER_AIO,
+                proxy=HTTP_PROXY
             ) as r:
                 return await r.text(encoding="ISO-8859-1")
         except:

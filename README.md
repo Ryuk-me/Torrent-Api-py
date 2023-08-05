@@ -46,6 +46,10 @@ $ pip install -r requirements.txt
 # Start
 $ python main.py
 
+# (optional) To Use a PROXY, set the HTTP Proxy environment variable
+# You can also use a tor proxy using dperson/torproxy:latest
+$ export HTTP_PROXY="http://proxy-host:proxy-port"
+
 # To access API Open any browser/API Testing tool & move to the given URL
 $ localhost:8009 
 
