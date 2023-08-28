@@ -3,7 +3,9 @@ import asyncio
 from .asyncioPoliciesFix import decorator_asyncio_fix
 from constants.headers import HEADER_AIO
 
-HTTP_PROXY = os.environ.get("HTTP_PROXY", None)
+HTTP_PROXY = os.environ.get(
+    "HTTP_PROXY", None)
+
 
 class Scraper:
     @decorator_asyncio_fix
@@ -14,7 +16,7 @@ class Scraper:
                 headers=HEADER_AIO,
                 proxy=HTTP_PROXY
             ) as r:
-                return await r.text(encoding="ISO-8859-1")
+                return await r.text()
         except:
             return None
 

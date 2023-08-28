@@ -4,3 +4,5 @@ api-py
 .env
 function.*
 .vscode
+test.py
+*.log
