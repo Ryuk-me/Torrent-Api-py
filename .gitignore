@@ -6,3 +6,4 @@ function.*
 .vscode
 test.py
 *.log
+test.json
