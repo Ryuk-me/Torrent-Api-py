@@ -78,7 +78,7 @@ class Bitsearch:
                     my_dict["current_page"] = current_page
                     my_dict["total_pages"] = int(total_pages)
                 except:
-                    pass
+                    ...
                 return my_dict
         except:
             return None

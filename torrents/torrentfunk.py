@@ -30,7 +30,7 @@ class TorrentFunk:
                         "#right > main > div.content > table:nth-child(7) > tr:nth-child(3) > td:nth-child(2)"
                     ).text
                 except:
-                    pass
+                    ...
         except:
             return None
 

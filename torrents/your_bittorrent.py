@@ -32,7 +32,7 @@ class YourBittorrent:
                     obj["torrent"] = torrent
                     obj["poster"] = poster
                 except:
-                    pass
+                    ...
         except:
             return None
 
