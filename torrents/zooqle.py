@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from helper.html_scraper import Scraper
 from constants.base_url import ZOOQLE
 
+
 class Zooqle:
     def __init__(self):
         self.BASE_URL = ZOOQLE
@@ -28,12 +29,9 @@ class Zooqle:
                             size = None
                         url = td[1].find_all("a")[0]["href"]
                         date = td[4].get_text(strip=True)
-                        seeders_leechers = td[5].find(
-                            "div")["title"].split("|")
-                        seeders = seeders_leechers[0].replace(
-                            "Seeders: ", "").strip()
-                        leechers = seeders_leechers[1].replace(
-                            "Leechers: ", "").strip()
+                        seeders_leechers = td[5].find("div")["title"].split("|")
+                        seeders = seeders_leechers[0].replace("Seeders: ", "").strip()
+                        leechers = seeders_leechers[1].replace("Leechers: ", "").strip()
                         my_dict["data"].append(
                             {
                                 "name": name,
@@ -53,8 +51,7 @@ class Zooqle:
                 try:
                     ul = soup.find("ul", class_="pagination")
                     tpages = ul.find_all("a")[-3].text
-                    current_page = (
-                        ul.find("li", class_="active")).find("a").text
+                    current_page = (ul.find("li", class_="active")).find("a").text
                     my_dict["current_page"] = int(current_page)
                     my_dict["total_pages"] = int(tpages)
                 except:
@@ -68,14 +65,13 @@ class Zooqle:
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
             self.LIMIT = limit
-            url = self.BASE_URL + \
-                "/search?pg={1}&q={0}&v=t".format(query, page)
+            url = self.BASE_URL + "/search?pg={1}&q={0}&v=t".format(query, page)
             return await self.parser_result(start_time, url, session)
 
     async def parser_result(self, start_time, url, session):
         html = await Scraper().get_all_results(session, url)
         results = self._parser(html)
-        if results != None:
+        if results is not None:
             results["time"] = time.time() - start_time
             results["total"] = len(results["data"])
             return results

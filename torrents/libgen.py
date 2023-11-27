@@ -7,6 +7,7 @@ from helper.html_scraper import Scraper
 from constants.base_url import LIBGEN
 from constants.headers import HEADER_AIO
 
+
 class Libgen:
     def __init__(self):
         self.BASE_URL = LIBGEN
@@ -16,7 +17,7 @@ class Libgen:
     async def _individual_scrap(self, session, url, obj, sem):
         async with sem:
             try:
-                async with session.get(url,headers=HEADER_AIO) as res:
+                async with session.get(url, headers=HEADER_AIO) as res:
                     html = await res.text(encoding="ISO-8859-1")
                     soup = BeautifulSoup(html, "html.parser")
                     try:
@@ -41,8 +42,7 @@ class Libgen:
             for obj in result["data"]:
                 if obj["url"] == url:
                     task = asyncio.create_task(
-                        self._individual_scrap(
-                            session, url, result["data"][idx], sem)
+                        self._individual_scrap(session, url, result["data"][idx], sem)
                     )
                     tasks.append(task)
         await asyncio.gather(*tasks)
@@ -50,7 +50,6 @@ class Libgen:
 
     def _parser(self, htmls):
         try:
-
             for html in htmls:
                 soup = BeautifulSoup(html, "html.parser")
                 list_of_urls = []
@@ -113,7 +112,7 @@ class Libgen:
     async def parser_result(self, start_time, url, session):
         htmls = await Scraper().get_all_results(session, url)
         result, urls = self._parser(htmls)
-        if result != None:
+        if result is not None:
             results = await self._get_torrent(result, session, urls)
             results["time"] = time.time() - start_time
             results["total"] = len(results["data"])

@@ -16,7 +16,7 @@ class TorrentFunk:
     @decorator_asyncio_fix
     async def _individual_scrap(self, session, url, obj):
         try:
-            async with session.get(url,headers=HEADER_AIO) as res:
+            async with session.get(url, headers=HEADER_AIO) as res:
                 html = await res.text(encoding="ISO-8859-1")
                 soup = BeautifulSoup(html, "html.parser")
                 try:
@@ -40,8 +40,7 @@ class TorrentFunk:
             for obj in result["data"]:
                 if obj["url"] == url:
                     task = asyncio.create_task(
-                        self._individual_scrap(
-                            session, url, result["data"][idx])
+                        self._individual_scrap(session, url, result["data"][idx])
                     )
                     tasks.append(task)
         await asyncio.gather(*tasks)
@@ -87,8 +86,7 @@ class TorrentFunk:
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
             self.LIMIT = limit
-            url = self.BASE_URL + \
-                "/all/torrents/{}/{}.html".format(query, page)
+            url = self.BASE_URL + "/all/torrents/{}/{}.html".format(query, page)
             return await self.parser_result(start_time, url, session, idx=6)
 
     async def parser_result(self, start_time, url, session, idx=1):

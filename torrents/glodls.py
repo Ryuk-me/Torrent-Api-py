@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from helper.html_scraper import Scraper
 from constants.base_url import GLODLS
 
+
 class Glodls:
     def __init__(self):
         self.BASE_URL = GLODLS
@@ -68,7 +69,7 @@ class Glodls:
     async def parser_result(self, start_time, url, session):
         html = await Scraper().get_all_results(session, url)
         results = self._parser(html)
-        if results != None:
+        if results is not None:
             results["time"] = time.time() - start_time
             results["total"] = len(results["data"])
             return results

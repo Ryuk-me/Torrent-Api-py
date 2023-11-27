@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from helper.html_scraper import Scraper
 from constants.base_url import BITSEARCH
 
+
 class Bitsearch:
     def __init__(self):
         self.BASE_URL = BITSEARCH
@@ -20,8 +21,7 @@ class Bitsearch:
                     info = divs.find("div", class_="info")
                     name = info.find("h5", class_="title").find("a").text
                     url = info.find("h5", class_="title").find("a")["href"]
-                    category = info.find("div").find(
-                        "a", class_="category").text
+                    category = info.find("div").find("a", class_="category").text
                     if not category:
                         continue
                     stats = info.find("div", class_="stats").find_all("div")
@@ -93,7 +93,7 @@ class Bitsearch:
     async def parser_result(self, start_time, url, session):
         html = await Scraper().get_all_results(session, url)
         results = self._parser(html)
-        if results != None:
+        if results is not None:
             results["time"] = time.time() - start_time
             results["total"] = len(results["data"])
             return results

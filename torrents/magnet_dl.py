@@ -7,6 +7,7 @@ import requests
 from bs4 import BeautifulSoup
 from constants.base_url import MAGNETDL
 
+
 class Magnetdl:
     def __init__(self):
         self.BASE_URL = MAGNETDL
@@ -51,8 +52,7 @@ class Magnetdl:
                             )
                         if len(my_dict["data"]) == self.LIMIT:
                             break
-                total_results = soup.find(
-                    "div", id="footer").text.replace(",", "")
+                total_results = soup.find("div", id="footer").text.replace(",", "")
                 current_page = int(
                     (re.search(r"Page\s\d*", total_results).group(0)).replace(
                         "Page ", ""
@@ -97,14 +97,13 @@ class Magnetdl:
             query = requests.utils.unquote(query)
             query = query.split(" ")
             query = "-".join(query)
-            url = self.BASE_URL + \
-                "/{}/{}/se/desc/{}/".format(query[0], query, page)
+            url = self.BASE_URL + "/{}/{}/se/desc/{}/".format(query[0], query, page)
             return await self.parser_result(start_time, url, session)
 
     async def parser_result(self, start_time, url, session):
         data = await self._get_all_results(session, url)
         results = self._parser(data)
-        if results != None:
+        if results is not None:
             results["time"] = time.time() - start_time
             results["total"] = len(results["data"])
             return results

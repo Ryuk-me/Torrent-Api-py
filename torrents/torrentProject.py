@@ -8,6 +8,7 @@ from helper.html_scraper import Scraper
 from constants.base_url import TORRENTPROJECT
 from constants.headers import HEADER_AIO
 
+
 class TorrentProject:
     def __init__(self):
         self.BASE_URL = TORRENTPROJECT
@@ -28,8 +29,7 @@ class TorrentProject:
                             "#download > div:nth-child(2) > div > a"
                         )["href"]
                         index_of_magnet = magnet.index("magnet")
-                        magnet = requests.utils.unquote(
-                            magnet[index_of_magnet:])
+                        magnet = requests.utils.unquote(magnet[index_of_magnet:])
                         obj["magnet"] = magnet
                     except:
                         pass
@@ -43,8 +43,7 @@ class TorrentProject:
             for obj in result["data"]:
                 if obj["url"] == url:
                     task = asyncio.create_task(
-                        self._individual_scrap(
-                            session, url, result["data"][idx], sem)
+                        self._individual_scrap(session, url, result["data"][idx], sem)
                     )
                     tasks.append(task)
         await asyncio.gather(*tasks)
@@ -52,7 +51,6 @@ class TorrentProject:
 
     def _parser(self, htmls):
         try:
-
             for html in htmls:
                 soup = BeautifulSoup(html, "html.parser")
                 list_of_urls = []
@@ -93,7 +91,7 @@ class TorrentProject:
     async def parser_result(self, start_time, url, session):
         htmls = await Scraper().get_all_results(session, url)
         result, urls = self._parser(htmls)
-        if result != None:
+        if result is not None:
             results = await self._get_torrent(result, session, urls)
             results["time"] = time.time() - start_time
             results["total"] = len(results["data"])
