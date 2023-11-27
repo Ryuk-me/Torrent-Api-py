@@ -1,8 +1,8 @@
 aiohttp[speedups]
-beautifulsoup4==4.12.2
-cloudscraper==1.2.71
+beautifulsoup4
+cloudscraper
 fastapi==0.104.1
-gunicorn==21.2.0
-mangum==0.17.0
-requests==2.31.0
+gunicorn
+mangum
+requests
 uvicorn[standard]
