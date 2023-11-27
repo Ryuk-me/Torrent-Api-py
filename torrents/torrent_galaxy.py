@@ -164,7 +164,7 @@ class TorrentGalaxy:
                 except:
                     my_dict["current_page"] = None
                     my_dict["total_pages"] = None
-                    # pass
+                    # ...
                 return my_dict
         except:
             return None

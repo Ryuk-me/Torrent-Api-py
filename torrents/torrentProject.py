@@ -32,7 +32,7 @@ class TorrentProject:
                         magnet = requests.utils.unquote(magnet[index_of_magnet:])
                         obj["magnet"] = magnet
                     except:
-                        pass
+                        ...
             except:
                 return None
 

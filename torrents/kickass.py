@@ -35,7 +35,7 @@ class Kickass:
                     ).group(0)
                     obj["magnet"] = magnet
                 except:
-                    pass
+                    ...
         except:
             return None
 
@@ -92,7 +92,7 @@ class Kickass:
                     my_dict["current_page"] = current_page
                     my_dict["total_pages"] = int(total_page)
                 except:
-                    pass
+                    ...
                 return my_dict, list_of_urls
         except:
             return None, None

@@ -29,7 +29,7 @@ class Torlock:
                             0
                         ]["src"]
                     except:
-                        pass
+                        ...
                     if str(magnet).startswith("magnet") and str(torrent).endswith(
                         "torrent"
                     ):
@@ -45,7 +45,7 @@ class Torlock:
                     else:
                         del obj
                 except IndexError:
-                    pass
+                    ...
         except:
             return None
 

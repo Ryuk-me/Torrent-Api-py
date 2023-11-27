@@ -49,7 +49,7 @@ class Glodls:
                     total_pages = total_pages.split("=")[-1]
                     my_dict["total_pages"] = int(total_pages) + 1
                 except:
-                    pass
+                    ...
                 return my_dict
         except:
             return None

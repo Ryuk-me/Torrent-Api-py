@@ -31,7 +31,7 @@ class Libgen:
                         if poster:
                             obj["poster"] = "http://library.lol" + poster["src"]
                     except:
-                        pass
+                        ...
             except:
                 return None
 
@@ -72,7 +72,7 @@ class Libgen:
                     try:
                         pages = td[5].text
                     except:
-                        pass
+                        ...
                     language = td[6].text
                     size = td[7].text
                     extension = td[8].text

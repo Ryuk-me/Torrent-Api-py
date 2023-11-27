@@ -1,5 +1,6 @@
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from routers.v1.search_router import router as search_router
 from routers.v1.trending_router import router as trending_router
@@ -9,10 +10,24 @@ from routers.v1.combo_routers import router as combo_router
 from routers.v1.sites_list_router import router as site_list_router
 from routers.home_router import router as home_router
 from routers.v1.search_url_router import router as search_url_router
+from helper.uptime import getUptime
 from mangum import Mangum
+from math import ceil
+import time
 
+startTime = time.time()
 
-app = FastAPI()
+app = FastAPI(
+    title="Torrent-Api-Py",
+    version="1.0.1",
+    description=f"Unofficial Torrent-Api",
+    docs_url="/docs",
+    contact={
+        "name": "Neeraj Kumar",
+        "url": "https://github.com/ryuk-me",
+        "email": "neerajkr1210@gmail.com",
+    },
+)
 
 origins = ["*"]
 
@@ -23,6 +38,23 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.get("/health")
+async def health_route(req: Request):
+    """
+    Health Route : Returns App details.
+
+    """
+    return JSONResponse(
+        {
+            "app": "Torrent-Api-Py",
+            "version": "v" + "1.0.1",
+            "ip": req.client.host,
+            "uptime": ceil(getUptime(startTime)),
+        }
+    )
+
 
 app.include_router(search_router, prefix="/api/v1/search")
 app.include_router(trending_router, prefix="/api/v1/trending")

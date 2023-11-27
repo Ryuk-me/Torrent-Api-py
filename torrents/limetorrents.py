@@ -28,7 +28,7 @@ class Limetorrent:
                         r"([{a-f\d,A-F\d}]{32,40})\b", obj["magnet"]
                     ).group(0)
                 except:
-                    pass
+                    ...
         except:
             return None
 
@@ -86,7 +86,7 @@ class Limetorrent:
                     my_dict["current_page"] = current_page
                     my_dict["total_pages"] = total_page
                 except:
-                    pass
+                    ...
                 return my_dict, list_of_urls
         except:
             return None, None

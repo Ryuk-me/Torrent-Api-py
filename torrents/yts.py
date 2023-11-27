@@ -74,7 +74,7 @@ class Yts:
                     obj["screenshot"] = screenshots
                     obj["torrents"] = torrents
                 except:
-                    pass
+                    ...
         except:
             return None
 
@@ -120,7 +120,7 @@ class Yts:
                         )
 
                 except:
-                    pass
+                    ...
                 return my_dict, list_of_urls
         except:
             return None, None

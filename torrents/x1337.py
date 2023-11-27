@@ -45,14 +45,14 @@ class x1337:
                         elif str(poster).startswith("/"):
                             obj["poster"] = self.BASE_URL + poster
                     except:
-                        pass
+                        ...
                     obj["magnet"] = magnet
 
                     obj["hash"] = re.search(
                         r"([{a-f\d,A-F\d}]{32,40})\b", magnet
                     ).group(0)
                 except IndexError:
-                    pass
+                    ...
         except:
             return None
 
@@ -109,7 +109,7 @@ class x1337:
                     else:
                         my_dict["total_pages"] = int(pages[-1].text)
                 except:
-                    pass
+                    ...
                 return my_dict, list_of_urls
         except:
             return None, None
@@ -142,15 +142,18 @@ class x1337:
                 htmls = await Scraper().get_all_results(session, url)
                 result, urls = self._parser(htmls)
                 if result is not None:
-                    res = await self._get_torrent(result, session, urls)
-                    for obj in res["data"]:
-                        results["data"].append(obj)
-                    try:
-                        results["current_page"] = res["current_page"]
-                    except:
-                        pass
-                    results["time"] = time.time() - start_time
-                    results["total"] = len(results["data"])
+                    if len(result["data"]) > 0:
+                        res = await self._get_torrent(result, session, urls)
+                        for obj in res["data"]:
+                            results["data"].append(obj)
+                        try:
+                            results["current_page"] = res["current_page"]
+                        except:
+                            ...
+                        results["time"] = time.time() - start_time
+                        results["total"] = len(results["data"])
+                    else:
+                        break
                 else:
                     break
             return results
