@@ -9,7 +9,6 @@ from constants.base_url import X1337
 from constants.headers import HEADER_AIO
 
 
-
 class x1337:
     def __init__(self):
         self.BASE_URL = X1337
@@ -18,26 +17,29 @@ class x1337:
     @decorator_asyncio_fix
     async def _individual_scrap(self, session, url, obj):
         try:
-            async with session.get(url,headers=HEADER_AIO) as res:
+            async with session.get(url, headers=HEADER_AIO) as res:
                 html = await res.text(encoding="ISO-8859-1")
                 soup = BeautifulSoup(html, "html.parser")
                 try:
-                    magnet = soup.select_one(
-                        ".no-top-radius > div > ul > li > a")['href']
+                    magnet = soup.select_one(".no-top-radius > div > ul > li > a")[
+                        "href"
+                    ]
                     uls = soup.find_all("ul", class_="list")[1]
                     lis = uls.find_all("li")[0]
-                    imgs = [img['data-original'] for img in (soup.find("div", id="description")
-                                                    ).find_all("img") if img['data-original'].endswith(
-                        (".png", ".jpg", ".jpeg"))]
-                    files = [f.text for f in soup.find(
-                        "div", id="files").find_all("li")]
+                    imgs = [
+                        img["data-original"]
+                        for img in (soup.find("div", id="description")).find_all("img")
+                        if img["data-original"].endswith((".png", ".jpg", ".jpeg"))
+                    ]
+                    files = [
+                        f.text for f in soup.find("div", id="files").find_all("li")
+                    ]
                     if len(imgs) > 0:
                         obj["screenshot"] = imgs
                     obj["category"] = lis.find("span").text
                     obj["files"] = files
                     try:
-                        poster = soup.select_one(
-                            "div.torrent-image img")["src"]
+                        poster = soup.select_one("div.torrent-image img")["src"]
                         if str(poster).startswith("//"):
                             obj["poster"] = "https:" + poster
                         elif str(poster).startswith("/"):
@@ -60,8 +62,7 @@ class x1337:
             for obj in result["data"]:
                 if obj["url"] == url:
                     task = asyncio.create_task(
-                        self._individual_scrap(
-                            session, url, result["data"][idx])
+                        self._individual_scrap(session, url, result["data"][idx])
                     )
                     tasks.append(task)
         await asyncio.gather(*tasks)
@@ -118,30 +119,32 @@ class x1337:
             self.LIMIT = limit
             start_time = time.time()
             url = self.BASE_URL + "/search/{}/{}/".format(query, page)
-            return await self.parser_result(start_time, url, session, query=query, page=page)
+            return await self.parser_result(
+                start_time, url, session, query=query, page=page
+            )
 
     async def parser_result(self, start_time, url, session, page, query=None):
         htmls = await Scraper().get_all_results(session, url)
         result, urls = self._parser(htmls)
-        if result != None:
+        if result is not None:
             results = await self._get_torrent(result, session, urls)
             results["time"] = time.time() - start_time
             results["total"] = len(results["data"])
             if query is None:
                 return results
-            while (True):
+            while True:
                 if len(results["data"]) >= self.LIMIT:
-                    results["data"] = results["data"][0:self.LIMIT]
+                    results["data"] = results["data"][0 : self.LIMIT]
                     results["total"] = len(results["data"])
                     return results
                 page = page + 1
                 url = self.BASE_URL + "/search/{}/{}/".format(query, page)
                 htmls = await Scraper().get_all_results(session, url)
                 result, urls = self._parser(htmls)
-                if result != None:
+                if result is not None:
                     res = await self._get_torrent(result, session, urls)
                     for obj in res["data"]:
-                        results['data'].append(obj)
+                        results["data"].append(obj)
                     try:
                         results["current_page"] = res["current_page"]
                     except:

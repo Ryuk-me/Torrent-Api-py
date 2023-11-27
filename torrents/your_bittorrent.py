@@ -16,7 +16,7 @@ class YourBittorrent:
     @decorator_asyncio_fix
     async def _individual_scrap(self, session, url, obj):
         try:
-            async with session.get(url,headers=HEADER_AIO) as res:
+            async with session.get(url, headers=HEADER_AIO) as res:
                 html = await res.text(encoding="ISO-8859-1")
                 soup = BeautifulSoup(html, "html.parser")
                 try:
@@ -28,8 +28,7 @@ class YourBittorrent:
                         .find("img")["src"]
                     )
                     clearfix = soup.find("div", class_="clearfix")
-                    torrent = clearfix.find("div").find_all("div")[
-                        1].find("a")["href"]
+                    torrent = clearfix.find("div").find_all("div")[1].find("a")["href"]
                     obj["torrent"] = torrent
                     obj["poster"] = poster
                 except:
@@ -43,8 +42,7 @@ class YourBittorrent:
             for obj in result["data"]:
                 if obj["url"] == url:
                     task = asyncio.create_task(
-                        self._individual_scrap(
-                            session, url, result["data"][idx])
+                        self._individual_scrap(session, url, result["data"][idx])
                     )
                     tasks.append(task)
         await asyncio.gather(*tasks)
@@ -92,7 +90,7 @@ class YourBittorrent:
     async def parser_result(self, start_time, url, session, idx=1):
         htmls = await Scraper().get_all_results(session, url)
         result, urls = self._parser(htmls, idx)
-        if result != None:
+        if result is not None:
             results = await self._get_torrent(result, session, urls)
             results["time"] = time.time() - start_time
             results["total"] = len(results["data"])

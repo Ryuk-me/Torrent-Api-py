@@ -8,6 +8,7 @@ from helper.html_scraper import Scraper
 from constants.base_url import KICKASS
 from constants.headers import HEADER_AIO
 
+
 class Kickass:
     def __init__(self):
         self.BASE_URL = KICKASS
@@ -16,7 +17,7 @@ class Kickass:
     @decorator_asyncio_fix
     async def _individual_scrap(self, session, url, obj):
         try:
-            async with session.get(url,headers=HEADER_AIO) as res:
+            async with session.get(url, headers=HEADER_AIO) as res:
                 html = await res.text(encoding="ISO-8859-1")
                 soup = BeautifulSoup(html, "html.parser")
                 try:
@@ -27,8 +28,7 @@ class Kickass:
                     imgs = (soup.find("div", class_="data")).find_all("img")
                     if imgs and len(imgs) > 0:
                         obj["screenshot"] = [img["src"] for img in imgs]
-                    magnet_and_torrent = soup.find_all(
-                        "a", class_="kaGiantButton")
+                    magnet_and_torrent = soup.find_all("a", class_="kaGiantButton")
                     magnet = magnet_and_torrent[0]["href"]
                     obj["hash"] = re.search(
                         r"([{a-f\d,A-F\d}]{32,40})\b", magnet
@@ -45,8 +45,7 @@ class Kickass:
             for obj in result["data"]:
                 if obj["url"] == url:
                     task = asyncio.create_task(
-                        self._individual_scrap(
-                            session, url, result["data"][idx])
+                        self._individual_scrap(session, url, result["data"][idx])
                     )
                     tasks.append(task)
         await asyncio.gather(*tasks)
@@ -54,7 +53,6 @@ class Kickass:
 
     def _parser(self, htmls):
         try:
-
             for html in htmls:
                 soup = BeautifulSoup(html, "html.parser")
                 list_of_urls = []
@@ -62,8 +60,7 @@ class Kickass:
                 for tr in soup.select("tr.odd,tr.even"):
                     td = tr.find_all("td")
                     name = tr.find("a", class_="cellMainLink").text.strip()
-                    url = self.BASE_URL + \
-                        tr.find("a", class_="cellMainLink")["href"]
+                    url = self.BASE_URL + tr.find("a", class_="cellMainLink")["href"]
                     list_of_urls.append(url)
                     if name:
                         size = td[1].text.strip()
@@ -110,7 +107,7 @@ class Kickass:
     async def parser_result(self, start_time, url, session):
         htmls = await Scraper().get_all_results(session, url)
         result, urls = self._parser(htmls)
-        if result != None:
+        if result is not None:
             results = await self._get_torrent(result, session, urls)
             results["time"] = time.time() - start_time
             results["total"] = len(results["data"])

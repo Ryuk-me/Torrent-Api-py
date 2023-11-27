@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from helper.html_scraper import Scraper
 from constants.base_url import NYAASI
 
+
 class NyaaSi:
     def __init__(self):
         self.BASE_URL = NYAASI
@@ -52,8 +53,7 @@ class NyaaSi:
                 try:
                     ul = soup.find("ul", class_="pagination")
                     tpages = ul.find_all("a")[-2].text
-                    current_page = (
-                        ul.find("li", class_="active")).find("a").text
+                    current_page = (ul.find("li", class_="active")).find("a").text
                     my_dict["current_page"] = int(current_page)
                     my_dict["total_pages"] = int(tpages)
                 except:
@@ -73,7 +73,7 @@ class NyaaSi:
     async def parser_result(self, start_time, url, session):
         html = await Scraper().get_all_results(session, url)
         results = self._parser(html)
-        if results != None:
+        if results is not None:
             results["time"] = time.time() - start_time
             results["total"] = len(results["data"])
             return results

@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from helper.html_scraper import Scraper
 from constants.base_url import PIRATEBAY
 
+
 class PirateBay:
     def __init__(self):
         self.BASE_URL = PIRATEBAY
@@ -28,8 +29,7 @@ class PirateBay:
                         seeders = td[2].text
                         leechers = td[3].text
                         mixed = td[1].find_all("font")[0].text
-                        mixed = re.sub(r"(Uploaded|Size|ULed by)",
-                                       "", mixed).split(",")
+                        mixed = re.sub(r"(Uploaded|Size|ULed by)", "", mixed).split(",")
                         category = td[0].find_all("a")[0].text
                         my_dict["data"].append(
                             {
@@ -50,8 +50,7 @@ class PirateBay:
                     if len(my_dict["data"]) == self.LIMIT:
                         break
                 last_tr = soup.find_all("tr")[-1]
-                check_if_pagination_available = last_tr.find(
-                    "td").find("center")
+                check_if_pagination_available = last_tr.find("td").find("center")
                 if not check_if_pagination_available:
                     current_page = last_tr.find("td").find("b").text
                     my_dict["current_page"] = int(current_page)
@@ -72,7 +71,7 @@ class PirateBay:
     async def parser_result(self, start_time, url, session):
         html = await Scraper().get_all_results(session, url)
         results = self._parser(html)
-        if results != None:
+        if results is not None:
             results["time"] = time.time() - start_time
             results["total"] = len(results["data"])
             return results

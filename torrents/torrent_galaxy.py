@@ -19,23 +19,27 @@ class TorrentGalaxy:
             post_nd_torrents = root_div.find_next("div").find_all("div")
             poster = post_nd_torrents[1].find("img")["data-src"]
             torrentsand_all = post_nd_torrents[4].find_all("a")
-            torrent_link = torrentsand_all[0]['href']
-            magnet_link = torrentsand_all[1]['href']
-            direct_link = self.BASE_URL + \
-                torrentsand_all[2]['href']
+            torrent_link = torrentsand_all[0]["href"]
+            magnet_link = torrentsand_all[1]["href"]
+            direct_link = self.BASE_URL + torrentsand_all[2]["href"]
 
             details_root = soup.find("div", class_="gluewrapper").select(
-                "div > :nth-child(2) > div > .tprow")
+                "div > :nth-child(2) > div > .tprow"
+            )
 
             name = details_root[0].find_all("div")[-1].get_text(strip=True)
-            category = details_root[3].find_all(
-                "div")[-1].get_text(strip=True).split(">")[0]
-            languagee = details_root[4].find_all(
-                "div")[-1].get_text(strip=True)
+            category = (
+                details_root[3].find_all("div")[-1].get_text(strip=True).split(">")[0]
+            )
+            languagee = details_root[4].find_all("div")[-1].get_text(strip=True)
             size = details_root[5].find_all("div")[-1].get_text(strip=True)
             hash = details_root[6].find_all("div")[-1].get_text(strip=True)
-            username = details_root[7].find_all(
-                "div")[-1].find("span", class_="username").get_text(strip=True)
+            username = (
+                details_root[7]
+                .find_all("div")[-1]
+                .find("span", class_="username")
+                .get_text(strip=True)
+            )
             date_up = details_root[8].find_all("div")[-1].get_text(strip=True)
 
             btns = details_root[10].find_all("button")
@@ -43,11 +47,15 @@ class TorrentGalaxy:
             leechers = btns[1].find("span").get_text(strip=True)
             downloads = btns[2].find("span").get_text(strip=True)
             imdb_id = soup.select_one("#imdbpage")["href"].split("/")[-1]
-            genre_list = [x.get_text(strip=True)
-                          for x in details_root[11].find_all("a")]
+            genre_list = [
+                x.get_text(strip=True) for x in details_root[11].find_all("a")
+            ]
             soup.find("div", id="intblockslide").find_all("a")
-            imgs = [img['href'] for img in (soup.find("div", id="intblockslide").find_all("a")) if img['href'].endswith(
-                (".png", ".jpg", ".jpeg"))]
+            imgs = [
+                img["href"]
+                for img in (soup.find("div", id="intblockslide").find_all("a"))
+                if img["href"].endswith((".png", ".jpg", ".jpeg"))
+            ]
             my_dict["data"].append(
                 {
                     "name": name,
@@ -85,9 +93,8 @@ class TorrentGalaxy:
                         name = div[4].find("a").get_text(strip=True)
                         imdb_url = (div[4].find_all("a"))[-1]["href"]
                     except:
-                        name = (div[1].find("a", class_="txlight")).find(
-                            "b").text
-                        imdb_url = (div[1].find_all("a"))[-1]['href']
+                        name = (div[1].find("a", class_="txlight")).find("b").text
+                        imdb_url = (div[1].find_all("a"))[-1]["href"]
 
                     if name != "":
                         try:
@@ -177,7 +184,9 @@ class TorrentGalaxy:
     async def get_torrent_by_url(self, torrent_url):
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
-            return await self.parser_result(start_time, torrent_url, session, is_individual=True)
+            return await self.parser_result(
+                start_time, torrent_url, session, is_individual=True
+            )
 
     async def parser_result(self, start_time, url, session, is_individual=False):
         html = await Scraper().get_all_results(session, url)
@@ -185,7 +194,7 @@ class TorrentGalaxy:
             results = self._parser_individual(html)
         else:
             results = self._parser(html)
-        if results != None:
+        if results is not None:
             results["time"] = time.time() - start_time
             results["total"] = len(results["data"])
             return results

@@ -8,6 +8,7 @@ from helper.html_scraper import Scraper
 from constants.base_url import YTS
 from constants.headers import HEADER_AIO
 
+
 class Yts:
     def __init__(self):
         self.BASE_URL = YTS
@@ -16,7 +17,7 @@ class Yts:
     @decorator_asyncio_fix
     async def _individual_scrap(self, session, url, obj):
         try:
-            async with session.get(url,headers=HEADER_AIO) as res:
+            async with session.get(url, headers=HEADER_AIO) as res:
                 html = await res.text(encoding="ISO-8859-1")
                 soup = BeautifulSoup(html, "html.parser")
                 try:
@@ -32,8 +33,7 @@ class Yts:
                     )
                     poster[-1] = poster[-1].replace("medium", "large")
                     poster = "/".join(poster)
-                    description = soup.select(
-                        "div#synopsis > p")[0].text.strip()
+                    description = soup.select("div#synopsis > p")[0].text.strip()
                     runtime = (
                         soup.select_one(".tech-spec-info")
                         .find_all("div", class_="row")[-1]
@@ -46,18 +46,14 @@ class Yts:
                     torrents = []
                     for div in soup.find_all("div", class_="modal-torrent"):
                         quality = (
-                            div.find(
-                                "div", class_="modal-quality").find("span").text
+                            div.find("div", class_="modal-quality").find("span").text
                         )
                         all_p = div.find_all("p", class_="quality-size")
                         quality_type = all_p[0].text
                         size = all_p[1].text
-                        torrent_link = div.find(
-                            "a", class_="download-torrent")["href"]
-                        magnet = div.find(
-                            "a", class_="magnet-download")["href"]
-                        hash = re.search(
-                            r"([{a-f\d,A-F\d}]{32,40})\b", magnet).group(0)
+                        torrent_link = div.find("a", class_="download-torrent")["href"]
+                        magnet = div.find("a", class_="magnet-download")["href"]
+                        hash = re.search(r"([{a-f\d,A-F\d}]{32,40})\b", magnet).group(0)
                         torrents.append(
                             {
                                 "quality": quality,
@@ -88,8 +84,7 @@ class Yts:
             for obj in result["data"]:
                 if obj["url"] == url:
                     task = asyncio.create_task(
-                        self._individual_scrap(
-                            session, url, result["data"][idx])
+                        self._individual_scrap(session, url, result["data"][idx])
                     )
                     tasks.append(task)
         await asyncio.gather(*tasks)
@@ -97,7 +92,6 @@ class Yts:
 
     def _parser(self, htmls):
         try:
-
             for html in htmls:
                 soup = BeautifulSoup(html, "html.parser")
                 list_of_urls = []
@@ -151,7 +145,7 @@ class Yts:
     async def parser_result(self, start_time, url, session):
         htmls = await Scraper().get_all_results(session, url)
         result, urls = self._parser(htmls)
-        if result != None:
+        if result is not None:
             results = await self._get_torrent(result, session, urls)
             results["time"] = time.time() - start_time
             results["total"] = len(results["data"])
@@ -171,13 +165,9 @@ class Yts:
             self.LIMIT = limit
             if page != 1:
                 url = (
-                    self.BASE_URL +
-                    "/browse-movies/0/all/all/0/featured/0/all?page={}".format(
-                        page)
+                    self.BASE_URL
+                    + "/browse-movies/0/all/all/0/featured/0/all?page={}".format(page)
                 )
             else:
-                url = (
-                    self.BASE_URL +
-                    "/browse-movies/0/all/all/0/featured/0/all"
-                )
+                url = self.BASE_URL + "/browse-movies/0/all/all/0/featured/0/all"
             return await self.parser_result(start_time, url, session)
