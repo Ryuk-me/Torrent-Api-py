@@ -52,8 +52,9 @@ class PirateBay:
                     if len(my_dict["data"]) == self.LIMIT:
                         break
                 last_tr = soup.find_all("tr")[-1]
-                check_if_pagination_available = last_tr.find("td").find("center")
-                if not check_if_pagination_available:
+                potential_page_link = last_tr.find("td").find("a").href
+                check_if_pagination_available = potential_page_link is not None and potential_page_link[:len("/search/")] == "/search/"
+                if check_if_pagination_available:
                     current_page = last_tr.find("td").find("b").text
                     my_dict["current_page"] = int(current_page)
                     my_dict["total_pages"] = int(
