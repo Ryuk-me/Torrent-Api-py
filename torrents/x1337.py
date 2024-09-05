@@ -1,69 +1,59 @@
 import asyncio
 import re
 import time
-import aiohttp
+import cloudscraper
 from bs4 import BeautifulSoup
 from helper.asyncioPoliciesFix import decorator_asyncio_fix
-from helper.html_scraper import Scraper
 from constants.base_url import X1337
 from constants.headers import HEADER_AIO
-
 
 class x1337:
     def __init__(self):
         self.BASE_URL = X1337
         self.LIMIT = None
+        self.scraper = cloudscraper.create_scraper()
 
     @decorator_asyncio_fix
-    async def _individual_scrap(self, session, url, obj):
+    async def _individual_scrap(self, url, obj):
         try:
-            async with session.get(url, headers=HEADER_AIO) as res:
-                html = await res.text(encoding="ISO-8859-1")
-                soup = BeautifulSoup(html, "html.parser")
+            html = await asyncio.to_thread(self.scraper.get, url, headers=HEADER_AIO)
+            html = html.text
+            soup = BeautifulSoup(html, "html.parser")
+            try:
+                magnet = soup.select_one(".no-top-radius > div > ul > li > a")["href"]
+                uls = soup.find_all("ul", class_="list")[1]
+                lis = uls.find_all("li")[0]
+                imgs = [
+                    img["data-original"]
+                    for img in (soup.find("div", id="description")).find_all("img")
+                    if img["data-original"].endswith((".png", ".jpg", ".jpeg"))
+                ]
+                files = [f.text for f in soup.find("div", id="files").find_all("li")]
+                if len(imgs) > 0:
+                    obj["screenshot"] = imgs
+                obj["category"] = lis.find("span").text
+                obj["files"] = files
                 try:
-                    magnet = soup.select_one(".no-top-radius > div > ul > li > a")[
-                        "href"
-                    ]
-                    uls = soup.find_all("ul", class_="list")[1]
-                    lis = uls.find_all("li")[0]
-                    imgs = [
-                        img["data-original"]
-                        for img in (soup.find("div", id="description")).find_all("img")
-                        if img["data-original"].endswith((".png", ".jpg", ".jpeg"))
-                    ]
-                    files = [
-                        f.text for f in soup.find("div", id="files").find_all("li")
-                    ]
-                    if len(imgs) > 0:
-                        obj["screenshot"] = imgs
-                    obj["category"] = lis.find("span").text
-                    obj["files"] = files
-                    try:
-                        poster = soup.select_one("div.torrent-image img")["src"]
-                        if str(poster).startswith("//"):
-                            obj["poster"] = "https:" + poster
-                        elif str(poster).startswith("/"):
-                            obj["poster"] = self.BASE_URL + poster
-                    except:
-                        ...
-                    obj["magnet"] = magnet
-
-                    obj["hash"] = re.search(
-                        r"([{a-f\d,A-F\d}]{32,40})\b", magnet
-                    ).group(0)
-                except IndexError:
-                    ...
+                    poster = soup.select_one("div.torrent-image img")["src"]
+                    if str(poster).startswith("//"):
+                        obj["poster"] = "https:" + poster
+                    elif str(poster).startswith("/"):
+                        obj["poster"] = self.BASE_URL + poster
+                except:
+                    pass
+                obj["magnet"] = magnet
+                obj["hash"] = re.search(r"([{a-f\d,A-F\d}]{32,40})\b", magnet).group(0)
+            except IndexError:
+                pass
         except:
             return None
 
-    async def _get_torrent(self, result, session, urls):
+    async def _get_torrent(self, result, urls):
         tasks = []
         for idx, url in enumerate(urls):
             for obj in result["data"]:
                 if obj["url"] == url:
-                    task = asyncio.create_task(
-                        self._individual_scrap(session, url, result["data"][idx])
-                    )
+                    task = asyncio.create_task(self._individual_scrap(url, result["data"][idx]))
                     tasks.append(task)
         await asyncio.gather(*tasks)
         return result
@@ -109,47 +99,46 @@ class x1337:
                     else:
                         my_dict["total_pages"] = int(pages[-1].text)
                 except:
-                    ...
+                    pass
                 return my_dict, list_of_urls
         except:
             return None, None
 
     async def search(self, query, page, limit):
-        async with aiohttp.ClientSession() as session:
-            self.LIMIT = limit
-            start_time = time.time()
-            url = self.BASE_URL + "/search/{}/{}/".format(query, page)
-            return await self.parser_result(
-                start_time, url, session, query=query, page=page
-            )
+        self.LIMIT = limit
+        start_time = time.time()
+        url = self.BASE_URL + "/search/{}/{}/".format(query, page)
+        return await self.parser_result(start_time, url, query=query, page=page)
 
-    async def parser_result(self, start_time, url, session, page, query=None):
-        htmls = await Scraper().get_all_results(session, url)
+    async def parser_result(self, start_time, url, page, query=None):
+        html = await asyncio.to_thread(self.scraper.get, url, headers=HEADER_AIO)
+        htmls = [html.text]
         result, urls = self._parser(htmls)
         if result is not None:
-            results = await self._get_torrent(result, session, urls)
+            results = await self._get_torrent(result, urls)
             results["time"] = time.time() - start_time
             results["total"] = len(results["data"])
             if query is None:
                 return results
             while True:
                 if len(results["data"]) >= self.LIMIT:
-                    results["data"] = results["data"][0 : self.LIMIT]
+                    results["data"] = results["data"][: self.LIMIT]
                     results["total"] = len(results["data"])
                     return results
-                page = page + 1
+                page += 1
                 url = self.BASE_URL + "/search/{}/{}/".format(query, page)
-                htmls = await Scraper().get_all_results(session, url)
+                html = await asyncio.to_thread(self.scraper.get, url, headers=HEADER_AIO)
+                htmls = [html.text]
                 result, urls = self._parser(htmls)
                 if result is not None:
                     if len(result["data"]) > 0:
-                        res = await self._get_torrent(result, session, urls)
+                        res = await self._get_torrent(result, urls)
                         for obj in res["data"]:
                             results["data"].append(obj)
                         try:
                             results["current_page"] = res["current_page"]
                         except:
-                            ...
+                            pass
                         results["time"] = time.time() - start_time
                         results["total"] = len(results["data"])
                     else:
@@ -160,32 +149,29 @@ class x1337:
         return result
 
     async def trending(self, category, page, limit):
-        async with aiohttp.ClientSession() as session:
-            start_time = time.time()
-            self.LIMIT = limit
-            if not category:
-                url = self.BASE_URL + "/home/"
-            else:
-                url = self.BASE_URL + "/popular-{}".format(category.lower())
-            return await self.parser_result(start_time, url, session, page)
+        start_time = time.time()
+        self.LIMIT = limit
+        if not category:
+            url = self.BASE_URL + "/home/"
+        else:
+            url = self.BASE_URL + "/popular-{}".format(category.lower())
+        return await self.parser_result(start_time, url, page)
 
     async def recent(self, category, page, limit):
-        async with aiohttp.ClientSession() as session:
-            start_time = time.time()
-            self.LIMIT = limit
-            if not category:
-                url = self.BASE_URL + "/trending"
-            else:
-                url = self.BASE_URL + "/cat/{}/{}/".format(
-                    str(category).capitalize(), page
-                )
-            return await self.parser_result(start_time, url, session, page)
+        start_time = time.time()
+        self.LIMIT = limit
+        if not category:
+            url = self.BASE_URL + "/trending"
+        else:
+            url = self.BASE_URL + "/cat/{}/{}/".format(
+                str(category).capitalize(), page
+            )
+        return await self.parser_result(start_time, url, page)
 
     async def search_by_category(self, query, category, page, limit):
-        async with aiohttp.ClientSession() as session:
-            start_time = time.time()
-            self.LIMIT = limit
-            url = self.BASE_URL + "/category-search/{}/{}/{}/".format(
-                query, category.capitalize(), page
-            )
-            return await self.parser_result(start_time, url, session, page, query)
+        start_time = time.time()
+        self.LIMIT = limit
+        url = self.BASE_URL + "/category-search/{}/{}/{}/".format(
+            query, category.capitalize(), page
+        )
+        return await self.parser_result(start_time, url, page, query)
