@@ -1,4 +1,5 @@
 import uvicorn
+import nest_asyncio
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -68,4 +69,5 @@ app.include_router(home_router, prefix="")
 handler = Mangum(app)
 
 if __name__ == "__main__":
+    nest_asyncio.apply()
     uvicorn.run(app, host="0.0.0.0", port=8009)
