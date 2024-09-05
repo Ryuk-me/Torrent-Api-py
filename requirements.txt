@@ -6,3 +6,4 @@ gunicorn
 mangum
 requests
 uvicorn[standard]
+nest_asyncio
