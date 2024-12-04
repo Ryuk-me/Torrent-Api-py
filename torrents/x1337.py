@@ -10,6 +10,7 @@ from constants.headers import HEADER_AIO
 
 
 class x1337:
+    _name = "1337x"
     def __init__(self):
         self.BASE_URL = X1337
         self.LIMIT = None

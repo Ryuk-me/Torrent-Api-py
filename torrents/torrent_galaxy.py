@@ -7,6 +7,7 @@ from constants.base_url import TGX
 
 
 class TorrentGalaxy:
+    _name = "Torrent Galaxy"
     def __init__(self):
         self.BASE_URL = TGX
         self.LIMIT = None

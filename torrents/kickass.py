@@ -10,6 +10,7 @@ from constants.headers import HEADER_AIO
 
 
 class Kickass:
+    _name = "Kick Ass"
     def __init__(self):
         self.BASE_URL = KICKASS
         self.LIMIT = None

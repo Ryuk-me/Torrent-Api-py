@@ -9,6 +9,7 @@ from constants.headers import HEADER_AIO
 
 
 class TorrentFunk:
+    _name = "Torrent Funk"
     def __init__(self):
         self.BASE_URL = TORRENTFUNK
         self.LIMIT = None

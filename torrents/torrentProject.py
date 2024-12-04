@@ -10,6 +10,7 @@ from constants.headers import HEADER_AIO
 
 
 class TorrentProject:
+    _name = "Torrent Project"
     def __init__(self):
         self.BASE_URL = TORRENTPROJECT
         self.LIMIT = None

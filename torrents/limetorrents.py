@@ -10,6 +10,7 @@ from constants.headers import HEADER_AIO
 
 
 class Limetorrent:
+    _name = "Lime Torrents"
     def __init__(self):
         self.BASE_URL = LIMETORRENT
         self.LIMIT = None

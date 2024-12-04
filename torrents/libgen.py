@@ -9,6 +9,7 @@ from constants.headers import HEADER_AIO
 
 
 class Libgen:
+    _name = "Libgen"
     def __init__(self):
         self.BASE_URL = LIBGEN
         self.LIMIT = None

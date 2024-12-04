@@ -10,6 +10,7 @@ from constants.headers import HEADER_AIO
 
 
 class Yts:
+    _name = "YTS"
     def __init__(self):
         self.BASE_URL = YTS
         self.LIMIT = None
