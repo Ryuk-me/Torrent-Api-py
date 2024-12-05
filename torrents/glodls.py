@@ -6,6 +6,7 @@ from constants.base_url import GLODLS
 
 
 class Glodls:
+    _name = "Glodls"
     def __init__(self):
         self.BASE_URL = GLODLS
         self.LIMIT = None

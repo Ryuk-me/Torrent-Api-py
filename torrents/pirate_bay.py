@@ -7,6 +7,7 @@ from constants.base_url import PIRATEBAY
 
 
 class PirateBay:
+    _name = "Pirate Bay"
     def __init__(self):
         self.BASE_URL = PIRATEBAY
         self.LIMIT = None

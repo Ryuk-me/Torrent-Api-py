@@ -1,5 +1,5 @@
 from fastapi import APIRouter, status
-from helper.is_site_available import check_if_site_available
+from helper.is_site_available import check_if_site_available, sites_config
 from helper.error_messages import error_handler
 
 router = APIRouter(tags=["Get all sites"])
@@ -15,4 +15,11 @@ async def get_all_supported_sites():
         json_message={
             "supported_sites": sites_list,
         },
+    )
+    
+@router.get("/config")
+async def get_site_config():
+    return error_handler(
+        status_code=status.HTTP_200_OK,
+        json_message=sites_config
     )

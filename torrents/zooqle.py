@@ -7,6 +7,7 @@ from constants.base_url import ZOOQLE
 
 
 class Zooqle:
+    _name = "Zooqle"
     def __init__(self):
         self.BASE_URL = ZOOQLE
         self.LIMIT = None

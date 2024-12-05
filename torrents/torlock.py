@@ -10,6 +10,7 @@ from constants.headers import HEADER_AIO
 
 
 class Torlock:
+    _name = "Tor Lock"
     def __init__(self):
         self.BASE_URL = TORLOCK
         self.LIMIT = None

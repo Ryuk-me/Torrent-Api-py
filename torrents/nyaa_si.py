@@ -7,6 +7,7 @@ from constants.base_url import NYAASI
 
 
 class NyaaSi:
+    _name = "Nyaa"
     def __init__(self):
         self.BASE_URL = NYAASI
         self.LIMIT = None

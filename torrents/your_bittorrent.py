@@ -9,6 +9,7 @@ from constants.headers import HEADER_AIO
 
 
 class YourBittorrent:
+    _name = "Your BitTorrent"
     def __init__(self):
         self.BASE_URL = YOURBITTORRENT
         self.LIMIT = None

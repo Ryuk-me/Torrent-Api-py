@@ -7,6 +7,7 @@ from constants.base_url import BITSEARCH
 
 
 class Bitsearch:
+    _name = "Bit Search"
     def __init__(self):
         self.BASE_URL = BITSEARCH
         self.LIMIT = None

@@ -9,6 +9,7 @@ from constants.base_url import MAGNETDL
 
 
 class Magnetdl:
+    _name = "MagnetDL"
     def __init__(self):
         self.BASE_URL = MAGNETDL
         self.LIMIT = None
