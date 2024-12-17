@@ -1,5 +1,5 @@
 import uvicorn
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Depends
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from routers.v1.search_router import router as search_router
@@ -11,6 +11,7 @@ from routers.v1.sites_list_router import router as site_list_router
 from routers.home_router import router as home_router
 from routers.v1.search_url_router import router as search_url_router
 from helper.uptime import getUptime
+from helper.dependencies import authenticate_request
 from mangum import Mangum
 from math import ceil
 import time
@@ -20,7 +21,7 @@ startTime = time.time()
 app = FastAPI(
     title="Torrent-Api-Py",
     version="1.0.1",
-    description=f"Unofficial Torrent-Api",
+    description="Unofficial Torrent-Api",
     docs_url="/docs",
     contact={
         "name": "Neeraj Kumar",
@@ -56,13 +57,13 @@ async def health_route(req: Request):
     )
 
 
-app.include_router(search_router, prefix="/api/v1/search")
-app.include_router(trending_router, prefix="/api/v1/trending")
-app.include_router(category_router, prefix="/api/v1/category")
-app.include_router(recent_router, prefix="/api/v1/recent")
-app.include_router(combo_router, prefix="/api/v1/all")
-app.include_router(site_list_router, prefix="/api/v1/sites")
-app.include_router(search_url_router, prefix="/api/v1/search_url")
+app.include_router(search_router, prefix="/api/v1/search", dependencies=[Depends(authenticate_request)])
+app.include_router(trending_router, prefix="/api/v1/trending", dependencies=[Depends(authenticate_request)])
+app.include_router(category_router, prefix="/api/v1/category", dependencies=[Depends(authenticate_request)])
+app.include_router(recent_router, prefix="/api/v1/recent", dependencies=[Depends(authenticate_request)])
+app.include_router(combo_router, prefix="/api/v1/all", dependencies=[Depends(authenticate_request)])
+app.include_router(site_list_router, prefix="/api/v1/sites", dependencies=[Depends(authenticate_request)])
+app.include_router(search_url_router, prefix="/api/v1/search_url", dependencies=[Depends(authenticate_request)])
 app.include_router(home_router, prefix="")
 
 handler = Mangum(app)
